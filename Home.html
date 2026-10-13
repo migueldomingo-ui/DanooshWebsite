@@ -1,0 +1,3226 @@
+<!-- GHL-safe page section: paste into ONE Custom HTML/JS element. Do not include doctype/html/head/body wrappers. -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   @FONT-FACE — brand fonts, self-hosted
+   Paths are relative to index.html; update to absolute CDN URLs in GHL.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Helvetica Regular */
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("fonts/helvetica-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Helvetica Oblique (treated as italic for CSS) */
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("fonts/helvetica-oblique.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Helvetica Light */
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("fonts/helvetica-light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Helvetica Bold */
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("fonts/helvetica-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Helvetica Bold Oblique */
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("fonts/helvetica-bold-oblique.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Century Regular */
+@font-face {
+  font-family: "DK Century";
+  src: url("fonts/century-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Century Bold */
+@font-face {
+  font-family: "DK Century";
+  src: url("fonts/century-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   RESET — scoped to avoid GHL conflicts
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home,
+#dk-home *,
+#dk-home *::before,
+#dk-home *::after { box-sizing: border-box; }
+
+#dk-home { margin: 0; padding: 0; }
+
+#dk-home h1, #dk-home h2, #dk-home h3, #dk-home h4, #dk-home h5, #dk-home h6,
+#dk-home p, #dk-home ul, #dk-home ol, #dk-home li, #dk-home figure, #dk-home blockquote {
+  margin: 0; padding: 0; font-weight: inherit;
+}
+
+#dk-home ul, #dk-home ol { list-style: none; }
+#dk-home a { color: inherit; text-decoration: none; }
+
+#dk-home button {
+  font: inherit; color: inherit; background: none; border: none;
+  padding: 0; cursor: pointer; text-align: left;
+}
+
+#dk-home img, #dk-home svg { display: block; max-width: 100%; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TOKENS — directly from brand guidelines
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home {
+  /* Colors */
+  --white:           #FFFFFF;
+  --paper:           #F5F3EE;
+  --khaki-light:     #ECE3D7;
+  --khaki:           #C5AA88;
+  --grey-soft:       #EAEAEA;
+  --grey-line:       #D6D3CE;
+  --grey-line-white: #E8E6E1;
+  --black:           #000000;
+  --ink:             #0A0A0A;
+  --ink-soft:        #2A2A2A;
+  --red:             #CC0000;
+
+  /* Typography — brand fonts with system fallbacks */
+  --font-sans:  "DK Helvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "DK Century", "Century Schoolbook", Georgia, "Times New Roman", serif;
+  --font-mono:  "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing scale (4px base) */
+  --s1: 4px;   --s2: 8px;   --s3: 12px;  --s4: 16px;
+  --s5: 24px;  --s6: 32px;  --s7: 48px;  --s8: 64px;
+  --s9: 96px;  --s10: 128px;--s11: 160px;--s12: 200px;
+
+  /* Grid */
+  --max-w:  1280px;
+  --gutter: 28px;
+  --edge:   clamp(20px, 4vw, 56px);
+
+  /* Rules */
+  --rule-hair:       0.5px solid rgba(0,0,0,0.12);
+  --rule-hair-white: 0.5px solid rgba(255,255,255,0.15);
+  --rule-soft:       1px solid var(--grey-line-white);
+
+  /* Motion */
+  --ease:     cubic-bezier(.2,.7,.2,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+
+  /* Base */
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   GRID SYSTEM
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-shell {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+}
+
+#dk-home .dk-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--gutter);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY — brand fonts applied
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--khaki);
+  line-height: 1;
+}
+#dk-home .on-khaki .eyebrow,
+#dk-home .eyebrow.ink { color: var(--ink); }
+#dk-home .eyebrow.red { color: var(--red); }
+
+#dk-home .display-xl {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(38px, 6.5vw, 88px);
+  line-height: 0.96;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+#dk-home .display-l {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+#dk-home .display-m {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+#dk-home .display-s {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+#dk-home .body-l {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 1.25vw, 19px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+#dk-home .body {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+#dk-home .body-sans {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+#dk-home .caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+#dk-home .mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+#dk-home .mono.red { color: var(--red); }
+#dk-home .mono.uppercase { text-transform: uppercase; letter-spacing: 0.12em; }
+
+#dk-home .red-accent { color: var(--red); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PAGE OFFSET (below fixed nav — reduced from 72px to 64px)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+  white-space: nowrap;
+}
+#dk-home .btn-primary {
+  background: var(--red);
+  color: var(--white);
+}
+#dk-home .btn-primary:hover { background: #A80000; }
+#dk-home .btn-primary .arrow { transition: transform 200ms var(--ease); }
+#dk-home .btn-primary:hover .arrow { transform: translateX(3px); }
+
+#dk-home .btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(0,0,0,0.18);
+  padding: 13px 23px;
+}
+#dk-home .btn-ghost:hover { border-color: var(--ink); }
+#dk-home .btn-ghost .arrow { transition: transform 200ms var(--ease); }
+#dk-home .btn-ghost:hover .arrow { transform: translateX(3px); }
+
+#dk-home .btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 4px 0;
+  position: relative;
+}
+#dk-home .btn-text::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 20px; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transition: transform 240ms var(--ease);
+}
+#dk-home .btn-text .arrow { transition: transform 200ms var(--ease); }
+#dk-home .btn-text:hover .arrow { transform: translateX(4px); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION RHYTHM — tightened from v4
+   Default: clamp(64px, 8vw, 100px) — was clamp(80px, 10vw, 160px)
+   Compact: clamp(40px, 5vw, 72px)  — was clamp(48px, 6vw, 88px)
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home section {
+  position: relative;
+  padding: clamp(64px, 8vw, 100px) 0;
+}
+#dk-home section.compact {
+  padding: clamp(40px, 5vw, 72px) 0;
+}
+#dk-home .bg-white { background: var(--white); }
+#dk-home .bg-khaki { background: var(--khaki-light); }
+#dk-home .bg-grey  { background: var(--grey-soft); }
+#dk-home .bg-paper { background: var(--paper); }
+#dk-home .bg-black { background: var(--black); color: var(--white); }
+#dk-home .bg-black .eyebrow { color: var(--khaki); }
+#dk-home .bg-black .body,
+#dk-home .bg-black .body-l,
+#dk-home .bg-black .body-sans { color: rgba(255,255,255,0.78); }
+#dk-home .bg-black .display-xl,
+#dk-home .bg-black .display-l,
+#dk-home .bg-black .display-m,
+#dk-home .bg-black .display-s { color: var(--white); }
+
+/* Section marker — tightened margin */
+#dk-home .sect-marker {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+}
+#dk-home .sect-marker-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--khaki);
+  letter-spacing: 0.12em;
+}
+#dk-home .sect-marker-line {
+  flex: 0 0 40px;
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+}
+#dk-home .sect-marker-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#dk-home .bg-black .sect-marker-num,
+#dk-home .bg-black .sect-marker-label { color: rgba(255,255,255,0.7); }
+#dk-home .bg-black .sect-marker-line  { background: rgba(255,255,255,0.2); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   REVEAL ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out);
+}
+#dk-home .reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+#dk-home .reveal[data-delay="1"] { transition-delay: 80ms; }
+#dk-home .reveal[data-delay="2"] { transition-delay: 160ms; }
+#dk-home .reveal[data-delay="3"] { transition-delay: 240ms; }
+#dk-home .reveal[data-delay="4"] { transition-delay: 320ms; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HERO — tightened from v4
+   min-height: 88vh (was 100vh)
+   copy panel padding: s7/s6 (was s9/s8)
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-hero {
+  background: var(--white);
+  padding: 0;
+  min-height: calc(74vh - 64px);
+  display: flex;
+  position: relative;
+  border-bottom: var(--rule-hair);
+}
+#dk-home .dk-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  min-height: calc(74vh - 64px);
+}
+
+/* LEFT: illustration panel */
+#dk-home .dk-hero-illus {
+  position: relative;
+  background: var(--khaki-light);
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+}
+#dk-home .dk-hero-illus-inner {
+  position: relative;
+  width: 100%;
+  padding: var(--s6) var(--s6) var(--s5) var(--s6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* Subtle vertical grid lines */
+#dk-home .dk-hero-illus-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
+  pointer-events: none;
+}
+
+#dk-home .dk-hero-illus-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+#dk-home .dk-hero-illus-top .mono { color: var(--ink-soft); }
+
+#dk-home .dk-illus-plate {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  margin: var(--s5) auto;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#dk-home .dk-illus-plate svg { width: 100%; height: auto; }
+
+#dk-home .dk-hero-illus-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s4);
+}
+#dk-home .dk-illus-caption {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  max-width: 220px;
+  line-height: 1.5;
+}
+#dk-home .dk-illus-caption strong { color: var(--ink); font-weight: 700; }
+
+/* LEFT: type panel — text-first layout */
+#dk-home .dk-hero-copy {
+  padding: var(--s6) var(--s6) var(--s6) var(--s7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  order: -1;
+}
+#dk-home .dk-hero-copy::before {
+  content: "";
+  position: absolute;
+  top: var(--s6);
+  left: var(--s7);
+  width: 48px;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: dk-rule-in 700ms var(--ease-out) 400ms forwards;
+}
+@keyframes dk-rule-in { to { transform: scaleX(1); } }
+
+#dk-home .dk-hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--khaki);
+  margin-top: 20px;
+  margin-bottom: var(--s3);
+}
+
+#dk-home .dk-hero-h1 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin-bottom: var(--s4);
+  max-width: 16ch;
+}
+
+#dk-home .dk-hero-lede {
+  font-family: var(--font-serif);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 42ch;
+  margin-bottom: var(--s2);
+}
+
+#dk-home .dk-hero-actions {
+  margin-top: var(--s4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s3);
+}
+#dk-home .dk-hero-meta {
+  margin-top: var(--s4);
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding-top: var(--s3);
+  border-top: var(--rule-hair);
+}
+#dk-home .dk-hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+#dk-home .dk-hero-meta-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+#dk-home .dk-hero-meta-lbl {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#dk-home .dk-hero-meta-sep {
+  width: 1px; height: 20px;
+  background: rgba(0,0,0,0.15);
+}
+
+@media (max-width: 960px) {
+  #dk-home .dk-hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+  }
+  #dk-home .dk-hero { min-height: auto; }
+  /* On mobile, copy stays first (order:-1 already set), illus below */
+  #dk-home .dk-hero-copy { order: -1; padding: var(--s7) var(--edge); }
+  #dk-home .dk-hero-copy::before { top: var(--s7); left: var(--edge); }
+  #dk-home .dk-hero-illus { min-height: 300px; border-top: var(--rule-hair); order: 1; }
+}
+@media (max-width: 600px) {
+  #dk-home .dk-hero-illus { min-height: 240px; }
+  #dk-home .dk-hero-illus-inner { padding: var(--s4); }
+  #dk-home .dk-hero-copy { padding: var(--s6) var(--edge) var(--s6); }
+  #dk-home .dk-hero-copy::before { top: var(--s6); left: var(--edge); }
+  #dk-home .dk-hero-meta { flex-wrap: wrap; gap: var(--s3); }
+  #dk-home .dk-hero-meta-sep { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: THE NOISE — interactive Noise→Signal slider
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-noise { border-bottom: var(--rule-hair); }
+#dk-home .dk-noise-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s7);
+  align-items: start;
+  margin-top: var(--s5);
+}
+/* Left column: slider + stage */
+#dk-home .dk-nts-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  position: relative;
+}
+#dk-home .dk-nts-track-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+#dk-home .dk-nts-track-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#dk-home .dk-nts-track {
+  position: relative;
+  width: 100%;
+  height: 28px;
+  border-radius: 999px;
+  overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+}
+#dk-home .dk-nts-track::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background: var(--grey-soft);
+  border-radius: 999px;
+}
+#dk-home .dk-nts-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  transform: translateY(-50%);
+  background: var(--red);
+  border-radius: 999px;
+  pointer-events: none;
+}
+@keyframes dkNtsPulse {
+  0%   { box-shadow: 0 3px 12px rgba(204,0,0,0.2), 0 0 0 0 rgba(204,0,0,0.16); }
+  60%  { box-shadow: 0 3px 12px rgba(204,0,0,0.2), 0 0 0 6px rgba(204,0,0,0); }
+  100% { box-shadow: 0 3px 12px rgba(204,0,0,0.2), 0 0 0 0 rgba(204,0,0,0); }
+}
+#dk-home .dk-nts-handle {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  background: var(--red);
+  border: 3px solid rgba(255,255,255,0.94);
+  border-radius: 50%;
+  cursor: grab;
+  z-index: 10;
+  animation: dkNtsPulse 2.6s ease-out infinite;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+  -webkit-user-drag: none;
+  touch-action: none;
+  will-change: left;
+}
+#dk-home .dk-nts-handle:hover {
+  box-shadow: 0 6px 18px rgba(204,0,0,0.28);
+  animation: none;
+}
+#dk-home .dk-nts-handle.is-dragging,
+#dk-home .dk-nts-handle:active {
+  cursor: grabbing;
+  animation: none;
+  transform: translate(-50%, -50%) scale(1.03);
+}
+#dk-home .dk-nts-hint {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--khaki);
+  text-align: center;
+  transition: opacity 0.35s ease;
+  margin-top: var(--s1);
+}
+/* Stage: word field + signal reveal */
+#dk-home .dk-nts-stage {
+  position: relative;
+  width: 100%;
+  min-height: 390px;
+  border: var(--rule-hair);
+  border-radius: 2px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,249,247,1) 100%);
+}
+#dk-home .dk-nts-cloud {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+#dk-home .dk-nts-word {
+  position: absolute;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.72);
+  transition: opacity 0.24s ease;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  #dk-home .dk-nts-word {
+    transform: none !important;
+  }
+}
+#dk-home .dk-nts-signal-reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  padding: var(--s5) var(--s6);
+  background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.87) 58%, rgba(255,255,255,0.72) 100%);
+}
+#dk-home .dk-nts-signal-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--red);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+#dk-home .dk-nts-signal-text {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  padding-left: var(--s5);
+  margin-bottom: var(--s3);
+}
+#dk-home .dk-nts-signal-text em { font-style: italic; color: var(--red); }
+#dk-home .dk-nts-signal-attr {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--khaki);
+  padding-left: var(--s5);
+}
+/* Right copy column */
+#dk-home .dk-noise-copy { grid-column: 2; }
+@media (max-width: 768px) {
+  #dk-home .dk-noise-grid { grid-template-columns: 1fr; gap: var(--s5); }
+  #dk-home .dk-nts-stage { min-height: 350px; }
+  #dk-home .dk-noise-copy { grid-column: 1; }
+  #dk-home .dk-nts-signal-reveal { padding: var(--s5) var(--s4); }
+  #dk-home .dk-nts-signal-text { font-size: 15px; padding-left: var(--s4); line-height: 1.55; }
+  #dk-home .dk-nts-signal-attr { padding-left: var(--s4); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: THE STANCE — editorial two-col
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-edit-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: var(--s8);
+  align-items: start;
+}
+#dk-home .dk-edit-head { position: sticky; top: 80px; }
+#dk-home .dk-edit-body { display: flex; flex-direction: column; gap: var(--s4); }
+
+#dk-home .dk-pullquote {
+  margin-top: var(--s6);
+  padding: var(--s5) var(--s6);
+  background: var(--paper);
+  border-left: 2px solid var(--red);
+  border-radius: 0 2px 2px 0;
+}
+#dk-home .dk-pullquote q {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--ink);
+  quotes: none;
+  display: block;
+  margin-bottom: var(--s3);
+}
+#dk-home .dk-pullquote .cite {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--khaki);
+}
+
+@media (max-width: 768px) {
+  #dk-home .dk-edit-grid { grid-template-columns: 1fr; gap: var(--s5); }
+  #dk-home .dk-edit-head { position: static; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: THE DIAGNOSTIC — centerpiece
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-diag {
+  border-top: 3px solid var(--red);
+  border-bottom: var(--rule-hair);
+}
+#dk-home .dk-diag::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--red) 0%, transparent 60%);
+  opacity: 0.4;
+}
+
+#dk-home .dk-diag-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--s7);
+}
+#dk-home .dk-diag-head .eyebrow { margin-bottom: var(--s3); }
+#dk-home .dk-diag-head h2 { margin-bottom: var(--s4); }
+#dk-home .dk-diag-head .lede {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+#dk-home .dk-diag-body {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: var(--s7);
+  align-items: start;
+}
+
+/* Offer card */
+#dk-home .dk-diag-offer {
+  background: var(--khaki-light);
+  border: var(--rule-hair);
+  border-radius: 4px;
+  padding: var(--s6);
+  position: sticky;
+  top: 80px;
+}
+#dk-home .dk-diag-offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--s4);
+}
+#dk-home .dk-diag-offer-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#dk-home .dk-diag-offer-badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+#dk-home .dk-diag-offer-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: var(--s3);
+  line-height: 1.2;
+}
+#dk-home .dk-diag-offer-desc {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: var(--s4);
+}
+#dk-home .dk-diag-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+  padding: var(--s4);
+  background: rgba(255,255,255,0.6);
+  border-radius: 3px;
+}
+#dk-home .dk-diag-spec-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--khaki);
+  margin-bottom: 3px;
+}
+#dk-home .dk-diag-spec-value {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+}
+#dk-home .dk-diag-price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+  padding-top: var(--s4);
+  border-top: var(--rule-hair);
+}
+#dk-home .dk-diag-price-num {
+  font-family: var(--font-mono);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+#dk-home .dk-diag-price-note {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+#dk-home .dk-diag-offer .btn { width: 100%; margin-bottom: var(--s3); }
+#dk-home .dk-diag-fineprint {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Framework tabs */
+/* Framework wrapper */
+#dk-home .dk-framework { display: flex; flex-direction: column; gap: var(--s4); }
+#dk-home .dk-framework-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+/* Progress bar above tabs */
+#dk-home .dk-tab-progress-wrap {
+  position: relative;
+  height: 2px;
+  background: var(--grey-soft);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+#dk-home .dk-tab-progress-fill {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  background: var(--red);
+  border-radius: 999px;
+  width: 33.33%;
+  transition: width 260ms var(--ease);
+}
+/* Tab row */
+#dk-home .dk-tabs {
+  display: flex;
+  gap: 0;
+  border: var(--rule-hair);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  overflow: hidden;
+}
+#dk-home .dk-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: var(--s4) var(--s4);
+  border-right: var(--rule-hair);
+  background: var(--white);
+  transition: background 180ms var(--ease);
+  cursor: pointer;
+  position: relative;
+}
+#dk-home .dk-tab:last-child { border-right: none; }
+#dk-home .dk-tab:hover { background: var(--khaki-light); }
+#dk-home .dk-tab.is-active { background: var(--ink); }
+#dk-home .dk-tab-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--khaki);
+  transition: color 180ms var(--ease);
+}
+#dk-home .dk-tab.is-active .dk-tab-num { color: rgba(197,170,136,0.72); }
+#dk-home .dk-tab-name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+  transition: color 180ms var(--ease);
+  line-height: 1.2;
+}
+#dk-home .dk-tab.is-active .dk-tab-name { color: var(--white); }
+/* Active tab indicator dot */
+#dk-home .dk-tab.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: var(--s3);
+  right: var(--s3);
+  width: 5px; height: 5px;
+  background: var(--red);
+  border-radius: 50%;
+}
+/* Panel content */
+#dk-home .dk-tab-content {
+  border: var(--rule-hair);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  overflow: hidden;
+  background: var(--paper);
+}
+#dk-home .dk-tab-panel {
+  display: none;
+  padding: var(--s6);
+}
+#dk-home .dk-tab-panel.is-active {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--s6);
+  animation: dkPanelIn 220ms var(--ease-out);
+}
+@keyframes dkPanelIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#dk-home .dk-tab-desc h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+  margin-bottom: var(--s3);
+  letter-spacing: -0.01em;
+}
+#dk-home .dk-tab-desc p {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-top: var(--s2);
+}
+/* Outcomes column */
+#dk-home .dk-tab-outcomes {
+  border-left: var(--rule-hair);
+  padding-left: var(--s5);
+}
+#dk-home .outcomes-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--khaki);
+  margin-bottom: var(--s4);
+}
+#dk-home .dk-outcomes { display: flex; flex-direction: column; gap: var(--s3); }
+#dk-home .dk-outcome {
+  display: flex;
+  gap: var(--s2);
+  align-items: flex-start;
+  padding-bottom: var(--s3);
+  border-bottom: var(--rule-hair);
+}
+#dk-home .dk-outcome:last-child { border-bottom: none; padding-bottom: 0; }
+#dk-home .dk-outcome-dash {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--red);
+  flex-shrink: 0;
+  line-height: 1.6;
+  font-size: 14px;
+}
+#dk-home .dk-outcome-text {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  #dk-home .dk-diag-body { grid-template-columns: 1fr; }
+  #dk-home .dk-diag-offer { position: static; }
+  #dk-home .dk-tab-panel.is-active { grid-template-columns: 1fr; }
+  #dk-home .dk-tab-outcomes { border-left: none; padding-left: 0; border-top: var(--rule-hair); padding-top: var(--s4); }
+}
+@media (max-width: 600px) {
+  #dk-home .dk-tabs { flex-direction: column; }
+  #dk-home .dk-tab { border-right: none; border-bottom: var(--rule-hair); }
+  #dk-home .dk-tab:last-child { border-bottom: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: THE LADDER — ways to work
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-ladder { background: var(--grey-soft); border-bottom: var(--rule-hair); }
+#dk-home .dk-ladder-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s7);
+  align-items: end;
+  margin-bottom: var(--s7);
+}
+#dk-home .dk-ladder-rungs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s5);
+}
+#dk-home .dk-rung {
+  background: var(--white);
+  border: var(--rule-hair);
+  border-radius: 4px;
+  padding: var(--s5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  transition: border-color 200ms var(--ease);
+}
+#dk-home .dk-rung:hover { border-color: rgba(0,0,0,0.25); }
+#dk-home .dk-rung.is-current {
+  background: var(--ink);
+  border-color: var(--ink);
+  border-top: 3px solid var(--red);
+}
+#dk-home .dk-rung-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#dk-home .dk-rung-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--khaki);
+  letter-spacing: 0.08em;
+}
+#dk-home .dk-rung-status {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#dk-home .dk-rung.is-current .dk-rung-status { color: var(--red); }
+#dk-home .dk-rung-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+#dk-home .dk-rung.is-current .dk-rung-title { color: var(--white); }
+#dk-home .dk-rung-desc {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  flex: 1;
+}
+#dk-home .dk-rung.is-current .dk-rung-desc { color: rgba(255,255,255,0.72); }
+#dk-home .dk-rung-price {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--khaki);
+  padding-top: var(--s3);
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+}
+#dk-home .dk-rung.is-current .dk-rung-price {
+  color: var(--khaki);
+  border-top-color: rgba(255,255,255,0.15);
+}
+
+@media (max-width: 768px) {
+  #dk-home .dk-ladder-head { grid-template-columns: 1fr; gap: var(--s4); margin-bottom: var(--s5); }
+  #dk-home .dk-ladder-rungs { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: PROOF — testimonials
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-proof { background: var(--white); border-bottom: var(--rule-hair); }
+#dk-home .dk-proof-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s7);
+  align-items: end;
+  margin-bottom: var(--s6);
+}
+#dk-home .dk-proof-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s5);
+  max-width: 960px;
+}
+#dk-home .dk-proof-card {
+  background: var(--paper);
+  border: var(--rule-hair);
+  border-radius: 4px;
+  padding: var(--s5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  transition: border-color 200ms var(--ease);
+}
+#dk-home .dk-proof-card:hover { border-color: rgba(0,0,0,0.22); }
+#dk-home .dk-proof-quote {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--ink);
+  flex: 1;
+  quotes: none;
+}
+#dk-home .dk-proof-cite { margin-top: auto; padding-top: var(--s3); border-top: var(--rule-hair); }
+#dk-home .dk-proof-role {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+#dk-home .dk-proof-detail {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  #dk-home .dk-proof-head { grid-template-columns: 1fr; gap: var(--s4); margin-bottom: var(--s5); }
+  #dk-home .dk-proof-cards { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: +AI COMMUNITY
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-community-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--s8);
+  align-items: start;
+}
+#dk-home .dk-community-card {
+  background: var(--khaki-light);
+  border: var(--rule-hair);
+  border-radius: 4px;
+  padding: var(--s6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s5);
+}
+#dk-home .dk-community-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+#dk-home .dk-community-price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+}
+#dk-home .dk-community-price-num {
+  font-family: var(--font-mono);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+#dk-home .dk-community-price-unit {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+#dk-home .dk-community-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: var(--s4) 0;
+  border-top: var(--rule-hair);
+  border-bottom: var(--rule-hair);
+}
+#dk-home .dk-community-feat {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  padding-left: var(--s4);
+  position: relative;
+}
+#dk-home .dk-community-feat::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--red);
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  #dk-home .dk-community-grid { grid-template-columns: 1fr; gap: var(--s5); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: CLOSING CTA
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .dk-close {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(56px, 7vw, 88px) 0;
+}
+#dk-home .dk-close .eyebrow { color: var(--khaki); }
+#dk-home .dk-close-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s8);
+  align-items: center;
+}
+#dk-home .dk-close .display-l { color: var(--white); }
+#dk-home .dk-close .body-l { color: rgba(255,255,255,0.72); }
+#dk-home .dk-close .dk-close-eyebrow {
+  color: var(--white);
+  letter-spacing: 0.18em;
+  margin-bottom: var(--s4);
+}
+#dk-home .dk-close-actions {
+  width: 100%;
+  max-width: 460px;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+  border-radius: 4px;
+}
+#dk-home .dk-close-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  width: 100%;
+}
+#dk-home .dk-close-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+#dk-home .dk-close-field label:not(.sr-only) {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+#dk-home .dk-close-field input {
+  width: 100%;
+  min-height: 52px;
+  padding: 15px 16px;
+  border: 1px solid rgba(10,10,10,0.18);
+  border-radius: 2px;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.2;
+  transition: border-color 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+#dk-home .dk-close-field input::placeholder {
+  color: rgba(10,10,10,0.48);
+}
+#dk-home .dk-close-field input:focus {
+  outline: none;
+  border-color: rgba(10,10,10,0.72);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(10,10,10,0.045);
+}
+#dk-home .dk-close-form .btn {
+  width: 100%;
+  min-height: 52px;
+  margin-top: var(--s1);
+}
+#dk-home .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  #dk-home .dk-close-grid { grid-template-columns: 1fr; gap: var(--s5); }
+  #dk-home .dk-close-actions { max-width: none; justify-self: stretch; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  #dk-home *,
+  #dk-home *::before,
+  #dk-home *::after {
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
+  }
+  #dk-home .reveal { opacity: 1; transform: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HEADLINE LINE-BREAK CONTROL
+   Desktop: explicit <br> tags lock the composition.
+   max-width prevents accidental reflow at wide viewports.
+   font-size overrides the global display-l scale for each headline.
+   Mobile (≤767px): <br> tags hidden via .dk-br-desktop, font scales down.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/*
+  Problem headline — 3 lines on desktop:
+  Senior leaders don't need
+  more information.
+  They need orientation.
+*/
+#dk-home .hl-problem {
+  max-width: 680px;
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1.0;
+  hyphens: none;
+  word-break: normal;
+}
+
+/*
+  Proof headline — 2 lines on desktop:
+  Leaders who have done
+  the Diagnostic.
+*/
+#dk-home .hl-proof {
+  max-width: 720px;
+  font-size: clamp(34px, 4.4vw, 60px);
+  line-height: 1.0;
+  hyphens: none;
+  word-break: normal;
+}
+
+/*
+  CTA headline — 3 lines on desktop:
+  You don't need more
+  information. You need
+  orientation.
+*/
+#dk-home .hl-cta {
+  max-width: 760px;
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1.0;
+  hyphens: none;
+  word-break: normal;
+}
+
+/* Explicit headline lines */
+#dk-home .dk-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Desktop <br> tags are visible by default */
+#dk-home .dk-br-desktop { display: block; }
+
+/* Tablet (768px–960px): relax max-widths, let <br> still guide breaks */
+@media (max-width: 960px) {
+  #dk-home .hl-problem { max-width: 560px; font-size: clamp(32px, 4.2vw, 52px); }
+  #dk-home .hl-proof   { max-width: 580px; font-size: clamp(30px, 4.0vw, 50px); }
+  #dk-home .hl-cta     { max-width: 600px; font-size: clamp(32px, 4.2vw, 52px); }
+}
+
+/* Mobile (≤600px): hide desktop <br> tags, let text flow naturally */
+@media (max-width: 600px) {
+  #dk-home .dk-br-desktop { display: none; }
+  #dk-home .dk-line { display: inline; white-space: normal; }
+  #dk-home .hl-problem,
+  #dk-home .hl-proof,
+  #dk-home .hl-cta {
+    max-width: 100%;
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.05;
+  }
+}
+
+
+/* ======================================================================
+   MOBILE POLISH - optimized for small screens
+   Keeps intentional headline lines, reduces cramped spacing, prevents
+   horizontal overflow, and makes CTAs easier to tap.
+   ====================================================================== */
+@media (max-width: 600px) {
+  #dk-home {
+    --edge: clamp(18px, 5vw, 24px);
+    overflow-x: hidden;
+  }
+
+  
+
+  #dk-home section {
+    padding: clamp(48px, 13vw, 64px) 0;
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  #dk-home .display-xl,
+  #dk-home .display-l,
+  #dk-home .display-m { letter-spacing: -0.018em; }
+
+  #dk-home .body-l { font-size: 16px; line-height: 1.55; }
+  #dk-home .body,
+  #dk-home .body-sans { font-size: 15px; }
+
+  #dk-home .btn,
+  #dk-home .btn-ghost,
+  #dk-home .btn-primary {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 18px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  #dk-home .btn-text { line-height: 1.3; }
+
+  #dk-home .dk-hero-copy { padding: var(--s6) var(--edge) var(--s5); }
+  #dk-home .dk-hero-copy::before { width: 40px; }
+  #dk-home .dk-hero-eyebrow { margin-top: 18px; font-size: 10px; line-height: 1.35; }
+  #dk-home .dk-hero-h1 {
+    max-width: 11.5ch;
+    font-size: clamp(34px, 11vw, 44px);
+    line-height: 0.98;
+    margin-bottom: var(--s5);
+  }
+
+  #dk-home .dk-hero-actions,
+  #dk-home .dk-close-actions { width: 100%; max-width: none; justify-self: stretch; }
+  #dk-home .dk-hero-actions .btn,
+  #dk-home .dk-hero-actions .btn-text,
+  #dk-home .dk-close-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #dk-home .dk-hero-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+  }
+
+  #dk-home .dk-hero-meta-item {
+    padding-bottom: var(--s3);
+    border-bottom: var(--rule-hair);
+  }
+
+  #dk-home .dk-hero-meta-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  #dk-home .dk-hero-illus { min-height: 220px; }
+  #dk-home .dk-illus-plate { max-width: 300px; margin: var(--s4) auto; }
+  #dk-home .dk-hero-illus-top,
+  #dk-home .dk-hero-illus-bottom { gap: var(--s3); }
+  #dk-home .dk-illus-caption { max-width: 190px; font-size: 9px; }
+
+  #dk-home .sect-marker { margin-bottom: var(--s4); gap: var(--s2); }
+  #dk-home .sect-marker-line { flex-basis: 28px; }
+  #dk-home .sect-marker-label { font-size: 10px; letter-spacing: 0.14em; }
+
+  #dk-home .dk-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  #dk-home .hl-problem,
+  #dk-home .hl-proof,
+  #dk-home .hl-cta {
+    max-width: 100%;
+    font-size: clamp(22px, 6.2vw, 34px);
+    line-height: 1.04;
+    overflow-wrap: normal;
+  }
+
+  #dk-home .hl-proof { font-size: clamp(23px, 6.4vw, 34px); }
+  #dk-home .hl-cta { font-size: clamp(24px, 6.6vw, 36px); }
+
+  #dk-home .dk-noise-grid,
+  #dk-home .dk-edit-grid,
+  #dk-home .dk-ladder-head,
+  #dk-home .dk-proof-head,
+  #dk-home .dk-community-grid,
+  #dk-home .dk-close-grid { gap: var(--s5); }
+
+  #dk-home .dk-nts-stage { min-height: 260px; }
+  #dk-home .dk-nts-signal-reveal { padding: var(--s5) var(--s4); }
+  #dk-home .dk-nts-signal-text { padding-left: var(--s4); font-size: 14px; line-height: 1.55; }
+  #dk-home .dk-nts-signal-attr { padding-left: var(--s4); }
+
+  #dk-home .dk-diag-head { margin-bottom: var(--s5); }
+  #dk-home .dk-diag-head .display-xl {
+    font-size: clamp(34px, 10vw, 44px);
+    line-height: 0.98;
+  }
+
+  #dk-home .dk-diag-offer,
+  #dk-home .dk-tab-panel { padding: var(--s5); }
+  #dk-home .dk-diag-specs { grid-template-columns: 1fr; }
+  #dk-home .dk-diag-price { align-items: flex-start; flex-direction: column; gap: var(--s2); }
+  #dk-home .dk-tabs { border-top: var(--rule-hair); border-radius: 3px; }
+  #dk-home .dk-tab { padding: var(--s4); }
+  #dk-home .dk-tab.is-active::after { bottom: var(--s4); }
+
+  #dk-home .dk-rung,
+  #dk-home .dk-proof-card,
+  #dk-home .dk-community-card { padding: var(--s5); }
+
+  #dk-home .dk-community-card-head { flex-direction: column; gap: var(--s3); }
+  #dk-home .dk-community-card-head .mono { text-align: left !important; }
+  #dk-home .dk-close { padding: clamp(52px, 14vw, 72px) 0; }
+  
+}
+
+@media (max-width: 380px) {
+  #dk-home .hl-problem,
+  #dk-home .hl-proof,
+  #dk-home .hl-cta { font-size: clamp(21px, 5.9vw, 28px); }
+  #dk-home .dk-hero-h1 { font-size: clamp(31px, 10vw, 38px); }
+}
+
+
+/* ======================================================================
+   HERO BALANCE PATCH - keeps copy and illustration inside one editorial
+   composition while cropping the illustration window instead of scaling it.
+   ====================================================================== */
+@media (min-width: 961px) {
+  #dk-home .dk-hero {
+    min-height: auto;
+    padding: clamp(28px, 3vw, 36px) 0;
+    align-items: center;
+  }
+
+  #dk-home .dk-hero-grid {
+    width: 100%;
+    max-width: 1240px;
+    min-height: clamp(600px, calc(100vh - 124px), 660px);
+    margin: 0 auto;
+    padding-left: var(--edge);
+    padding-right: var(--edge);
+    grid-template-columns: minmax(360px, 0.92fr) minmax(520px, 1.08fr);
+    align-items: stretch;
+  }
+
+  #dk-home .dk-hero-copy {
+    min-width: 0;
+    padding: clamp(30px, 3vw, 44px) clamp(28px, 3vw, 42px) clamp(28px, 3vw, 40px) 0;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #dk-home .dk-hero-copy::before {
+    top: clamp(30px, 3vw, 44px);
+    left: 0;
+  }
+
+  #dk-home .dk-hero-eyebrow {
+    margin-top: 28px;
+    margin-bottom: var(--s3);
+    white-space: nowrap;
+  }
+
+  #dk-home .dk-hero-h1 {
+    max-width: 13.5ch;
+    font-size: clamp(42px, 3.55vw, 56px);
+    line-height: 0.98;
+    margin-bottom: var(--s4);
+  }
+
+  #dk-home .dk-hero-lede {
+    max-width: 38ch;
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.55;
+  }
+
+  #dk-home .dk-hero-actions {
+    margin-top: var(--s4);
+    gap: var(--s3);
+  }
+
+  #dk-home .dk-hero-meta {
+    width: 100%;
+    max-width: 100%;
+    gap: clamp(14px, 1.6vw, 24px);
+    align-items: flex-start;
+    overflow: hidden;
+  }
+
+  #dk-home .dk-hero-meta-item {
+    min-width: 0;
+  }
+
+  #dk-home .dk-hero-meta-num {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  #dk-home .dk-hero-meta-lbl {
+    font-size: 9.5px;
+    line-height: 1.35;
+  }
+
+  #dk-home .dk-hero-illus {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  #dk-home .dk-hero-illus-inner {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    min-height: 100%;
+    row-gap: clamp(18px, 2vw, 24px);
+    padding: clamp(24px, 2.4vw, 30px) clamp(22px, 2.2vw, 28px) clamp(18px, 2vw, 22px);
+  }
+
+  #dk-home .dk-hero-illus-top,
+  #dk-home .dk-hero-illus-bottom {
+    width: 100%;
+  }
+
+  #dk-home .dk-illus-plate {
+    width: 100%;
+    height: 100%;
+    min-height: clamp(470px, 54vh, 610px);
+    max-width: none;
+    margin: 0;
+    flex: none;
+    overflow: hidden;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+
+  #dk-home .dk-illus-plate svg {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    flex: 0 0 auto;
+    transform: none;
+    display: block;
+  }
+
+  #dk-home .dk-hero-illus-bottom {
+    align-self: end;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1180px) {
+  #dk-home .dk-hero-grid {
+    grid-template-columns: minmax(330px, 0.9fr) minmax(460px, 1.1fr);
+  }
+
+  #dk-home .dk-hero-h1 {
+    font-size: clamp(38px, 3.8vw, 48px);
+  }
+
+  #dk-home .dk-hero-eyebrow {
+    white-space: normal;
+  }
+
+  #dk-home .dk-illus-plate {
+    min-height: clamp(430px, 50vh, 540px);
+  }
+}
+
+/* ======================================================================
+   FINAL HERO IMAGE CROP PATCH
+   The right-side hero artwork is now a true crop frame: the visible beige
+   card uses the red-box proportions, and any oversized card content outside
+   that frame is clipped by overflow:hidden.
+   ====================================================================== */
+@media (min-width: 961px) {
+  #dk-home .dk-hero-grid {
+    align-items: center;
+  }
+
+  #dk-home .dk-hero-illus {
+    width: 100%;
+    aspect-ratio: 610 / 665;
+    height: auto;
+    min-height: 0;
+    align-self: center;
+    justify-self: stretch;
+    overflow: hidden;
+    background: var(--khaki-light);
+    contain: paint;
+  }
+
+  #dk-home .dk-hero-illus-inner {
+    width: 100%;
+    height: calc(100% + clamp(74px, 7vw, 96px));
+    min-height: 0;
+    transform: translateY(calc(-1 * clamp(37px, 3.5vw, 48px)));
+    overflow: visible;
+  }
+
+  #dk-home .dk-illus-plate {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  #dk-home .dk-illus-plate svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1180px) {
+  #dk-home .dk-hero-illus {
+    aspect-ratio: 610 / 665;
+  }
+
+  #dk-home .dk-hero-illus-inner {
+    height: calc(100% + 76px);
+    transform: translateY(-38px);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   REFINEMENT: section markers removed + tighter page rhythm
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home section {
+  padding-top: clamp(52px, 6.2vw, 82px);
+  padding-bottom: clamp(52px, 6.2vw, 82px);
+}
+
+#dk-home section.compact {
+  padding-top: clamp(34px, 4vw, 56px);
+  padding-bottom: clamp(34px, 4vw, 56px);
+}
+
+#dk-home .dk-hero {
+  padding-top: clamp(24px, 3vw, 36px);
+  padding-bottom: clamp(24px, 3vw, 36px);
+}
+
+#dk-home .dk-noise-grid,
+#dk-home .dk-edit-grid,
+#dk-home .dk-ladder-head,
+#dk-home .dk-proof-head,
+#dk-home .dk-community-grid,
+#dk-home .dk-close-grid {
+  margin-top: 0;
+}
+
+#dk-home .dk-ladder-head {
+  margin-bottom: clamp(28px, 3.4vw, 48px);
+}
+
+#dk-home .dk-proof-head {
+  margin-bottom: clamp(28px, 3vw, 44px);
+}
+
+#dk-home .dk-pullquote {
+  margin-top: clamp(22px, 2.8vw, 38px);
+}
+
+#dk-home .dk-close {
+  padding-top: clamp(48px, 5.8vw, 76px);
+  padding-bottom: clamp(48px, 5.8vw, 76px);
+}
+
+@media (max-width: 768px) {
+  #dk-home section {
+    padding-top: clamp(42px, 11vw, 58px);
+    padding-bottom: clamp(42px, 11vw, 58px);
+  }
+
+  #dk-home .dk-hero {
+    /* padding-top intentionally removed — controlled by the mobile-safe block below */
+    padding-bottom: 0;
+  }
+
+  #dk-home .dk-ladder-head,
+  #dk-home .dk-proof-head {
+    margin-bottom: var(--s5);
+  }
+
+  #dk-home .dk-close {
+    padding-top: clamp(44px, 12vw, 62px);
+    padding-bottom: clamp(44px, 12vw, 62px);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MOBILE OPTIMIZATION — intentional vertical flow
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  #dk-home {
+    overflow-x: hidden;
+  }
+
+  #dk-home .dk-hero {
+    min-height: auto;
+    border-bottom: var(--rule-hair);
+  }
+
+  #dk-home .dk-hero-grid {
+    display: block;
+    min-height: auto;
+  }
+
+  /* Hide the hero artwork completely on mobile so the message leads. */
+  #dk-home .dk-hero-illus {
+    display: none !important;
+  }
+
+  #dk-home .dk-hero-copy {
+    order: initial;
+    min-height: auto;
+    padding: 0 var(--edge) clamp(40px, 10vw, 64px); /* Top space handled by .dk-hero padding-top */
+  }
+
+  #dk-home .dk-hero-copy::before {
+    display: none; /* Hide red decorative rule on mobile — not needed at this layout */
+  }
+
+  #dk-home .dk-hero-eyebrow {
+    margin-top: 0; /* No extra gap needed — hero padding-top handles clearance */
+  }
+
+  #dk-home .dk-hero-h1 {
+    max-width: 11.5ch;
+    margin-bottom: var(--s4);
+  }
+
+  #dk-home .dk-hero-lede {
+    max-width: 36ch;
+  }
+
+  #dk-home .dk-hero-actions {
+    margin-top: var(--s4);
+    gap: var(--s3);
+  }
+
+  #dk-home .dk-hero-meta {
+    margin-top: var(--s5);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Tighter mobile rhythm without removing editorial breathing room. */
+  #dk-home section {
+    padding: clamp(44px, 11vw, 64px) 0;
+  }
+
+  #dk-home section.compact {
+    padding: clamp(34px, 9vw, 48px) 0;
+  }
+
+  #dk-home .display-xl {
+    font-size: clamp(34px, 11vw, 48px);
+    line-height: 0.98;
+  }
+
+  #dk-home .display-l {
+    font-size: clamp(30px, 9.5vw, 42px);
+    line-height: 1.02;
+  }
+
+  #dk-home .body-l {
+    font-size: 16px;
+    line-height: 1.58;
+  }
+
+  /* The Problem content should lead, followed by the interaction. */
+  #dk-home .dk-noise-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s5);
+    margin-top: 0;
+  }
+
+  #dk-home .dk-noise-copy {
+    grid-column: 1;
+    order: 1;
+    min-width: 0;
+  }
+
+  #dk-home .dk-nts-panel {
+    order: 2;
+    min-width: 0;
+    width: 100%;
+    gap: var(--s3);
+  }
+
+  #dk-home .dk-nts-track-wrap,
+  #dk-home .dk-nts-track {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #dk-home .dk-nts-stage {
+    width: 100%;
+    min-height: clamp(300px, 78vw, 360px);
+    max-width: 100%;
+  }
+
+  #dk-home .dk-nts-cloud {
+    inset: 0;
+  }
+
+  #dk-home .dk-nts-signal-reveal {
+    padding: var(--s5) var(--s4);
+  }
+
+  #dk-home .dk-nts-signal-text {
+    font-size: 15px;
+    line-height: 1.55;
+    padding-left: var(--s4);
+  }
+
+  #dk-home .dk-nts-signal-attr {
+    padding-left: var(--s4);
+  }
+
+  #dk-home .dk-edit-grid,
+#dk-home .dk-diag-body,
+#dk-home .dk-ladder-head,
+#dk-home .dk-community-grid,
+#dk-home .dk-close-grid {
+    gap: var(--s5);
+  }
+
+  #dk-home .dk-close {
+    padding-top: clamp(48px, 12vw, 68px);
+    padding-bottom: clamp(48px, 12vw, 68px);
+  }
+}
+
+@media (max-width: 520px) {
+  #dk-home .dk-hero-copy {
+    padding-top: 0; /* Top space handled by .dk-hero padding-top above — prevents double-gap */
+    padding-bottom: 44px;
+  }
+
+  #dk-home .dk-hero-copy::before {
+    display: none; /* Red decorative rule hidden on mobile */
+  }
+
+  #dk-home .dk-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #dk-home .dk-hero-actions .btn,
+  #dk-home .dk-close-form .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #dk-home .dk-hero-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+  }
+
+  #dk-home .dk-hero-meta-sep {
+    display: none;
+  }
+
+  #dk-home .dk-nts-stage {
+    min-height: 315px;
+  }
+
+  #dk-home .dk-nts-word {
+    letter-spacing: -0.018em;
+  }
+}
+
+
+#dk-home .eyebrow,
+#dk-home .dk-hero-eyebrow,
+#dk-home .dk-close-eyebrow,
+#dk-home .dk-diag-offer-label,
+#dk-home .dk-diag-spec-label,
+#dk-home .dk-framework-label,
+#dk-home .outcomes-label,
+#dk-home .sect-marker-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   EYEBROW WEIGHT PASS — bold labels, colors/spacing preserved
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-home .eyebrow,
+#dk-home .u-label,
+#dk-home .u-eyebrow,
+#dk-home .dk-hero-eyebrow,
+#dk-home .dk-close-eyebrow,
+#dk-home .dk-framework-label,
+#dk-home .outcomes-label,
+#dk-home .dk-diag-offer-label,
+#dk-home .dk-diag-spec-label,
+#dk-home .dk-pricing-card-label,
+#dk-home .dk-pricing-card-spec-label,
+#dk-home .dk-service-eyebrow,
+#dk-home .dk-comparison-col-label,
+#dk-home .dk-service-detail-trigger-label,
+#dk-home .rsc-hero-breadcrumb-label,
+#dk-home .rsc-card-type,
+#dk-home .rsc-card-format,
+#dk-home .rsc-card-expand-label,
+#dk-home .rsc-grid-head-title,
+#dk-home .rsc-cta-eyebrow {
+  font-size: 11px;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+}
+</style>
+
+
+<style>
+/* HOME HERO TOP SPACE — reduced further */
+#dk-home .dk-hero {
+  padding-top: clamp(104px, 10vw, 144px);
+}
+
+@media (max-width: 960px) {
+  #dk-home .dk-hero {
+    padding-top: clamp(72px, 14vw, 96px);
+  }
+}
+/* END HOME HERO TOP SPACE */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HERO EYEBROW ALIGNMENT PATCH
+   Moves the Home hero copy upward so the eyebrow aligns with the requested
+   top reference area, without changing the header/footer removal state.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 961px) {
+  #dk-home .dk-hero-copy {
+    justify-content: flex-start;
+  }
+}
+</style>
+
+
+<style>
+/* HOME HERO TOP SPACE — mobile-safe clearance for fixed header + banner
+   !important is required because #dk-home section { padding } rules later in the
+   cascade (from the tighter-rhythm blocks) also match .dk-hero as a <section>
+   element and would otherwise silently override this value. */
+#dk-home .dk-hero {
+  padding-top: clamp(72px, 8vw, 104px) !important; /* Desktop */
+}
+
+@media (max-width: 960px) {
+  #dk-home .dk-hero {
+    /* Small, normal top padding only. GHL's fixed header + announcement banner
+       already push this section down on the live site, so the hero must NOT add
+       its own large offset on top of that (which caused the big empty gap). */
+    padding-top: clamp(28px, 6vw, 40px) !important;
+    padding-bottom: 0 !important;
+  }
+}
+/* END HOME HERO TOP SPACE */
+</style>
+
+<style>
+/* HOME CLEANUP PASS — review-requested refinements only */
+#dk-home .reveal {
+  transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
+}
+#dk-home .reveal[data-delay="1"] { transition-delay: 40ms; }
+#dk-home .reveal[data-delay="2"] { transition-delay: 80ms; }
+#dk-home .reveal[data-delay="3"] { transition-delay: 120ms; }
+#dk-home .reveal[data-delay="4"] { transition-delay: 160ms; }
+#dk-home .dk-hero .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+#dk-home .dk-diag-head {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+#dk-home .dk-diag-head .lede {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+#dk-home .eyebrow,
+#dk-home .eyebrow.red,
+#dk-home .eyebrow.ink,
+#dk-home .on-khaki .eyebrow,
+#dk-home .dk-hero-eyebrow,
+#dk-home .dk-close-eyebrow {
+  color: #C5AA88 !important;
+}
+#dk-home .red-accent {
+  color: var(--ink) !important;
+}
+</style>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   MOBILE OVERFLOW FIX — GHL-safe patch
+   Prevents horizontal scroll caused by fixed-width elements, nowrap text,
+   and grid columns exceeding the viewport on small screens.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Root containment — stops any child from pushing past viewport */
+#dk-home {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Shell and grid must never exceed their container */
+#dk-home .dk-shell {
+  max-width: min(var(--max-w), 100%);
+  overflow: hidden;
+}
+
+#dk-home .dk-grid {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* All grid children must not overflow */
+#dk-home .dk-grid > * {
+  min-width: 0;
+}
+
+@media (max-width: 960px) {
+  /* Force all sections to stay within viewport */
+  #dk-home section,
+  #dk-home .dk-hero,
+  #dk-home .dk-noise,
+  #dk-home .dk-diag,
+  #dk-home .dk-ladder,
+  #dk-home .dk-proof,
+  #dk-home .dk-close {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* dk-line white-space:nowrap causes text to run off-screen on mobile.
+     Override to allow wrapping at narrow widths. */
+  #dk-home .dk-line {
+    white-space: normal !important;
+    display: block;
+  }
+
+  /* Noise-to-Signal stage must not exceed screen width */
+  #dk-home .dk-nts-stage,
+  #dk-home .dk-nts-track,
+  #dk-home .dk-nts-track-wrap,
+  #dk-home .dk-nts-panel {
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Prevent any word cloud words from pushing layout */
+  #dk-home .dk-nts-word {
+    max-width: 100%;
+  }
+
+  /* Tab content must not overflow */
+  #dk-home .dk-tabs,
+  #dk-home .dk-tab-content,
+  #dk-home .dk-tab-panel {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Proof cards and rung cards */
+  #dk-home .dk-proof-cards,
+  #dk-home .dk-ladder-rungs {
+    max-width: 100%;
+  }
+
+  /* Community grid */
+  #dk-home .dk-community-grid {
+    max-width: 100%;
+  }
+
+  /* Close section — GHL form container */
+  #dk-home .dk-close-actions {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Ensure the hero headline never overflows */
+  #dk-home .dk-hero-h1 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+
+  /* Prevent display headlines from overflowing */
+  #dk-home .display-xl,
+  #dk-home .display-l,
+  #dk-home .display-m,
+  #dk-home .display-s,
+  #dk-home .hl-problem,
+  #dk-home .hl-proof,
+  #dk-home .hl-cta {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+
+  /* dk-line: allow wrapping at mobile */
+  #dk-home .dk-line {
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Prevent hero meta items from overflowing */
+  #dk-home .dk-hero-meta-num {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+</style>
+
+<div id="dk-home">
+<main id="top">
+<!-- ════════════════════════════════════════════════════════════
+         HERO — Split composition (illustration / typography)
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="Hero" class="dk-hero">
+<div class="dk-hero-grid">
+<!-- LEFT: editorial illustration panel -->
+<div class="dk-hero-illus">
+<div class="dk-hero-illus-inner">
+<div class="dk-hero-illus-top">
+<span class="mono uppercase">DK/01</span>
+<span class="mono uppercase">Edition 01 · v5</span>
+</div>
+<!--
+              ILLUSTRATION PLACEHOLDER
+              Replace this entire <div class="dk-illus-plate"> block
+              with <img src="your-illustration.jpg" alt="Untangling Complexity"/>
+              when the final commissioned artwork is ready.
+              The container is already sized and positioned correctly.
+            -->
+<div aria-label="Untangling Complexity — editorial illustration placeholder" class="dk-illus-plate" role="img">
+<svg aria-hidden="true" preserveaspectratio="xMidYMid slice" viewbox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ECE3D7" height="480" width="480" x="0" y="0"></rect>
+<!-- Construction grid -->
+<g stroke="rgba(0,0,0,0.05)" stroke-width="0.5">
+<line x1="0" x2="480" y1="80" y2="80"></line>
+<line x1="0" x2="480" y1="160" y2="160"></line>
+<line x1="0" x2="480" y1="240" y2="240"></line>
+<line x1="0" x2="480" y1="320" y2="320"></line>
+<line x1="0" x2="480" y1="400" y2="400"></line>
+<line x1="80" x2="80" y1="0" y2="480"></line>
+<line x1="160" x2="160" y1="0" y2="480"></line>
+<line x1="240" x2="240" y1="0" y2="480"></line>
+<line x1="320" x2="320" y1="0" y2="480"></line>
+<line x1="400" x2="400" y1="0" y2="480"></line>
+</g>
+<!-- Register marks -->
+<g fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="0.75">
+<line x1="28" x2="44" y1="28" y2="28"></line><line x1="28" x2="28" y1="28" y2="44"></line>
+<line x1="452" x2="436" y1="28" y2="28"></line><line x1="452" x2="452" y1="28" y2="44"></line>
+<line x1="28" x2="44" y1="452" y2="452"></line><line x1="28" x2="28" y1="452" y2="436"></line>
+<line x1="452" x2="436" y1="452" y2="452"></line><line x1="452" x2="452" y1="452" y2="436"></line>
+</g>
+<!-- THE TANGLE — dense gestural mass, lower-left quadrant -->
+<g transform="translate(110, 290)">
+<ellipse cx="0" cy="6" fill="rgba(0,0,0,0.07)" rx="130" ry="28"></ellipse>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-120,-12 Q-85,-48 -48,-18 Q-14,-52 18,-20 Q52,-48 90,-15 Q122,-44 128,-8" opacity="0.7" stroke="#7A6E5A" stroke-width="1.8"></path>
+<path d="M-118,-4 Q-88,-36 -60,-10 Q-26,-44 8,-12 Q42,-44 78,-14 Q108,-40 122,-4" opacity="0.65" stroke="#8A7B6A" stroke-width="1.6"></path>
+<path d="M-115,6 Q-80,-22 -44,2 Q-8,-30 26,-4 Q62,-26 98,-4 Q118,-18 122,8" opacity="0.6" stroke="#6B5E4A" stroke-width="1.4"></path>
+<path d="M-110,16 Q-76,-8 -40,10 Q-4,-16 32,8 Q68,-12 104,8 Q118,-4 120,18" opacity="0.55" stroke="#7A6E5A" stroke-width="1.2"></path>
+<path d="M-105,26 Q-70,6 -34,20 Q4,2 38,18 Q74,2 108,18 Q118,8 116,28" opacity="0.5" stroke="#8A7B6A" stroke-width="1.0"></path>
+<path d="M-100,-16 Q-66,-40 -28,-18 Q8,-42 44,-18 Q80,-38 116,-16" opacity="0.4" stroke="#8B9E8A" stroke-width="1.3"></path>
+<path d="M-95,10 Q-60,-12 -22,8 Q14,-16 50,6 Q86,-8 118,10" opacity="0.38" stroke="#6B7E9A" stroke-width="1.1"></path>
+<path d="M-88,2 Q-52,-18 -14,0 Q22,-22 58,-2 Q92,-16 112,2" opacity="0.38" stroke="#9A7A6A" stroke-width="1.0"></path>
+</g>
+<circle cx="-58" cy="-10" fill="none" opacity="0.48" r="4.5" stroke="#6B7E9A" stroke-width="1.1"></circle>
+<circle cx="36" cy="-4" fill="none" opacity="0.48" r="3.5" stroke="#8B9E8A" stroke-width="1.1"></circle>
+<circle cx="82" cy="6" fill="none" opacity="0.48" r="3" stroke="#9A7A6A" stroke-width="1.1"></circle>
+</g>
+<!-- THE RED THREAD — single clean line emerging from tangle -->
+<g fill="none" stroke="#CC0000" stroke-linecap="round" stroke-width="2">
+<path d="M240,290 Q262,258 288,228 Q316,196 346,172 Q374,152 396,140"></path>
+</g>
+<circle cx="396" cy="140" fill="#CC0000" r="5.5"></circle>
+<!-- Brand shape trio — top right, quiet signature -->
+<g transform="translate(380, 52)">
+<rect fill="#0A0A0A" height="16" width="16" x="0" y="0"></rect>
+<circle cx="36" cy="8" fill="#CC0000" r="8"></circle>
+<polygon fill="none" points="58,16 68,0 78,16" stroke="#0A0A0A" stroke-width="1.5"></polygon>
+</g>
+<!-- Ground rule -->
+<line stroke="rgba(0,0,0,0.1)" stroke-width="0.5" x1="0" x2="480" y1="400" y2="400"></line>
+</svg>
+</div>
+<div class="dk-hero-illus-bottom">
+<div class="dk-illus-caption">
+<strong>Fig. 01</strong> · Orientation emerging from noise.
+</div>
+<div class="mono uppercase" style="text-align: right; line-height: 1.6;">
+                Untangling<br/>Complexity
+              </div>
+</div>
+</div>
+</div>
+<!-- RIGHT: typography panel -->
+<div class="dk-hero-copy">
+<div class="dk-hero-eyebrow reveal">Strategic Translation for the AI Era</div>
+<h1 class="dk-hero-h1 reveal" data-delay="1">Clarity for leaders who don't have time to guess</h1>
+<p class="dk-hero-lede reveal" data-delay="2">You've tried AI. You're not seeing the lift you expected.</p>
+<p class="dk-hero-lede reveal" data-delay="2">That's not a knowledge gap. It's an <em>orientation</em> problem.</p>
+<p class="dk-hero-lede reveal" data-delay="3">I help founders, owner-operators, and senior executives use AI as a thinking partner, not a distraction.</p>
+<div class="dk-hero-actions reveal" data-delay="4">
+<a class="btn btn-primary" href="https://danooshkapadia.com/diagnostic">
+              Book the AI Strategic Diagnostic
+              <span class="arrow">→</span>
+</a>
+<a class="btn-text" href="https://danooshkapadia.com/ways-to-work-together">
+              See how we work together
+              <span class="arrow">→</span>
+</a>
+</div>
+<div class="dk-hero-meta reveal" data-delay="4">
+<div class="dk-hero-meta-item">
+<span class="dk-hero-meta-num">90 MIN</span>
+<span class="dk-hero-meta-lbl">Working Session</span>
+</div>
+<div class="dk-hero-meta-sep"></div>
+<div class="dk-hero-meta-item">
+<span class="dk-hero-meta-num">ONE DECISION</span>
+<span class="dk-hero-meta-lbl">Real, Not Hypothetical</span>
+</div>
+<div class="dk-hero-meta-sep"></div>
+<div class="dk-hero-meta-item">
+<span class="dk-hero-meta-num">CLEAR NEXT MOVE</span>
+<span class="dk-hero-meta-lbl">You Can Act On</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         NOISE vs. SIGNAL — The Pressure Valve
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="Noise to Signal interactive" class="dk-noise bg-white">
+<div class="dk-shell">
+<div class="dk-grid dk-noise-grid">
+<!-- Interactive Noise→Signal slider -->
+<div class="dk-nts-panel reveal">
+<!-- Slider control -->
+<div class="dk-nts-track-wrap">
+<div class="dk-nts-track-labels">
+<span>Noise</span>
+<span>Signal</span>
+</div>
+<div class="dk-nts-track" id="dkNtsTrack">
+<div class="dk-nts-fill" id="dkNtsFill"></div>
+<div class="dk-nts-handle" id="dkNtsHandle"></div>
+</div>
+<div class="dk-nts-hint" id="dkNtsHint">Drag to find the signal</div>
+</div>
+<!-- Stage: word cloud fades to signal text -->
+<div class="dk-nts-stage" id="dkNtsStage">
+<div class="dk-nts-cloud" id="dkNtsCloud"></div>
+<div class="dk-nts-signal-reveal" id="dkNtsSignal">
+<div class="dk-nts-signal-accent" id="dkNtsAccent"></div>
+<p class="dk-nts-signal-text">Most leaders experimenting with AI are spending hours a week testing tools, prompts, and workflows, but the lift stays inconsistent. The issue is rarely effort. <em>It’s orientation.</em></p>
+<p class="dk-nts-signal-text">The gap isn’t technical. It’s conceptual. Closing it doesn’t require more tutorials. <em>It requires a different mental model.</em></p>
+<div class="dk-nts-signal-attr">(DK Consulting)</div>
+</div>
+</div>
+</div>
+<div class="dk-noise-copy">
+<div class="eyebrow red reveal" style="margin-bottom: var(--s3);">The Problem</div>
+<h2 class="display-l reveal hl-problem" data-delay="1" style="margin-bottom: var(--s5);"><span class="dk-line">Senior leaders </span><span class="dk-line">don’t need more </span><span class="dk-line">information. They need </span><span class="dk-line"><span style="color: var(--ink-soft);">orientation.</span></span></h2>
+<p class="body-l reveal" data-delay="2">
+              The hype cycle has flooded your inbox, your LinkedIn feed, and your board deck with tools, trends, and takes that don't survive contact with a real business decision.
+            </p>
+<p class="body-l reveal" data-delay="3" style="margin-top: var(--s4);">
+              The gap isn't technical. It's conceptual. Closing it doesn't require more tutorials. It requires a different mental model.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         THE STANCE — editorial two-col on khaki
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="How I Help" class="on-khaki bg-khaki">
+<div class="dk-shell">
+<div class="dk-edit-grid">
+<div class="dk-edit-head reveal">
+<div class="eyebrow ink" style="margin-bottom: var(--s4);">How I Help</div>
+<h2 class="display-l">I translate AI capability into business judgment that P&amp;L owners can actually use.</h2>
+</div>
+<div class="dk-edit-body reveal" data-delay="2">
+<p class="body-l">I've spent over 15 years in environments where decisions carry real consequences. I understand how modern AI systems work, and I understand how real businesses operate under pressure.</p>
+<p class="body-l">My work focuses on helping senior operators use AI to think more clearly, pressure-test decisions, and act with confidence when the stakes are high.</p>
+<p class="body-l" style="font-weight: 700; color: var(--ink);">
+              This isn't training. <span class="red-accent">It's enablement.</span>
+</p>
+<div class="dk-pullquote">
+<q>The design treats AI as a thinking partner, not a shortcut, not a replacement, not a gimmick. The goal is leverage you can actually trust.</q>
+<div class="cite">· DK Consulting</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         THE DIAGNOSTIC — the centerpiece
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="The AI Strategic Diagnostic" class="dk-diag bg-white" id="diagnostic">
+<div class="dk-shell">
+<div class="dk-diag-head reveal">
+<div class="eyebrow red" style="margin-bottom: var(--s3);">Where to Start · The Centerpiece</div>
+<h2 class="display-xl">The AI Strategic Diagnostic</h2>
+<p class="lede">A 90-minute working session for leaders who need orientation, not curriculum. Bring one real decision. Leave with a clear next move.</p>
+</div>
+<div class="dk-diag-body">
+<!-- OFFER CARD -->
+<div class="dk-diag-offer reveal">
+<div class="dk-diag-offer-header">
+<span class="dk-diag-offer-label">Offer · DK/02</span>
+<span class="dk-diag-offer-badge">Anchor</span>
+</div>
+<h3 class="dk-diag-offer-title">The AI Strategic Diagnostic</h3>
+<p class="dk-diag-offer-desc">
+              You bring a real decision or challenge. We work through it together, using AI as a thinking partner, and you leave with orientation you can act on.
+            </p>
+<div class="dk-diag-specs">
+<div><div class="dk-diag-spec-label">Duration</div><div class="dk-diag-spec-value">90 min</div></div>
+<div><div class="dk-diag-spec-label">Format</div><div class="dk-diag-spec-value">Live, 1:1</div></div>
+<div><div class="dk-diag-spec-label">Prep</div><div class="dk-diag-spec-value">None</div></div>
+<div><div class="dk-diag-spec-label">Outcome</div><div class="dk-diag-spec-value">Clear move</div></div>
+</div>
+<div class="dk-diag-price">
+<div class="dk-diag-price-num">$900</div>
+<div class="dk-diag-price-note">Credits toward ongoing work</div>
+</div>
+<a class="btn btn-primary" href="https://danooshkapadia.com/diagnostic">
+              Book the Diagnostic <span class="arrow">→</span>
+</a>
+<p class="dk-diag-fineprint">No prep deck. No homework. Bring one decision that's been stuck.</p>
+</div>
+<!-- FRAMEWORK TABS -->
+<div class="dk-framework reveal" data-delay="1">
+<div class="dk-framework-label">What happens in the session</div>
+<div class="dk-tab-progress-wrap">
+<div class="dk-tab-progress-fill" id="dkTabProgress"></div>
+</div>
+<div aria-label="Diagnostic framework" class="dk-tabs" role="tablist">
+<button aria-selected="true" class="dk-tab is-active" data-tab="assess" role="tab" type="button">
+<span class="dk-tab-num">01 / ASSESS</span>
+<span class="dk-tab-name">Situational Read</span>
+</button>
+<button aria-selected="false" class="dk-tab" data-tab="map" role="tab" type="button">
+<span class="dk-tab-num">02 / MAP</span>
+<span class="dk-tab-name">Fit &amp; Friction</span>
+</button>
+<button aria-selected="false" class="dk-tab" data-tab="define" role="tab" type="button">
+<span class="dk-tab-num">03 / DEFINE</span>
+<span class="dk-tab-name">Next Move</span>
+</button>
+</div>
+<div class="dk-tab-content" id="dkTabContent">
+<div class="dk-tab-panel is-active" data-panel="assess">
+<div class="dk-tab-desc">
+<h4>A situational read, not a skills test.</h4>
+<p>We begin by assessing how you're currently using AI, what's working, what's creating friction, and what's being avoided entirely. This isn't about grading your prompt craft. It's about mapping how AI is actually showing up in your working week.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">You Leave With</div>
+<div class="dk-outcomes">
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">A clear picture of your current AI usage and blind spots.</span></div>
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">The business outcomes you're actually optimizing for.</span></div>
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">The real constraints shaping decisions right now.</span></div>
+</div>
+</div>
+</div>
+<div class="dk-tab-panel" data-panel="map">
+<div class="dk-tab-desc">
+<h4>Where AI fits, and where it doesn't.</h4>
+<p>With a clear picture of your current state, we map your business priorities and constraints against what AI can actually do, not in theory, but in your specific operating context. No generic frameworks. No hype-driven use cases.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">You Leave With</div>
+<div class="dk-outcomes">
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">A map of where AI fits your actual business model.</span></div>
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">Where AI introduces risk you haven't accounted for.</span></div>
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">A reusable framework for evaluating AI fit going forward.</span></div>
+</div>
+</div>
+</div>
+<div class="dk-tab-panel" data-panel="define">
+<div class="dk-tab-desc">
+<h4>Definition, not ambiguity.</h4>
+<p>The session ends with definition. You'll know what to change, what to ignore, and what to test, with a prioritised next move that fits your real operating conditions. No ten-step playbook. One decision, made cleanly.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">You Leave With</div>
+<div class="dk-outcomes">
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">A clear mental model for how AI fits your role.</span></div>
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">A prioritized next move you can act on immediately.</span></div>
+<div class="dk-outcome"><span class="dk-outcome-dash">—</span><span class="dk-outcome-text">Permission to trust your own judgment again.</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         THE LADDER — professional steps
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="Ways to work together" class="dk-ladder" id="how-i-work">
+<div class="dk-shell">
+<div class="dk-ladder-head">
+<div class="reveal">
+<div class="eyebrow ink" style="margin-bottom: var(--s3);">Ways to Work Together</div>
+<h2 class="display-l">Professional steps, not funnel hacks.</h2>
+</div>
+<div class="reveal" data-delay="1">
+<p class="body-l">Three ways in, each with its own intensity and commitment. The Diagnostic is where most leaders start. From there, the engagement grows only when the work justifies it.</p>
+</div>
+</div>
+<div class="dk-ladder-rungs reveal" data-delay="2">
+<div class="dk-rung is-current">
+<div class="dk-rung-header">
+<span class="dk-rung-num">01</span>
+<span class="dk-rung-status">★ Anchor</span>
+</div>
+<h3 class="dk-rung-title">AI Strategic Diagnostic</h3>
+<p class="dk-rung-desc">The centerpiece. A 90-minute working session designed to replace experimentation with orientation. You leave with a mental model and a clear next move.</p>
+<div class="dk-rung-price">$900 · 90 min · credited</div>
+</div>
+<div class="dk-rung">
+<div class="dk-rung-header">
+<span class="dk-rung-num">02</span>
+<span class="dk-rung-status">Build-With-Me</span>
+</div>
+<h3 class="dk-rung-title">Strategic Edge Partnership</h3>
+<p class="dk-rung-desc">An ongoing partnership for leaders who've done the Diagnostic and are ready to embed AI-assisted judgment into how their organization actually decides.</p>
+<div class="dk-rung-price">By application · retainer</div>
+</div>
+<a class="dk-rung" href="https://danooshkapadia.com/team-sprint">
+<div class="dk-rung-header">
+<span class="dk-rung-num">03</span>
+<span class="dk-rung-status">Team Rollout</span>
+</div>
+<h3 class="dk-rung-title">The AI Team Sprint</h3>
+<p class="dk-rung-desc">For teams. Five weeks from experimentation to confident, repeatable use.</p>
+<div class="dk-rung-price">Five-week team sprint</div>
+</a>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         PROOF — testimonials
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="Social proof" class="dk-proof">
+<div class="dk-shell">
+<div class="dk-proof-head">
+<div class="reveal">
+<div class="eyebrow" style="margin-bottom: var(--s3);">Social Proof</div>
+<h2 class="display-l hl-proof"><span class="dk-line">Leaders who have worked </span><span class="dk-line">with Danoosh.</span></h2>
+</div>
+<div class="reveal" data-delay="1">
+<p class="body-l">Operators and founders who worked with Danoosh to turn AI from abstract potential into practical leverage.</p>
+</div>
+</div>
+<div class="dk-proof-cards">
+<article class="dk-proof-card reveal" data-delay="1">
+<div class="mono uppercase">Case 01</div>
+<blockquote class="dk-proof-quote">"There's no way I would have signed up to build a three-year strategic plan for that client without Claude in my toolbox. It would have taken me months — we got it done in a few weeks. I'm a toolmaker, not a tech wizard. But now I know enough about AI to be dangerous with it."</blockquote>
+<div class="dk-proof-cite">
+<div class="dk-proof-role">Mike Zacharias</div>
+<div class="dk-proof-detail">Manufacturing Consultant · 30-year owner-operator</div>
+</div>
+</article>
+<article class="dk-proof-card reveal" data-delay="2">
+<div class="mono uppercase">Case 02</div>
+<blockquote class="dk-proof-quote">"I’m not a tech person — I started using a computer late in life — and Danoosh made it easy and simple. He really helped me go through it and understand."</blockquote>
+<div class="dk-proof-cite">
+<div class="dk-proof-role">Fabrizio Cercatore</div>
+<div class="dk-proof-detail">Owner · Hot Italian</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         +AI COMMUNITY — secondary path
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="+AI Community" class="bg-white" id="community" hidden>
+<div class="dk-shell">
+<div class="dk-community-grid">
+<div class="reveal">
+<div class="eyebrow" style="margin-bottom: var(--s3);">For Staying Current</div>
+<h2 class="display-l" style="margin-bottom: var(--s4);">Stay current without chasing hype.</h2>
+<p class="body-l">The <strong>+AI Community</strong> is a quiet, curated space for leaders who want ongoing orientation, not more tools, prompts, or tutorials. Weekly calibration. Trusted signal. A place to stay sharp without having to wade through noise.</p>
+<div style="margin-top: var(--s5);">
+<a class="btn btn-ghost" href="/community">
+                Learn about +AI <span class="arrow">→</span>
+</a>
+</div>
+</div>
+<div class="dk-community-card reveal" data-delay="1">
+<div class="dk-community-card-head">
+<div>
+<div class="mono uppercase" style="margin-bottom: var(--s2);">Membership · DK/03</div>
+<div class="dk-community-price">
+<span class="dk-community-price-num">$90</span>
+<span class="dk-community-price-unit">/ month</span>
+</div>
+</div>
+<div class="mono uppercase" style="color: var(--ink-soft); text-align: right; line-height: 1.6;">Cancel<br/>Anytime</div>
+</div>
+<div class="dk-community-features">
+<div class="dk-community-feat">Weekly calibration, not a firehose</div>
+<div class="dk-community-feat">Curated signal, not noise</div>
+<div class="dk-community-feat">Access to a community of senior operators</div>
+<div class="dk-community-feat">Monthly live Q&amp;A session</div>
+<div class="dk-community-feat">Private library of decision frameworks</div>
+</div>
+<a class="btn btn-primary" href="/community">
+              Join +AI Community <span class="arrow">→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         CLOSING CTA
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="Ready when you are" class="dk-close">
+<div class="dk-shell">
+<div class="dk-close-grid">
+<div class="reveal">
+<div class="eyebrow dk-close-eyebrow">SEE HOW I WORK</div>
+<h2 class="display-l hl-cta"><span class="dk-line">You don’t need </span><span class="dk-line">more information. </span><span class="dk-line">You need orientation.</span></h2>
+<p class="body-l" style="margin-top: var(--s4);">The AI Strategic Diagnostic is designed for leaders who are done experimenting and ready for a clear next move.</p>
+</div>
+<div class="dk-close-actions reveal" data-delay="1">
+<iframe
+    src="https://api.leadconnectorhq.com/widget/form/syDsxG9u8SynVahJZjMc"
+    style="width:100%;height:412px;border:none;border-radius:2px;display:block;"
+    id="inline-syDsxG9u8SynVahJZjMc"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="JFW - DK - Form - Website - NewLead - Home - Sign-up Form"
+    data-height="412"
+    data-layout-iframe-id="inline-syDsxG9u8SynVahJZjMc"
+    data-form-id="syDsxG9u8SynVahJZjMc"
+    title="JFW - DK - Form - Website - NewLead - Home - Sign-up Form"
+>
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+</div>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     BEHAVIOR — vanilla JS, no dependencies
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+  var root = document.getElementById('dk-home');
+  if (!root) return;
+
+  /* SCROLL REVEAL */
+  var reveals = root.querySelectorAll('.reveal');
+  root.querySelectorAll('.dk-hero .reveal').forEach(function(el) { el.classList.add('is-in'); });
+  if ('IntersectionObserver' in window && reveals.length) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+    reveals.forEach(function(el) { if (!el.closest('.dk-hero')) io.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('is-in'); });
+  }
+
+  /* ─── DIAGNOSTIC TABS + PROGRESS FILL ─────────────────────────────── */
+  var tabs     = root.querySelectorAll('.dk-tab');
+  var panels   = root.querySelectorAll('.dk-tab-panel');
+  var progFill = root.querySelector('#dkTabProgress');
+  var tabOrder = ['assess', 'map', 'define'];
+
+  function setTab(targetKey) {
+    tabs.forEach(function(t) {
+      var active = t.getAttribute('data-tab') === targetKey;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    panels.forEach(function(p) {
+      p.classList.toggle('is-active', p.getAttribute('data-panel') === targetKey);
+    });
+    if (progFill) {
+      var idx = tabOrder.indexOf(targetKey);
+      var pct = idx < 0 ? 33.33 : ((idx + 1) / tabOrder.length) * 100;
+      progFill.style.width = pct + '%';
+    }
+  }
+
+  if (tabs.length && panels.length) {
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        setTab(tab.getAttribute('data-tab'));
+      });
+    });
+    /* Autoplay: cycle through tabs every 4s when section is in view */
+    var diagSection = root.querySelector('#diagnostic');
+    var autoIdx = 0;
+    var autoTimer = null;
+    function startAuto() {
+      if (autoTimer) return;
+      autoTimer = setInterval(function() {
+        autoIdx = (autoIdx + 1) % tabOrder.length;
+        setTab(tabOrder[autoIdx]);
+      }, 4000);
+    }
+    function stopAuto() {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+    if (diagSection && 'IntersectionObserver' in window) {
+      var diagObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { startAuto(); } else { stopAuto(); }
+        });
+      }, { threshold: 0.3 });
+      diagObs.observe(diagSection);
+    }
+    /* Stop autoplay on manual interaction */
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() { stopAuto(); });
+    });
+  }
+
+  /* ─── NOISE → SIGNAL SLIDER ─────────────────────────────────────────── */
+  (function() {
+    var stage  = root.querySelector('#dkNtsStage');
+    var track  = root.querySelector('#dkNtsTrack');
+    var fill   = root.querySelector('#dkNtsFill');
+    var handle = root.querySelector('#dkNtsHandle');
+    var hint   = root.querySelector('#dkNtsHint');
+    var cloud  = root.querySelector('#dkNtsCloud');
+    var signal = root.querySelector('#dkNtsSignal');
+    var accent = root.querySelector('#dkNtsAccent');
+    if (!stage || !track || !fill || !handle || !cloud || !signal || !accent) return;
+
+    var words = [
+      { text: 'HYPE',           size: 60, top:  7, left:  4, tier: 2 },
+      { text: 'LLM',            size: 28, top:  8, left: 41, tier: 1 },
+      { text: 'AGENTS',         size: 44, top:  7, left: 59, tier: 1 },
+      { text: 'FOMO',           size: 18, top: 14, left: 84, tier: 0 },
+      { text: 'GPT',            size: 20, top: 18, left:  8, tier: 0 },
+      { text: 'AUTOMATION',     size: 23, top: 14, left: 25, tier: 0 },
+      { text: 'PILOT',          size: 21, top: 18, left: 75, tier: 0 },
+      { text: 'DISRUPTION',     size: 17, top: 23, left: 12, tier: 0 },
+      { text: 'MODEL',          size: 29, top: 25, left: 56, tier: 1 },
+      { text: 'TOOLS',          size: 21, top: 29, left: 79, tier: 0 },
+      { text: 'SINGULARITY',    size: 15, top: 35, left:  5, tier: 0 },
+      { text: 'FUTURE',         size: 23, top: 34, left: 29, tier: 0 },
+      { text: 'PROMPTS',        size: 18, top: 41, left: 54, tier: 0 },
+      { text: 'COPILOT',        size: 31, top: 30, left: 49, tier: 1 },
+      { text: 'AGI',            size: 50, top: 51, left:  4, tier: 2 },
+      { text: 'WORKFLOWS',      size: 19, top: 48, left: 25, tier: 0 },
+      { text: 'CHATBOTS',       size: 17, top: 54, left: 21, tier: 0 },
+      { text: 'AI STRATEGY',    size: 17, top: 55, left: 52, tier: 0 },
+      { text: 'PRODUCTIVITY',   size: 17, top: 58, left: 73, tier: 0 },
+      { text: 'STACK',          size: 17, top: 67, left:  7, tier: 0 },
+      { text: 'AI TOOLS',       size: 17, top: 68, left: 23, tier: 0 },
+      { text: 'GENERATIVE AI',  size: 18, top: 11, left: 55, tier: 0 },
+      { text: 'TRANSFORMATION', size: 15, top: 76, left:  4, tier: 0 },
+      { text: 'SPEED',          size: 17, top: 68, left: 46, tier: 0 },
+      { text: 'SCALE',          size: 17, top: 68, left: 64, tier: 0 },
+      { text: 'EFFICIENCY',     size: 15, top: 74, left: 78, tier: 0 },
+      { text: 'EXPERIMENTS',    size: 17, top: 82, left:  5, tier: 0 },
+      { text: 'UNCERTAINTY',    size: 19, top: 79, left: 31, tier: 0 },
+      { text: 'SIGNAL',         size: 28, top: 88, left: 28, tier: 1 },
+      { text: 'NOISE',          size: 33, top: 76, left: 53, tier: 1 },
+      { text: 'DECISION',       size: 19, top: 87, left: 54, tier: 0 },
+      { text: 'JUDGMENT',       size: 17, top: 88, left: 78, tier: 0 },
+      { text: 'ORIENTATION',    size: 15, top: 93, left:  4, tier: 0 }
+    ];
+
+    var tierOpacity = [0.18, 0.38, 0.74];
+    var tierWeight = [600, 700, 800];
+    var wordNodes = [];
+    var pct = 0;
+    var dragging = false;
+    var activePointerId = null;
+    var hasInteracted = false;
+
+    function buildCloud() {
+      cloud.innerHTML = '';
+      wordNodes = words.map(function(word, index) {
+        var span = document.createElement('span');
+        span.className = 'dk-nts-word';
+        span.textContent = word.text;
+        span.dataset.baseSize = String(word.size);
+        span.dataset.baseOpacity = String(tierOpacity[word.tier]);
+        span.style.top = word.top + '%';
+        span.style.left = word.left + '%';
+        span.style.fontWeight = String(tierWeight[word.tier]);
+        cloud.appendChild(span);
+
+        /* Each word receives its own subtle motion profile so Noise feels alive,
+           but remains controlled, readable, and editorial. */
+        var tierAmp = word.tier === 2 ? 0.82 : (word.tier === 1 ? 1 : 1.16);
+        var seed = index + 1;
+        return {
+          node: span,
+          ampX: (2.4 + (seed % 5) * 0.72) * tierAmp,
+          ampY: (2.0 + (seed % 6) * 0.58) * tierAmp,
+          micro: 0.32 + (seed % 4) * 0.16,
+          rot: (0.18 + (seed % 5) * 0.08) * (seed % 2 ? 1 : -1),
+          speedX: 0.34 + (seed % 7) * 0.055,
+          speedY: 0.41 + (seed % 6) * 0.052,
+          speedJ: 1.25 + (seed % 5) * 0.17,
+          phaseX: seed * 1.37,
+          phaseY: seed * 2.11,
+          phaseJ: seed * 0.73
+        };
+      });
+      layoutCloud();
+    }
+
+    function layoutCloud() {
+      var baseScale = stage.clientWidth / 520;
+      var scale = stage.clientWidth < 420
+        ? Math.max(0.58, Math.min(0.72, baseScale))
+        : Math.max(0.72, Math.min(1, baseScale));
+      wordNodes.forEach(function(word) {
+        var node = word.node || word;
+        var size = parseFloat(node.dataset.baseSize || '18');
+        var baseOpacity = parseFloat(node.dataset.baseOpacity || '0.2');
+        node.style.fontSize = (size * scale).toFixed(2) + 'px';
+        node.style.opacity = Math.max(0.06, baseOpacity * (1 - pct * 1.18)).toFixed(3);
+      });
+    }
+
+    function getPercent(clientX) {
+      var rect = track.getBoundingClientRect();
+      var raw = (clientX - rect.left) / rect.width;
+      return Math.max(0, Math.min(1, raw));
+    }
+
+    function updateHint(value) {
+      if (!hint) return;
+      if (value < 0.02) {
+        hint.textContent = 'Drag to find the signal';
+        hint.style.opacity = '1';
+      } else if (value > 0.92) {
+        hint.textContent = 'Signal found.';
+        hint.style.opacity = '1';
+      } else {
+        hint.style.opacity = '0';
+      }
+    }
+
+    function syncAria() {
+      handle.setAttribute('aria-valuenow', String(Math.round(pct * 100)));
+    }
+
+    var reduceNoiseMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var currentNoiseStrength = reduceNoiseMotion ? 0 : 1;
+    var noiseRaf = null;
+
+    function targetNoiseStrength() {
+      if (reduceNoiseMotion) return 0;
+      /* Noise is active on the left, then progressively calms as the slider
+         approaches Signal. The curve keeps the transition smooth and reversible. */
+      var raw = Math.max(0, Math.min(1, 1 - pct));
+      return raw * raw * (3 - 2 * raw);
+    }
+
+    function animateNoiseWords(timestamp) {
+      var target = targetNoiseStrength();
+      currentNoiseStrength += (target - currentNoiseStrength) * 0.075;
+      var strength = currentNoiseStrength < 0.001 ? 0 : currentNoiseStrength;
+      var t = timestamp * 0.001;
+
+      wordNodes.forEach(function(word) {
+        var node = word.node || word;
+        var x = 0;
+        var y = 0;
+        var r = 0;
+
+        if (strength > 0) {
+          var driftX = Math.sin(t * word.speedX + word.phaseX) * word.ampX;
+          var driftY = Math.cos(t * word.speedY + word.phaseY) * word.ampY;
+          var wanderX = Math.sin(t * 0.19 + word.phaseY) * word.ampX * 0.46;
+          var wanderY = Math.sin(t * 0.23 + word.phaseX) * word.ampY * 0.40;
+          var micro = Math.sin(t * word.speedJ + word.phaseJ) * word.micro;
+          var unstable = Math.pow(strength, 1.18);
+
+          x = (driftX + wanderX + micro) * unstable;
+          y = (driftY + wanderY - micro * 0.55) * unstable;
+          r = Math.sin(t * 0.31 + word.phaseJ) * word.rot * unstable;
+        }
+
+        node.style.transform = 'translate3d(' + x.toFixed(2) + 'px, ' + y.toFixed(2) + 'px, 0) rotate(' + r.toFixed(3) + 'deg)';
+      });
+
+      noiseRaf = window.requestAnimationFrame(animateNoiseWords);
+    }
+
+    function applyPct(value) {
+      pct = value;
+      fill.style.width = (value * 100).toFixed(2) + '%';
+      handle.style.left = (value * 100).toFixed(2) + '%';
+      wordNodes.forEach(function(word) {
+        var node = word.node || word;
+        var baseOpacity = parseFloat(node.dataset.baseOpacity || '0.2');
+        node.style.opacity = Math.max(0.06, baseOpacity * (1 - value * 1.18)).toFixed(3);
+      });
+      var signalOpacity = Math.max(0, (value - 0.6) / 0.28);
+      signal.style.opacity = signalOpacity.toFixed(3);
+      accent.style.opacity = signalOpacity.toFixed(3);
+      updateHint(value);
+      syncAria();
+    }
+
+    function markInteracted() {
+      hasInteracted = true;
+    }
+
+    function stopDragging() {
+      dragging = false;
+      activePointerId = null;
+      handle.classList.remove('is-dragging');
+    }
+
+    handle.setAttribute('tabindex', '0');
+    handle.setAttribute('role', 'slider');
+    handle.setAttribute('aria-valuemin', '0');
+    handle.setAttribute('aria-valuemax', '100');
+    handle.setAttribute('aria-label', 'Noise to signal slider');
+
+    handle.addEventListener('pointerdown', function(event) {
+      markInteracted();
+      dragging = true;
+      activePointerId = event.pointerId;
+      handle.classList.add('is-dragging');
+      if (handle.setPointerCapture) handle.setPointerCapture(event.pointerId);
+      applyPct(getPercent(event.clientX));
+      event.preventDefault();
+    });
+
+    handle.addEventListener('pointermove', function(event) {
+      if (!dragging || event.pointerId !== activePointerId) return;
+      applyPct(getPercent(event.clientX));
+      event.preventDefault();
+    });
+
+    handle.addEventListener('pointerup', function(event) {
+      if (event.pointerId !== activePointerId) return;
+      if (handle.releasePointerCapture && handle.hasPointerCapture && handle.hasPointerCapture(event.pointerId)) {
+        handle.releasePointerCapture(event.pointerId);
+      }
+      stopDragging();
+    });
+
+    handle.addEventListener('pointercancel', stopDragging);
+    handle.addEventListener('lostpointercapture', stopDragging);
+
+    handle.addEventListener('keydown', function(event) {
+      var next = pct;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowUp') next = Math.min(1, pct + 0.05);
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') next = Math.max(0, pct - 0.05);
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = 1;
+      if (next !== pct) {
+        markInteracted();
+        applyPct(next);
+        event.preventDefault();
+      }
+    });
+
+    window.addEventListener('resize', layoutCloud, { passive: true });
+
+    buildCloud();
+    applyPct(0);
+    if (!reduceNoiseMotion) {
+      noiseRaf = window.requestAnimationFrame(animateNoiseWords);
+    }
+  })();
+
+  /* ─── SMOOTH ANCHOR SCROLL ──────────────────────────────────────────── */
+  root.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var href = a.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      var target = root.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+
+  /* ─── GHL FORM → POST-SUBMIT REDIRECT ──────────────────────────────── */
+  window.addEventListener('message', function(event) {
+    if (
+      event.data &&
+      typeof event.data === 'object' &&
+      event.data.type === 'form_submitted' &&
+      event.data.formId === 'syDsxG9u8SynVahJZjMc'
+    ) {
+      window.location.href = 'https://danooshkapadia.com/diagnostic';
+    }
+  });
+
+})();
+</script>
