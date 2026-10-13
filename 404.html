@@ -1,0 +1,234 @@
+<div id="dk-404-page" class="dk-site" data-page="404">
+  <style>
+    #dk-404-page,
+    #dk-404-page *,
+    #dk-404-page *::before,
+    #dk-404-page *::after {
+      box-sizing: border-box;
+    }
+
+    #dk-404-page {
+      --ink: #1A1A1A;
+      --ink-soft: #2A2A2A;
+      --white: #FFFFFF;
+      --paper: #F5F3EE;
+      --khaki: #C5AA88;
+      --black: #000000;
+      --red: #CC0000;
+      --red-dark: #A30000;
+      --font-sans: "DK Helvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-serif: "DK Century", "Century Schoolbook", Georgia, "Times New Roman", serif;
+      --edge: clamp(20px, 4vw, 56px);
+      --max-w: 1280px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    #dk-404-page a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #dk-404-page .dk-shell {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding-left: var(--edge);
+      padding-right: var(--edge);
+    }
+
+    #dk-404-page .dk-404 {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(112px, 14vh, 168px) 0 clamp(80px, 10vh, 128px);
+      background: var(--white);
+    }
+
+    #dk-404-page .dk-404-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #dk-404-page .dk-404-eyebrow {
+      margin-bottom: 18px;
+      font-family: var(--font-sans);
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--khaki);
+    }
+
+    #dk-404-page .dk-404 h1 {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 700;
+      line-height: .98;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    #dk-404-page .dk-404 p {
+      max-width: 620px;
+      margin: 24px auto 0;
+      font-family: var(--font-serif);
+      font-size: clamp(17px, 1.25vw, 19px);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    #dk-404-page .dk-404-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    #dk-404-page .btn,
+    #dk-404-page .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 15px 24px;
+      background: var(--red);
+      color: var(--white) !important;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: 0;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: background 180ms var(--ease), transform 180ms var(--ease);
+    }
+
+    #dk-404-page .btn:hover,
+    #dk-404-page .btn-primary:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+    }
+
+    #dk-404-page .btn-text {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    #dk-404-page .btn-text::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 20px;
+      bottom: 0;
+      height: 1px;
+      background: currentColor;
+      transform-origin: left;
+      transition: transform 220ms var(--ease);
+    }
+
+    #dk-404-page .arrow {
+      display: inline-block;
+      line-height: 1;
+      transition: transform 200ms var(--ease);
+    }
+
+    #dk-404-page .btn:hover .arrow,
+    #dk-404-page .btn-text:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    #dk-404-page .dk-404-contact {
+      margin-top: 20px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(26,26,26,.62);
+    }
+
+    #dk-404-page .dk-404-contact a {
+      color: var(--ink);
+      border-bottom: 1px solid rgba(26,26,26,.22);
+      transition: color 180ms var(--ease), border-color 180ms var(--ease);
+    }
+
+    #dk-404-page .dk-404-contact a:hover {
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    @media (max-width: 640px) {
+      #dk-404-page .dk-404 {
+        min-height: 70vh;
+        padding: 104px 0 72px;
+      }
+
+      #dk-404-page .dk-404-inner {
+        text-align: center;
+      }
+
+      #dk-404-page .dk-404 h1 {
+        font-size: clamp(36px, 11vw, 48px);
+        line-height: 1.02;
+      }
+
+      #dk-404-page .dk-404 p {
+        margin-top: 20px;
+        font-size: 17px;
+      }
+
+      #dk-404-page .dk-404-actions {
+        width: 100%;
+        margin-top: 30px;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      #dk-404-page .btn,
+      #dk-404-page .btn-primary {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+  </style>
+
+  <main id="top">
+    <section class="dk-404" aria-labelledby="dk-404-title">
+      <div class="dk-shell">
+        <div class="dk-404-inner">
+          <div class="dk-404-eyebrow">404</div>
+          <h1 id="dk-404-title">This page wandered off.</h1>
+          <p>The page you&rsquo;re looking for may have moved, been renamed, or no longer exists. Start again from the home page, or book the Diagnostic if you came here looking for clarity.</p>
+          <div class="dk-404-actions">
+            <a href="https://danooshkapadia.com/home" class="btn btn-primary">Go Home <span class="arrow" aria-hidden="true">→</span></a>
+            <a href="https://danooshkapadia.com/diagnostic" class="btn-text">Book the Diagnostic <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="dk-404-contact">Need help? <a href="https://danooshkapadia.com/contact">Contact Danoosh</a>.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
