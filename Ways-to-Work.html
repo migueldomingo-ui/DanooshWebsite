@@ -1,0 +1,809 @@
+<style>
+@font-face { font-family:'DK Helvetica'; src:url('fonts/helvetica-regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+
+@font-face { font-family:'DK Helvetica'; src:url('fonts/helvetica-oblique.ttf') format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
+
+@font-face { font-family:'DK Helvetica'; src:url('fonts/helvetica-light.ttf') format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
+
+@font-face { font-family:'DK Helvetica'; src:url('fonts/helvetica-bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+
+@font-face { font-family:'DK Helvetica'; src:url('fonts/helvetica-bold-oblique.ttf') format('truetype'); font-weight:700; font-style:italic; font-display:swap; }
+
+@font-face { font-family:'DK Century'; src:url('fonts/century-regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+
+@font-face { font-family:'DK Century'; src:url('fonts/century-bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+
+html { scroll-behavior:smooth; }
+
+body { margin:0; background:#FFFFFF; overflow-x:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+
+#dk-ways, #dk-ways *, #dk-ways *::before, #dk-ways *::after { box-sizing:border-box; }
+
+#dk-ways {
+  --white:#FFFFFF;
+  --paper:#F5F3EE;
+  --khaki-light:#ECE3D7;
+  --khaki:#C5AA88;
+  --grey-soft:#EAEAEA;
+  --grey-line:#D6D3CE;
+  --grey-line-white:#E8E6E1;
+  --black:#000000;
+  --ink:#0A0A0A;
+  --ink-soft:#2A2A2A;
+  --mid:#4F4A45;
+  --slate:#6B6B6B;
+  --red:#CC0000;
+  --red-dark:#A80000;
+
+  --font-sans:'DK Helvetica','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-serif:'DK Century','Century Schoolbook',Georgia,'Times New Roman',serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+
+  /* Locked typography ladder */
+  --t-hero:72px;      --lh-hero:.95;     --trk-hero:-.035em;
+  --t-display:48px;   --lh-display:1;    --trk-display:-.025em;
+  --t-h1:40px;        --lh-h1:1.1;       --trk-h1:-.02em;
+  --t-h2:28px;        --lh-h2:1.15;      --trk-h2:-.015em;
+  --t-h3:22px;        --lh-h3:1.25;      --trk-h3:-.01em;
+  --t-editorial:17px; --lh-editorial:1.55;
+  --t-intro:19px;
+  --t-ui:15px;        --lh-ui:1.55;
+  --t-caption:13.5px; --lh-caption:1.45;
+  --t-eyebrow:11px;   --trk-eyebrow:.10em;
+  --t-kicker:10px;    --trk-kicker:.10em;
+  --t-mono:12px;      --trk-mono:.03em;
+
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  --max-w:1280px;
+  --edge:clamp(20px,4vw,56px);
+  --rule-hair:0.5px solid rgba(0,0,0,.12);
+  --rule-soft:1px solid var(--grey-line-white);
+  --rule-hair-white:0.5px solid rgba(255,255,255,.15);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.5;
+  color:var(--ink);
+  background:var(--white);
+}
+
+#dk-ways h1, #dk-ways h2, #dk-ways h3, #dk-ways h4, #dk-ways h5, #dk-ways h6, #dk-ways p, #dk-ways ul, #dk-ways ol, #dk-ways li, #dk-ways figure, #dk-ways blockquote { margin:0; padding:0; font-weight:inherit; }
+
+#dk-ways ul, #dk-ways ol { list-style:none; }
+
+#dk-ways a { color:inherit; text-decoration:none; }
+
+#dk-ways button { font:inherit; color:inherit; background:none; border:none; padding:0; cursor:pointer; text-align:left; }
+
+#dk-ways img, #dk-ways svg { display:block; max-width:100%; }
+
+#dk-ways .dk-shell, #dk-ways .u-container { max-width:var(--max-w); margin:0 auto; padding-left:var(--edge); padding-right:var(--edge); }
+
+#dk-ways .reveal { opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-out), transform 480ms var(--ease-out); }
+
+#dk-ways .reveal.is-visible, #dk-ways .reveal.is-in { opacity:1; transform:translateY(0); }
+
+#dk-ways .reveal-delay-1, #dk-ways .reveal[data-delay="1"] { transition-delay:80ms; }
+
+#dk-ways .reveal-delay-2, #dk-ways .reveal[data-delay="2"] { transition-delay:160ms; }
+
+#dk-ways .reveal-delay-3, #dk-ways .reveal[data-delay="3"] { transition-delay:240ms; }
+
+/* Shared buttons */
+#dk-ways .btn { display:inline-flex; align-items:center; justify-content:center; gap:var(--s2); font-family:var(--font-sans); font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:14px 24px; border-radius:3px; cursor:pointer; transition:background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease); white-space:nowrap; }
+
+#dk-ways .btn-primary { background:var(--red); color:var(--white); }
+
+#dk-ways .btn-primary:hover { background:var(--red-dark); transform:translateY(-1px); }
+
+#dk-ways .btn .arrow { transition:transform 200ms var(--ease); }
+
+#dk-ways .btn:hover .arrow { transform:translateX(3px); }
+
+#dk-ways .dk-hero-cta, #dk-ways .dk-service-cta, #dk-ways .dk-comparison-col-cta, #dk-ways .dk-btn-primary-lg {
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--s2);
+  padding:14px 24px; background:var(--red); color:var(--white) !important;
+  font-family:var(--font-sans); font-size:11px; font-weight:700; line-height:1;
+  letter-spacing:.14em; text-transform:uppercase; border-radius:3px;
+  transition:background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
+  white-space:nowrap;
+}
+
+#dk-ways .dk-hero-cta:hover, #dk-ways .dk-service-cta:hover, #dk-ways .dk-comparison-col-cta:hover, #dk-ways .dk-btn-primary-lg:hover { background:var(--red-dark); transform:translateY(-1px); }
+
+#dk-ways .dk-comparison-col-cta.ghost { background:transparent; color:var(--ink) !important; border-bottom:1px solid rgba(0,0,0,.22); border-radius:0; padding:4px 0 3px; }
+
+#dk-ways .dk-comparison-col-cta.ghost:hover { color:var(--red) !important; border-color:var(--red); background:transparent; transform:none; }
+
+/* Common labels */
+#dk-ways .u-label, #dk-ways .u-eyebrow, #dk-ways .dk-service-eyebrow, #dk-ways .dk-comparison-col-label, #dk-ways .dk-anchor-link { font-family:var(--font-sans); font-size:var(--t-eyebrow); font-weight:700; line-height:1; letter-spacing:var(--trk-eyebrow); text-transform:uppercase; }
+
+#dk-ways .u-label, #dk-ways .dk-service-eyebrow, #dk-ways .dk-comparison-col-label { color:var(--khaki); }
+
+#dk-ways .u-eyebrow { color:var(--khaki); }
+
+/* Hero */
+#dk-ways .dk-hero { background:var(--white); border-bottom:var(--rule-hair); }
+
+#dk-ways .dk-hero-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; max-width:860px; margin:0 auto; padding:clamp(136px, 12vw, 192px) var(--edge) var(--s7); text-align:center; }
+
+#dk-ways .dk-hero-copy { display:flex; flex-direction:column; align-items:center; width:100%; }
+
+#dk-ways .dk-hero-breadcrumb { display:flex; align-items:center; justify-content:center; gap:var(--s2); margin-bottom:var(--s4); }
+
+#dk-ways .dk-hero-h1 { font-family:var(--font-sans); font-weight:700; font-size:var(--t-hero); line-height:var(--lh-hero); letter-spacing:var(--trk-hero); color:var(--ink); text-transform:uppercase; margin-bottom:var(--s5); }
+
+#dk-ways .dk-hero-h1 em { font-style:normal; color:inherit; }
+
+#dk-ways .dk-hero-lede { font-family:var(--font-serif); font-size:var(--t-intro); font-weight:400; line-height:var(--lh-editorial); color:var(--ink-soft); max-width:620px; margin-bottom:var(--s6); }
+
+#dk-ways .dk-hero-lede strong { font-weight:700; color:var(--ink); }
+
+/* Anchor navigation — fixed top-overlap correction */
+#dk-ways .dk-anchor-nav { position:sticky; top:64px; z-index:120; background:rgba(255,255,255,.96); border-top:var(--rule-hair); border-bottom:var(--rule-hair); backdrop-filter:saturate(140%) blur(8px); -webkit-backdrop-filter:saturate(140%) blur(8px); }
+
+#dk-ways .dk-anchor-nav-inner { display:flex; align-items:stretch; gap:0; max-width:var(--max-w); margin:0 auto; padding:0 var(--edge); overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+
+#dk-ways .dk-anchor-nav-inner::-webkit-scrollbar { display:none; }
+
+#dk-ways .dk-anchor-link { display:flex; align-items:center; gap:10px; padding:20px 28px 18px; color:var(--ink-soft); border-bottom:2px solid transparent; white-space:nowrap; transition:color 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease); }
+
+#dk-ways .dk-anchor-link:hover, #dk-ways .dk-anchor-link.is-active { color:var(--ink); background:var(--paper); }
+
+#dk-ways .dk-anchor-link.is-active { border-bottom-color:var(--red); }
+
+#dk-ways .dk-anchor-link-num { font-family:var(--font-mono); font-size:var(--t-mono); font-weight:400; letter-spacing:var(--trk-mono); color:var(--red); }
+
+#dk-ways .dk-service[id] { scroll-margin-top:144px; }
+
+/* Sections */
+#dk-ways .dk-section { padding:clamp(64px,8vw,100px) 0; }
+
+#dk-ways .dk-divider { height:1px; background:var(--grey-line-white); }
+
+#dk-ways .dk-section-h2, #dk-ways .dk-service-h2, #dk-ways .dk-close-h2 { font-family:var(--font-sans); font-weight:700; font-size:var(--t-display); line-height:var(--lh-display); letter-spacing:var(--trk-display); color:var(--ink); }
+
+#dk-ways .dk-section-h2 em, #dk-ways .dk-service-h2 em { font-style:italic; color:var(--red); }
+
+#dk-ways .dk-section-lede { font-family:var(--font-serif); font-size:var(--t-intro); font-weight:400; line-height:var(--lh-editorial); color:var(--ink-soft); max-width:560px; margin-top:var(--s5); }
+
+/* Service sections */
+#dk-ways .dk-service-inner { display:grid; grid-template-columns:5fr 7fr; gap:var(--s8); align-items:start; }
+
+#dk-ways .dk-service-inner.reverse { grid-template-columns:7fr 5fr; }
+
+#dk-ways .dk-service-inner.reverse .dk-service-meta { order:2; }
+
+#dk-ways .dk-service-inner.reverse .dk-service-content { order:1; }
+
+#dk-ways .dk-service-meta { position:sticky; top:160px; }
+
+#dk-ways .dk-service-meta-num { font-family:var(--font-mono); font-size:clamp(80px,10vw,140px); font-weight:500; line-height:1; color:var(--grey-line-white); letter-spacing:-.03em; margin-bottom:var(--s5); }
+
+#dk-ways .dk-service-eyebrow { margin-bottom:var(--s4); }
+
+#dk-ways .dk-service-h2 { margin-bottom:var(--s6); }
+
+#dk-ways .dk-service-body { font-family:var(--font-serif); font-size:var(--t-intro); font-weight:400; line-height:var(--lh-editorial); color:var(--ink-soft); margin-bottom:var(--s4); max-width:680px; }
+
+#dk-ways .dk-service-body strong { font-weight:700; color:var(--ink); }
+
+#dk-ways .dk-service-body em { font-style:italic; color:var(--ink); }
+
+#dk-ways .dk-service-details { margin-top:var(--s5); border-top:var(--rule-hair); border-bottom:var(--rule-hair); }
+
+#dk-ways .dk-service-detail-trigger { display:flex; align-items:center; justify-content:space-between; gap:var(--s5); width:100%; padding:14px 0; cursor:pointer; text-align:left; }
+
+#dk-ways .dk-service-detail-body + .dk-service-detail-trigger { border-top:var(--rule-hair); }
+
+#dk-ways .dk-service-detail-trigger-label { font-family:var(--font-sans); font-size:var(--t-ui); font-weight:700; line-height:1.2; letter-spacing:var(--trk-kicker); text-transform:uppercase; color:var(--ink); transition:color 180ms var(--ease); }
+
+#dk-ways .dk-service-detail-trigger:hover .dk-service-detail-trigger-label, #dk-ways .dk-service-detail-trigger.is-open .dk-service-detail-trigger-label { color:var(--red); }
+
+#dk-ways .dk-service-detail-icon { width:18px; height:18px; flex-shrink:0; position:relative; }
+
+#dk-ways .dk-service-detail-icon::before, #dk-ways .dk-service-detail-icon::after { content:''; position:absolute; background:var(--ink-soft); transition:transform 240ms var(--ease), opacity 180ms var(--ease), background 180ms var(--ease); }
+
+#dk-ways .dk-service-detail-icon::before { width:10px; height:1.5px; top:50%; left:50%; transform:translate(-50%,-50%); }
+
+#dk-ways .dk-service-detail-icon::after { width:1.5px; height:10px; top:50%; left:50%; transform:translate(-50%,-50%); }
+
+#dk-ways .dk-service-detail-trigger:hover .dk-service-detail-icon::before, #dk-ways .dk-service-detail-trigger:hover .dk-service-detail-icon::after, #dk-ways .dk-service-detail-trigger.is-open .dk-service-detail-icon::before, #dk-ways .dk-service-detail-trigger.is-open .dk-service-detail-icon::after { background:var(--red); }
+
+#dk-ways .dk-service-detail-trigger.is-open .dk-service-detail-icon::after { opacity:0; transform:translate(-50%,-50%) rotate(90deg); }
+
+#dk-ways .dk-service-detail-body { display:none; padding:0 0 var(--s4); }
+
+#dk-ways .dk-service-detail-body.is-open { display:block; }
+
+#dk-ways .dk-service-detail-body p { font-family:var(--font-sans); font-size:var(--t-ui); font-weight:400; line-height:var(--lh-ui); color:var(--ink-soft); max-width:640px; }
+
+#dk-ways .dk-service-price { display:flex; align-items:baseline; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s5); padding-top:0; border-top:0; }
+
+#dk-ways .dk-service-price-value { font-family:var(--font-sans); font-weight:700; font-size:var(--t-h2); line-height:var(--lh-h2); letter-spacing:var(--trk-h2); color:var(--ink); }
+
+#dk-ways .dk-service-price-note { font-family:var(--font-mono); font-size:var(--t-mono); font-weight:400; line-height:1.4; letter-spacing:var(--trk-mono); color:var(--slate); }
+
+#dk-ways .dk-service-cta { margin-top:var(--s5); }
+
+/* Comparison cards */
+#dk-ways .dk-comparison { background:var(--white); }
+
+#dk-ways .dk-comparison-head { margin-bottom:var(--s6); }
+
+#dk-ways .dk-comparison-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s3); }
+
+#dk-ways .dk-comparison-col { background:var(--white); padding:var(--s6); border:var(--rule-hair); border-top:3px solid var(--grey-line-white); transition:border-color 180ms var(--ease), border-top-color 180ms var(--ease), transform 180ms var(--ease); }
+
+#dk-ways .dk-comparison-col:hover { border-top-color:var(--red); transform:translateY(-3px); }
+
+#dk-ways .dk-comparison-col.primary { background:var(--ink); border-color:var(--ink); border-top-color:var(--red); }
+
+#dk-ways .dk-comparison-col-label { margin-bottom:var(--s3); }
+
+#dk-ways .dk-comparison-col-title { font-family:var(--font-sans); font-weight:700; font-size:var(--t-h3); line-height:var(--lh-h3); letter-spacing:var(--trk-h3); color:var(--ink); margin-bottom:var(--s4); }
+
+#dk-ways .dk-comparison-col.primary .dk-comparison-col-title { color:var(--white); }
+
+#dk-ways .dk-comparison-col-body { font-family:var(--font-sans); font-size:var(--t-ui); font-weight:400; line-height:var(--lh-ui); color:var(--ink-soft); margin-bottom:var(--s5); }
+
+#dk-ways .dk-comparison-col.primary .dk-comparison-col-body { color:rgba(255,255,255,.76); }
+
+#dk-ways .dk-comparison-col-fits { display:flex; flex-direction:column; gap:var(--s2); }
+
+#dk-ways .dk-comparison-col-fit { display:flex; align-items:flex-start; gap:var(--s2); }
+
+#dk-ways .dk-comparison-col-fit-dot { width:5px; height:5px; background:var(--red); border-radius:50%; flex:0 0 auto; margin-top:9px; }
+
+#dk-ways .dk-comparison-col-fit-text { font-family:var(--font-sans); font-size:var(--t-ui); line-height:var(--lh-ui); color:var(--ink-soft); }
+
+#dk-ways .dk-comparison-col.primary .dk-comparison-col-fit-text { color:rgba(255,255,255,.72); }
+
+#dk-ways .dk-comparison-col-cta { margin-top:var(--s6); }
+
+/* Close CTA */
+#dk-ways .dk-close { background:var(--black); color:var(--white); padding:clamp(64px,8vw,100px) 0; }
+
+#dk-ways .dk-close-inner { display:grid; grid-template-columns:2fr 1fr; gap:var(--s8); align-items:center; }
+
+#dk-ways .dk-close-eyebrow { font-family:var(--font-sans); font-size:11px; font-weight:700; line-height:1; letter-spacing:var(--trk-eyebrow); text-transform:uppercase; color:var(--khaki); margin-bottom:var(--s4); }
+
+#dk-ways .dk-close-h2 { color:var(--white); font-size:60px; line-height:1; letter-spacing:var(--trk-display); margin-bottom:var(--s5); }
+
+#dk-ways .dk-close-h2 em { color:var(--white); font-style:normal; }
+
+#dk-ways .dk-close-sub { font-family:var(--font-serif); font-size:var(--t-intro); font-weight:400; line-height:var(--lh-editorial); color:rgba(255,255,255,.78); max-width:560px; }
+
+#dk-ways .dk-close-actions { display:flex; flex-direction:column; align-items:flex-end; gap:var(--s4); }
+
+#dk-ways .dk-close-secondary { font-family:var(--font-sans); font-size:11px; font-weight:400; line-height:1.45; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.52); text-align:right; }
+
+#dk-ways .dk-close-secondary a { color:rgba(255,255,255,.78); border-bottom:1px solid rgba(255,255,255,.22); transition:color 180ms var(--ease), border-color 180ms var(--ease); }
+
+#dk-ways .dk-close-secondary a:hover { color:var(--white); border-color:rgba(255,255,255,.7); }
+
+/* Responsive */
+@media (max-width:1024px) {
+  #dk-ways .dk-service-inner,
+  #dk-ways .dk-service-inner.reverse { grid-template-columns:1fr; gap:var(--s6); }
+  #dk-ways .dk-service-inner.reverse .dk-service-meta { order:1; }
+  #dk-ways .dk-service-inner.reverse .dk-service-content { order:2; }
+  #dk-ways .dk-service-meta { position:static; }
+  #dk-ways .dk-comparison-grid { grid-template-columns:1fr 1fr; }
+  #dk-ways .dk-close-inner { grid-template-columns:1fr; gap:var(--s6); }
+  #dk-ways .dk-close-actions { align-items:flex-start; }
+  #dk-ways .dk-close-secondary { text-align:left; }
+  #dk-ways .dk-foot-grid { grid-template-columns:1fr 1fr; gap:var(--s6); }
+}
+
+@media (max-width:768px) {
+#dk-ways .dk-hero-inner { padding:clamp(104px, 18vw, 128px) var(--edge) var(--s6); }
+
+#dk-ways .dk-hero-h1 { font-size:var(--t-display); line-height:var(--lh-display); letter-spacing:var(--trk-display); }
+
+#dk-ways .dk-section { padding:var(--s8) 0; }
+
+#dk-ways .dk-section-h2, #dk-ways .dk-service-h2, #dk-ways .dk-close-h2 { font-size:var(--t-h1); line-height:var(--lh-h1); letter-spacing:var(--trk-h1); }
+
+#dk-ways .dk-anchor-nav { display:none; }
+
+#dk-ways .dk-service[id] { scroll-margin-top:84px; }
+
+#dk-ways .dk-comparison-grid { grid-template-columns:1fr; }
+
+#dk-ways .dk-comparison-col { padding:var(--s5); }
+}
+
+@media (max-width:480px) {
+#dk-ways .dk-hero-h1 { font-size:var(--t-h1); line-height:var(--lh-h1); letter-spacing:var(--trk-h1); }
+
+#dk-ways .dk-service-h2, #dk-ways .dk-close-h2 { font-size:var(--t-h2); line-height:var(--lh-h2); letter-spacing:var(--trk-h2); }
+
+#dk-ways .dk-hero-lede, #dk-ways .dk-section-lede, #dk-ways .dk-service-body, #dk-ways .dk-close-sub { font-size:var(--t-ui); line-height:var(--lh-ui); }
+
+#dk-ways .dk-service-meta-num { font-size:72px; }
+}
+
+#dk-ways .u-label, #dk-ways .u-eyebrow, #dk-ways .dk-service-eyebrow, #dk-ways .dk-comparison-col-label, #dk-ways .dk-close-secondary {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   EYEBROW WEIGHT PASS — bold labels, colors/spacing preserved
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-ways .eyebrow, #dk-ways .u-label, #dk-ways .u-eyebrow, #dk-ways .dk-hero-eyebrow, #dk-ways .dk-close-eyebrow, #dk-ways .dk-framework-label, #dk-ways .outcomes-label, #dk-ways .dk-diag-offer-label, #dk-ways .dk-diag-spec-label, #dk-ways .dk-pricing-card-label, #dk-ways .dk-pricing-card-spec-label, #dk-ways .dk-service-eyebrow, #dk-ways .dk-comparison-col-label, #dk-ways .dk-service-detail-trigger-label, #dk-ways .rsc-hero-breadcrumb-label, #dk-ways .rsc-card-type, #dk-ways .rsc-card-format, #dk-ways .rsc-card-expand-label, #dk-ways .rsc-grid-head-title, #dk-ways .rsc-cta-eyebrow {
+  font-size: 11px;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+}
+
+#dk-ways .u-label,
+#dk-ways .dk-service-eyebrow,
+#dk-ways .dk-comparison-col-label {
+  color: var(--khaki);
+}
+
+
+/* Final sticky anchor-nav spacing fix */
+#dk-ways {
+  --dk-header-height: 74px;
+  --dk-anchor-nav-height: 46px;
+}
+
+/* Keep the anchor nav tight directly under the fixed global header.
+   Do not add the maintenance bar here; the global header stack already accounts for it. */
+#dk-ways .dk-anchor-nav {
+  position: sticky;
+  top: var(--dk-header-height) !important;
+  z-index: 9998;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Keep the anchor bar compact and close to the header */
+#dk-ways .dk-anchor-link {
+  padding-top: 14px !important;
+  padding-bottom: 12px !important;
+}
+
+/* Prevent clicked sections from hiding behind the fixed header/anchor bar without creating a large gap */
+#dk-ways .dk-service[id] {
+  scroll-margin-top: calc(
+    var(--dk-header-height) +
+    var(--dk-anchor-nav-height) +
+    12px
+  ) !important;
+}
+
+/* Remove any accidental extra top spacing after the anchor nav */
+#dk-ways .dk-anchor-nav + .dk-service,
+#dk-ways .dk-anchor-nav + section {
+  margin-top: 0 !important;
+}
+
+/* Mobile: anchor nav is hidden, so use only header clearance */
+@media (max-width: 768px) {
+  #dk-ways .dk-anchor-nav {
+    display: none !important;
+  }
+
+  #dk-ways .dk-service[id] {
+    scroll-margin-top: calc(
+      var(--dk-header-height) +
+      16px
+    ) !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<div id="dk-ways">
+<!-- HERO -->
+<section class="dk-hero">
+  <div class="dk-hero-inner">
+    <div class="dk-hero-copy">
+      <div class="dk-hero-breadcrumb reveal">
+        <span class="u-eyebrow">Ways to Work Together · DK Consulting</span>
+      </div>
+      <h1 class="dk-hero-h1 reveal reveal-delay-1">
+        FOUR PATHS.<br>
+        ONE CLEAR STARTING POINT.
+      </h1>
+      <p class="dk-hero-lede reveal reveal-delay-2">
+        Most serious work starts with the Diagnostic. It gives you the orientation to make the right call about what comes next, whether that's a one-time session, ongoing support, or team work. <strong>Everything builds from that clarity.</strong>
+      </p>
+      <a href="#diagnostic" class="dk-hero-cta reveal reveal-delay-3">See How It Works →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ANCHOR NAV -->
+<nav class="dk-anchor-nav" id="dkAnchorNav">
+  <div class="dk-anchor-nav-inner">
+    <a href="#diagnostic" class="dk-anchor-link is-active" data-section="diagnostic">
+      <span class="dk-anchor-link-num">01</span>
+      AI Strategic Diagnostic
+    </a>
+    <a href="#partnership" class="dk-anchor-link" data-section="partnership">
+      <span class="dk-anchor-link-num">02</span>
+      Strategic Edge Partnership
+    </a>
+    <a href="#team" class="dk-anchor-link" data-section="team">
+      <span class="dk-anchor-link-num">03</span>
+      The AI Team Sprint
+    </a>
+    <a href="#community" class="dk-anchor-link" data-section="community">
+      <span class="dk-anchor-link-num">04</span>
+      +AI Community
+    </a>
+  </div>
+</nav>
+
+<!-- SERVICE 01: DIAGNOSTIC -->
+<section class="dk-service dk-section" id="diagnostic" style="background:var(--white);">
+  <div class="u-container">
+    <div class="dk-service-inner">
+      <div class="dk-service-meta reveal">
+        <div class="dk-service-meta-num">01</div>
+      </div>
+      <div class="dk-service-content reveal reveal-delay-1">
+        <div class="dk-service-eyebrow">AI Strategic Diagnostic</div>
+        <h2 class="dk-service-h2">Paid clarity for <br>serious leaders.</h2>
+        <p class="dk-service-body">
+          A focused, structured working session designed to bring clarity to complex decisions around AI, strategy, and leverage. <strong>This is where most serious work begins.</strong>
+        </p>
+        <p class="dk-service-body">
+          You bring one real decision that's been stuck, something with real stakes and real constraints. We work through it together, using AI as a thinking partner. The goal isn't to teach you AI. It's to use AI to help you think more clearly about the specific problem in front of you.
+        </p>
+        <p class="dk-service-body">
+          You leave with a mental model, a prioritized next move, and the clarity to stop second-guessing whether you're "doing AI right." <em>This isn't training. It's enablement.</em>
+        </p>
+        <div class="dk-service-details">
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">What's included</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>90-minute live, 1:1 working session. No prep required. You bring one real decision. We work through it together using AI as a thinking partner. You leave with a clear next move, a reusable mental model, and the confidence to apply it to the next decision on your own.</p>
+          </div>
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">Who this is for</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>Founders, owner-operators, and senior executives who have tried the tools and aren't seeing the lift they expected. Leaders who have a real decision that's been stuck and want to work through it with someone who understands both AI and how real businesses operate under pressure.</p>
+          </div>
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">Why it's paid</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>The $900 is a working session fee, not a discovery call. It ensures you bring a real decision with real stakes, not a hypothetical. It also credits toward ongoing work if you continue with the Strategic Edge Partnership.</p>
+          </div>
+        </div>
+        <div class="dk-service-price">
+          <span class="dk-service-price-value">$900</span>
+          <span class="dk-service-price-note">Single session · Credits toward ongoing work</span>
+        </div>
+        <a href="https://buy.stripe.com/28E5kE7yK5Vefyi50n8AE0N" class="dk-service-cta">Book the Diagnostic →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dk-divider"></div>
+
+<!-- SERVICE 02: STRATEGIC EDGE PARTNERSHIP -->
+<section class="dk-service dk-section" id="partnership" style="background:var(--paper);">
+  <div class="u-container">
+    <div class="dk-service-inner reverse">
+      <div class="dk-service-content reveal">
+        <div class="dk-service-eyebrow">Strategic Edge Partnership</div>
+        <h2 class="dk-service-h2">Decision <br>support as real <br>situations unfold.</h2>
+        <p class="dk-service-body">
+          For leaders who've completed the Diagnostic and want continued support as real decisions unfold. <strong>Not in theory, in the actual rhythm of your business.</strong>
+        </p>
+        <p class="dk-service-body">
+          Six to eight working sessions adapted to your operating conditions. We work through what comes up, not a pre-set curriculum. You get a thinking partner who understands your context, your constraints, and how AI actually fits into the decisions you're making right now.
+        </p>
+        <p class="dk-service-body">
+          <em>Typically follows the Diagnostic.</em> Carefully scoped.
+        </p>
+        <div class="dk-service-details">
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">What's included</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>Six to eight working sessions over three to four months. Each session is driven by what's actually happening in your business, not a pre-set agenda. Asynchronous support between sessions for time-sensitive decisions. Scoped individually based on your context and operating conditions.</p>
+          </div>
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">Who this is for</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>Leaders who have completed the Diagnostic and want ongoing support as their AI strategy evolves. Senior operators who are making consequential decisions about AI adoption, investment, or team structure and want a trusted thinking partner who understands both the technology and the business context.</p>
+          </div>
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">How to start</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>The Strategic Edge Partnership typically follows the Diagnostic. If you've already completed a session and want to explore ongoing work, reach out directly. If you haven't done the Diagnostic yet, that's the right place to start.</p>
+          </div>
+        </div>
+        <div class="dk-service-price">
+          <span class="dk-service-price-value">Scoped individually</span>
+        </div>
+        <a href="https://danooshkapadia.com/diagnostic" class="dk-service-cta">Start with the Diagnostic →</a>
+      </div>
+      <div class="dk-service-meta reveal reveal-delay-1">
+        <div class="dk-service-meta-num">02</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dk-divider"></div>
+
+<!-- SERVICE 03: TEAM & ORGANIZATION -->
+<section class="dk-service dk-section" id="team" style="background:var(--white);">
+  <div class="u-container">
+    <div class="dk-service-inner">
+      <div class="dk-service-meta reveal">
+        <div class="dk-service-meta-num">03</div>
+      </div>
+      <div class="dk-service-content reveal reveal-delay-1">
+        <div class="dk-service-eyebrow">The AI Team Sprint</div>
+        <h2 class="dk-service-h2">Focused work with <br>leadership teams.</h2>
+        <p class="dk-service-body">
+          Workshops, strategy engagements, and embedded support for leadership teams, <strong>focused on judgment, governance, and how AI actually gets adopted.</strong>
+        </p>
+        <p class="dk-service-body">
+          This isn't a training program or a keynote. It's structured working time with your team, designed around the specific decisions and challenges you're actually facing. Carefully scoped.
+        </p>
+        <div class="dk-service-details">
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">What's included</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>Scoped individually based on team size, context, and objectives. Typically includes a pre-engagement diagnostic, one or more working sessions with the leadership team, and a structured output (a shared mental model, a prioritized decision framework, or a governance approach) that the team can use going forward.</p>
+          </div>
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">Who this is for</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>P&amp;L owners whose teams are moving in different directions on AI and need a shared orientation. Organizations that have made or are about to make significant AI investments and want to ensure their leadership team has the judgment to guide those investments well. Most engagements come through existing clients or trusted introductions.</p>
+          </div>
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">How to start</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>Team engagements are scoped individually. The best starting point is a conversation. Reach out directly and describe the challenge, team size, what's at stake, and what you're hoping to achieve. If it's a good fit, we'll scope something together.</p>
+          </div>
+        </div>
+        <div class="dk-service-price">
+          <span class="dk-service-price-value">Scoped individually</span>
+        </div>
+        <a href="https://danooshkapadia.com/team-sprint" class="dk-service-cta">Learn About the AI Team Sprint →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dk-divider"></div>
+
+<!-- SERVICE 04: +AI COMMUNITY -->
+<section class="dk-service dk-section" id="community" style="background:var(--paper);">
+  <div class="u-container">
+    <div class="dk-service-inner reverse">
+      <div class="dk-service-content reveal">
+        <div class="dk-service-eyebrow">+AI Community</div>
+        <h2 class="dk-service-h2">Calibration, <br>without the 1:1 <br>intensity.</h2>
+        <p class="dk-service-body">
+          A weekly rhythm of calibration from someone you trust. <strong>Not another course. Not a prompt library. Not another Slack channel.</strong> For leaders who want to stay sharp and current without chasing every new tool and headline.
+        </p>
+        <p class="dk-service-body">
+          Each week: a short, high-signal piece of thinking on something that actually matters, a decision framework, a pattern worth watching, a tool worth understanding, or a risk worth taking seriously. Curated for senior operators, not AI enthusiasts.
+        </p>
+        <div class="dk-service-details">
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">What's included</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>Weekly high-signal content, short, substantive, and directly relevant to the decisions senior operators are making right now. Access to the community archive. Occasional live sessions for members. No noise, no filler, no AI hype.</p>
+          </div>
+          <button class="dk-service-detail-trigger">
+            <span class="dk-service-detail-trigger-label">Who this is for</span>
+            <span class="dk-service-detail-icon"></span>
+          </button>
+          <div class="dk-service-detail-body">
+            <p>Leaders who want to stay current without spending hours filtering AI noise. Senior operators who have completed the Diagnostic and want ongoing calibration without the intensity of 1:1 work. People who trust the source and want a reliable signal in a noisy landscape.</p>
+          </div>
+        </div>
+        <div class="dk-service-price">
+          <span class="dk-service-price-value">$90</span>
+          <span class="dk-service-price-note">per month · cancel anytime</span>
+        </div>
+        <a href="/community" class="dk-service-cta">Join the +AI Community →</a>
+      </div>
+      <div class="dk-service-meta reveal reveal-delay-1">
+        <div class="dk-service-meta-num">04</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="dk-comparison dk-section">
+  <div class="u-container">
+    <div class="dk-comparison-head reveal">
+      <div class="u-label" style="margin-bottom:20px;">Which path fits you?</div>
+      <h2 class="dk-section-h2">Find your <br>starting point.</h2>
+    </div>
+    <div class="dk-comparison-grid">
+      <div class="dk-comparison-col primary reveal">
+        <div class="dk-comparison-col-label">START HERE</div>
+        <div class="dk-comparison-col-title">AI Strategic Diagnostic</div>
+        <p class="dk-comparison-col-body">The right starting point for most leaders. One session. One real decision. Clear orientation.</p>
+        <div class="dk-comparison-col-fits">
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You have a real decision that's been stuck</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You want to understand AI's role in your work</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You're second-guessing your current direction</div>
+          </div>
+        </div>
+        <a href="https://buy.stripe.com/28E5kE7yK5Vefyi50n8AE0N" class="dk-comparison-col-cta">Book the Diagnostic →</a>
+      </div>
+      <div class="dk-comparison-col reveal reveal-delay-1">
+        <div class="dk-comparison-col-title">Strategic Edge Partnership</div>
+        <p class="dk-comparison-col-body">Support as real decisions unfold. For leaders who want a trusted thinking partner.</p>
+        <div class="dk-comparison-col-fits">
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You've done the Diagnostic and want to continue</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You're making consequential AI decisions regularly</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You want support adapted to your operating conditions</div>
+          </div>
+        </div>
+        <a href="https://danooshkapadia.com/diagnostic" class="dk-comparison-col-cta ghost">Start with the Diagnostic →</a>
+      </div>
+      <div class="dk-comparison-col reveal reveal-delay-2">
+        <div class="dk-comparison-col-title">The AI Team Sprint</div>
+        <p class="dk-comparison-col-body">Workshops and embedded support for leadership teams. Carefully scoped.</p>
+        <div class="dk-comparison-col-fits">
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">Your team is moving in different directions on AI</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You need a shared orientation across leadership</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You have a significant AI investment to guide</div>
+          </div>
+        </div>
+        <a href="https://danooshkapadia.com/team-sprint" class="dk-comparison-col-cta ghost">Learn About the AI Team Sprint →</a>
+      </div>
+      <div class="dk-comparison-col reveal reveal-delay-3">
+        <div class="dk-comparison-col-title">+AI Community</div>
+        <p class="dk-comparison-col-body">Weekly high-signal thinking for leaders who want to stay sharp without the noise.</p>
+        <div class="dk-comparison-col-fits">
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You want a reliable signal without the noise</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You don't need 1:1 intensity right now</div>
+          </div>
+          <div class="dk-comparison-col-fit">
+            <div class="dk-comparison-col-fit-dot"></div>
+            <div class="dk-comparison-col-fit-text">You want ongoing calibration from a trusted source</div>
+          </div>
+        </div>
+        <a href="/community" class="dk-comparison-col-cta ghost">Join the Community →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE CTA -->
+<section class="dk-close">
+  <div class="u-container">
+    <div class="dk-close-inner">
+      <div class="reveal">
+        <div class="dk-close-eyebrow">READY TO START?</div>
+        <h2 class="dk-close-h2">If you're facing real decisions,<br>the <em>Diagnostic</em> is the right place to start.</h2>
+        <p class="dk-close-sub">If you're staying sharp over time, the <em>+AI Community</em> is a good fit. Most serious work begins with a single 90-minute session.</p>
+      </div>
+      <div class="dk-close-actions reveal reveal-delay-2">
+        <a href="https://buy.stripe.com/28E5kE7yK5Vefyi50n8AE0N" class="dk-btn-primary-lg">Book the Diagnostic →</a>
+        <p class="dk-close-secondary">
+          Or <a href="/community">join the +AI Community</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<script>
+(function() {
+  'use strict';
+  var root = document.getElementById('dk-ways');
+  if (!root) return;
+
+  
+
+  /* Scroll reveal. */
+  var reveals = root.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var revealObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el) { revealObs.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('is-visible'); });
+  }
+
+  /* Service accordions. */
+  root.querySelectorAll('.dk-service-detail-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var body = trigger.nextElementSibling;
+      var open = trigger.classList.toggle('is-open');
+      if (body) body.classList.toggle('is-open', open);
+    });
+  });
+
+  /* Anchor nav active state. */
+  var anchorLinks = Array.prototype.slice.call(root.querySelectorAll('.dk-anchor-link'));
+  var serviceSections = anchorLinks.map(function(link) {
+    return root.querySelector('#' + link.getAttribute('data-section'));
+  }).filter(Boolean);
+
+  function setActive(id) {
+    anchorLinks.forEach(function(link) {
+      link.classList.toggle('is-active', link.getAttribute('data-section') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window && serviceSections.length) {
+    var sectionObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    serviceSections.forEach(function(section) { sectionObs.observe(section); });
+  }
+})();
+</script>
