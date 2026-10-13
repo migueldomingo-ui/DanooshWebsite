@@ -1,0 +1,2567 @@
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — DK Consulting v7 (identical to homepage)
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page {
+  --ink:          #1A1A1A;
+  --ink-soft:     #2A2A2A;
+  --white:        #FFFFFF;
+  --paper:        #F5F3EE;
+  --khaki:        #C5AA88;
+  --khaki-light:  #ECE3D7;
+  --grey-soft:    #EAEAEA;
+  --black:        #000000;
+  --red:          #CC0000;
+  --red-dark:     #A30000;
+
+  --font-sans:  "DK Helvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "DK Century", "Century Schoolbook", Century, Georgia, "Times New Roman", serif;
+  --font-mono:  "JetBrains Mono", "Courier New", monospace;
+
+  --max-w: 1280px;
+  --edge:  clamp(20px, 5vw, 56px);
+
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+
+  --rule-hair:       1px solid rgba(0,0,0,0.10);
+  --rule-hair-white: 1px solid rgba(255,255,255,0.12);
+
+  --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── RESET ──────────────────────────────────────────────────────────── */
+#dk-diag-page *, #dk-diag-page *::before, #dk-diag-page *::after {
+  box-sizing: border-box; margin: 0; padding: 0;
+}
+#dk-diag-page { color: var(--ink); background: var(--white); font-family: var(--font-sans); }
+#dk-diag-page a { text-decoration: none; color: inherit; }
+#dk-diag-page ul, #dk-diag-page ol { list-style: none; }
+#dk-diag-page img { display: block; max-width: 100%; }
+#dk-diag-page button { background: none; border: none; cursor: pointer; font: inherit; }
+#dk-diag-page blockquote { quotes: none; }
+#dk-diag-page blockquote::before, #dk-diag-page blockquote::after { content: none; }
+
+/* ─── LAYOUT SHELL ───────────────────────────────────────────────────── */
+#dk-diag-page .dk-shell {
+  max-width: var(--max-w); margin: 0 auto;
+  padding-left: var(--edge); padding-right: var(--edge);
+}
+
+/* ─── TYPOGRAPHY UTILITIES ───────────────────────────────────────────── */
+#dk-diag-page .display-xl {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: clamp(38px, 6.5vw, 88px);
+  line-height: 0.96; letter-spacing: -0.022em;
+  text-transform: uppercase; color: var(--ink);
+}
+#dk-diag-page .display-l {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.02; letter-spacing: -0.02em; color: var(--ink);
+}
+#dk-diag-page .display-m {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.08; letter-spacing: -0.015em; color: var(--ink);
+}
+#dk-diag-page .display-s {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.15; letter-spacing: -0.01em; color: var(--ink);
+}
+#dk-diag-page .body-l {
+  font-family: var(--font-serif); font-size: clamp(17px, 1.25vw, 19px); font-weight: 400;
+  line-height: 1.6; color: var(--ink-soft);
+}
+#dk-diag-page .body {
+  font-family: var(--font-serif); font-size: 16px; font-weight: 400;
+  line-height: 1.65; color: var(--ink-soft);
+}
+#dk-diag-page .eyebrow {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--khaki);
+}
+#dk-diag-page .eyebrow.red  { color: var(--khaki); }
+#dk-diag-page .eyebrow.ink  { color: var(--ink); }
+#dk-diag-page .mono {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.04em; color: var(--ink-soft);
+}
+#dk-diag-page .mono.uppercase { text-transform: uppercase; }
+#dk-diag-page .red-accent { color: var(--red); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--s2); font-family: var(--font-sans); font-size: 11px;
+  font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 14px 24px; border-radius: 3px; cursor: pointer;
+  transition: background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+  white-space: nowrap;
+}
+#dk-diag-page .btn-primary { background: var(--red); color: var(--white); }
+#dk-diag-page .btn-primary:hover { background: #A80000; }
+#dk-diag-page .btn-primary .arrow { transition: transform 200ms var(--ease); }
+#dk-diag-page .btn-primary:hover .arrow { transform: translateX(3px); }
+#dk-diag-page .btn-ghost {
+  background: transparent; color: var(--ink);
+  border: 1px solid rgba(0,0,0,0.18); padding: 13px 23px; border-radius: 3px;
+}
+#dk-diag-page .btn-ghost:hover { border-color: var(--ink); }
+#dk-diag-page .btn-ghost .arrow { transition: transform 200ms var(--ease); }
+#dk-diag-page .btn-ghost:hover .arrow { transform: translateX(3px); }
+#dk-diag-page .btn-ghost-white {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.3); padding: 13px 23px; border-radius: 3px;
+}
+#dk-diag-page .btn-ghost-white:hover { border-color: rgba(255,255,255,0.7); }
+#dk-diag-page .btn-ghost-white .arrow { transition: transform 200ms var(--ease); }
+#dk-diag-page .btn-ghost-white:hover .arrow { transform: translateX(3px); }
+#dk-diag-page .btn-text {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  font-family: var(--font-sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); padding: 4px 0; position: relative;
+}
+#dk-diag-page .btn-text::after {
+  content: ""; position: absolute; left: 0; right: 20px; bottom: 0;
+  height: 1px; background: currentColor; transform-origin: left;
+  transition: transform 240ms var(--ease);
+}
+#dk-diag-page .btn-text .arrow { transition: transform 200ms var(--ease); }
+#dk-diag-page .btn-text:hover .arrow { transform: translateX(4px); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION RHYTHM
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page section {
+  position: relative; padding: clamp(64px, 8vw, 100px) 0;
+}
+#dk-diag-page section.compact { padding: clamp(40px, 5vw, 72px) 0; }
+#dk-diag-page .bg-white  { background: var(--white); }
+#dk-diag-page .bg-khaki  { background: var(--khaki-light); }
+#dk-diag-page .bg-grey   { background: var(--grey-soft); }
+#dk-diag-page .bg-paper  { background: var(--paper); }
+#dk-diag-page .bg-black  { background: var(--black); color: var(--white); }
+#dk-diag-page .bg-black .eyebrow { color: var(--khaki); }
+#dk-diag-page .bg-black .body,
+#dk-diag-page .bg-black .body-l { color: rgba(255,255,255,0.78); }
+#dk-diag-page .bg-black .display-xl,
+#dk-diag-page .bg-black .display-l,
+#dk-diag-page .bg-black .display-m,
+#dk-diag-page .bg-black .display-s { color: var(--white); }
+#dk-diag-page .bg-black .body-sans { color: rgba(255,255,255,0.78); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   REVEAL ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+#dk-diag-page .reveal.is-in { opacity: 1; transform: translateY(0); }
+#dk-diag-page .reveal[data-delay="1"] { transition-delay: 50ms; }
+#dk-diag-page .reveal[data-delay="2"] { transition-delay: 100ms; }
+#dk-diag-page .reveal[data-delay="3"] { transition-delay: 150ms; }
+#dk-diag-page .reveal[data-delay="4"] { transition-delay: 200ms; }
+#dk-diag-page .reveal[data-delay="5"] { transition-delay: 250ms; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HERO — editorial image right, copy left
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-hero {
+  background: var(--white);
+  padding: 0;
+  border-bottom: var(--rule-hair);
+  position: relative;
+  overflow: hidden;
+}
+/* Red rule accent removed — hero image area kept clean */
+
+#dk-diag-page .dk-hero-inner {
+  position: relative; z-index: 1;
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  min-height: 560px;
+  align-items: stretch;
+}
+
+/* Left: main copy */
+#dk-diag-page .dk-hero-copy {
+  padding: clamp(56px, 8vw, 104px) var(--s8) clamp(56px, 8vw, 96px) var(--edge);
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+#dk-diag-page .dk-hero-eyebrow {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--khaki);
+  margin-bottom: var(--s3);
+}
+#dk-diag-page .dk-hero-h1 {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.96; letter-spacing: -0.028em;
+  color: var(--ink); text-transform: uppercase;
+  margin-bottom: var(--s5); max-width: 14ch;
+}
+#dk-diag-page .dk-hero-lede {
+  font-family: var(--font-serif); font-weight: 400;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55; color: var(--ink-soft);
+  max-width: 46ch; margin-bottom: var(--s2);
+}
+#dk-diag-page .dk-hero-lede em { font-style: italic; color: var(--ink); }
+#dk-diag-page .dk-hero-actions {
+  margin-top: var(--s4);
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--s3);
+}
+#dk-diag-page .dk-hero-meta {
+  margin-top: var(--s5);
+  display: flex; align-items: center; gap: var(--s4);
+  padding-top: var(--s3); border-top: var(--rule-hair);
+}
+#dk-diag-page .dk-hero-meta-item { display: flex; flex-direction: column; gap: 3px; }
+#dk-diag-page .dk-hero-meta-num {
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--ink); letter-spacing: 0.02em;
+}
+#dk-diag-page .dk-hero-meta-lbl {
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft);
+}
+#dk-diag-page .dk-hero-meta-sep {
+  width: 1px; height: 20px; background: rgba(0,0,0,0.15);
+}
+
+/* Right: editorial image */
+#dk-diag-page .dk-hero-image {
+  position: relative; overflow: hidden;
+  background: var(--grey-soft);
+  /* Crop to ~4:5 portrait — matches the red-box reference composition */
+  aspect-ratio: 4 / 5;
+  max-height: 580px;
+  align-self: center;
+}
+#dk-diag-page .dk-hero-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  /* Position to show head-to-desk — crop top sky, keep subject centred */
+  object-position: center 15%;
+  display: block;
+}
+/* Subtle overlay to blend image into page */
+#dk-diag-page .dk-hero-image::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(255,255,255,0.08) 0%, transparent 40%);
+  pointer-events: none;
+}
+#dk-diag-page .dk-hero-image.is-placeholder {
+  position: relative;
+  background: var(--grey-soft, #e9e6df);
+  /* FIX: do NOT force min-height:100%. That made the placeholder stretch the
+     full height of the stretched grid row (from the header line all the way to
+     the bottom of the hero section). By keeping min-height:0 the placeholder
+     falls back to the base .dk-hero-image sizing (aspect-ratio:4/5 +
+     max-height:580px + align-self:center), so its top aligns near the eyebrow
+     and its bottom aligns near the content/meta row — matching the Homepage. */
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Price badge removed — $900 shown in stat bar and dedicated pricing section */
+
+@media (max-width: 960px) {
+  #dk-diag-page .dk-hero-inner {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  #dk-diag-page .dk-hero-copy {
+    padding: var(--s7) var(--edge);
+    border-right: none;
+    border-bottom: var(--rule-hair);
+  }
+  #dk-diag-page .dk-hero-image {
+    aspect-ratio: 4 / 3;
+    max-height: 400px;
+    height: auto;
+  }
+  #dk-diag-page .dk-hero-h1 { max-width: 100%; }
+}
+
+@media (max-width: 960px) {
+  #dk-diag-page .dk-hero-image {
+    display: none !important;
+  }
+
+  #dk-diag-page .dk-hero-copy {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 600px) {
+  #dk-diag-page .dk-hero-copy { padding: var(--s6) var(--edge); }
+  #dk-diag-page .dk-hero-h1 { font-size: clamp(38px, 11vw, 52px); line-height: 0.96; letter-spacing: -0.022em; }
+  #dk-diag-page .dk-hero-meta { flex-wrap: wrap; gap: var(--s3); }
+  #dk-diag-page .dk-hero-meta-sep { display: none; }
+  #dk-diag-page .dk-hero-image { aspect-ratio: 4 / 3; max-height: 300px; height: auto; }
+
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: THE PROBLEM
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s8); align-items: start;
+}
+#dk-diag-page .dk-problem-copy { display: flex; flex-direction: column; gap: var(--s4); }
+#dk-diag-page .dk-problem-pull {
+  background: var(--paper); border-left: 2px solid var(--red);
+  border-radius: 0 4px 4px 0; padding: var(--s5) var(--s6);
+  margin-top: var(--s2);
+}
+#dk-diag-page .dk-problem-pull-text {
+  font-family: var(--font-serif); font-size: 18px; font-style: italic;
+  line-height: 1.5; color: var(--ink); margin-bottom: var(--s3);
+  quotes: none;
+}
+#dk-diag-page .dk-problem-pull-attr {
+  font-family: var(--font-sans); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink);
+}
+#dk-diag-page .dk-problem-statement {
+  display: flex; flex-direction: column; gap: var(--s5);
+  padding: var(--s6); background: var(--grey-soft);
+  border-radius: 4px; border: var(--rule-hair);
+  transition: border-color 220ms var(--ease);
+}
+#dk-diag-page .dk-problem-statement:hover {
+  border-color: rgba(0,0,0,0.35);
+}
+#dk-diag-page .dk-problem-statement > .eyebrow {
+  color: var(--khaki);
+}
+#dk-diag-page .dk-problem-statement-hl {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: clamp(22px, 2.8vw, 34px);
+  line-height: 1.05; letter-spacing: -0.015em; color: var(--ink);
+}
+#dk-diag-page .dk-problem-statement-hl em {
+  font-style: normal; color: var(--red);
+}
+#dk-diag-page .dk-problem-statement p {
+  font-family: var(--font-serif); font-size: 15px;
+  line-height: 1.65; color: var(--ink-soft);
+}
+#dk-diag-page .dk-problem-statement-attr {
+  font-family: var(--font-sans); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); padding-top: var(--s4); border-top: var(--rule-hair);
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page .dk-problem-grid { grid-template-columns: 1fr; gap: var(--s5); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   QUOTE BAND
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-quote-band {
+  background: var(--ink); color: var(--white);
+  padding: clamp(40px, 5vw, 64px) 0;
+  border-top: var(--rule-hair-white); border-bottom: var(--rule-hair-white);
+}
+#dk-diag-page .dk-quote-band-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  padding-left: var(--edge); padding-right: var(--edge);
+  display: grid; grid-template-columns: 2fr 5fr 2fr;
+  gap: var(--s6); align-items: center;
+}
+#dk-diag-page .dk-quote-band-rule {
+  height: 1px; background: rgba(255,255,255,0.2);
+}
+#dk-diag-page .dk-quote-band-text {
+  font-family: var(--font-serif); font-size: clamp(18px, 2vw, 24px);
+  font-style: italic; line-height: 1.45; color: var(--white);
+  text-align: center; quotes: none;
+}
+#dk-diag-page .dk-quote-band-attr {
+  font-family: var(--font-sans); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--khaki); text-align: center;
+  margin-top: var(--s3);
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page .dk-quote-band-inner { grid-template-columns: 1fr; gap: var(--s3); }
+  #dk-diag-page .dk-quote-band-rule { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: THE SESSION — interactive zigzag step/timeline
+   ═══════════════════════════════════════════════════════════════════════ */
+
+#dk-diag-page .dk-session-intro {
+  display: grid; grid-template-columns: 5fr 7fr;
+  gap: var(--s8); align-items: start;
+  margin-bottom: var(--s6);
+}
+#dk-diag-page .dk-session-intro-body { display: flex; flex-direction: column; gap: var(--s4); }
+
+/* Zigzag step timeline */
+#dk-diag-page .dk-steps {
+  position: relative;
+  display: flex; flex-direction: column; gap: 0;
+  padding-bottom: var(--s6);
+}
+/* Central vertical spine */
+#dk-diag-page .dk-steps::before {
+  content: "";
+  position: absolute; top: 20px; bottom: 20px;
+  left: 50%; transform: translateX(-50%);
+  width: 1px; background: rgba(0,0,0,0.14);
+  z-index: 0;
+}
+/* Each step row */
+#dk-diag-page .dk-step {
+  display: grid; grid-template-columns: 1fr 48px 1fr;
+  align-items: center; gap: 0;
+  position: relative; z-index: 1;
+  cursor: pointer;
+}
+/* Odd steps: card on left */
+#dk-diag-page .dk-step:nth-child(odd) .dk-step-card { grid-column: 1; grid-row: 1; }
+#dk-diag-page .dk-step:nth-child(odd) .dk-step-node { grid-column: 2; grid-row: 1; }
+#dk-diag-page .dk-step:nth-child(odd) .dk-step-empty { grid-column: 3; grid-row: 1; }
+/* Even steps: card on right */
+#dk-diag-page .dk-step:nth-child(even) .dk-step-card { grid-column: 3; grid-row: 1; }
+#dk-diag-page .dk-step:nth-child(even) .dk-step-node { grid-column: 2; grid-row: 1; }
+#dk-diag-page .dk-step:nth-child(even) .dk-step-empty { grid-column: 1; grid-row: 1; }
+/* Node (dot on spine) */
+#dk-diag-page .dk-step-node {
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; position: relative; z-index: 2;
+}
+#dk-diag-page .dk-step-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--khaki); border: 2px solid rgba(0,0,0,0.18);
+  transition: background 240ms var(--ease), border-color 240ms var(--ease),
+              transform 240ms var(--ease);
+}
+#dk-diag-page .dk-step.is-active .dk-step-dot {
+  background: var(--red); border-color: var(--red);
+  transform: scale(1.4);
+}
+/* Step card */
+#dk-diag-page .dk-step-card {
+  background: var(--white); border: 1px solid rgba(0,0,0,0.09);
+  border-radius: 4px; padding: var(--s5) var(--s6);
+  margin: var(--s3) 0;
+  transition: border-color 220ms var(--ease);
+}
+#dk-diag-page .dk-step:hover .dk-step-card,
+#dk-diag-page .dk-step:focus-visible .dk-step-card {
+  border-color: rgba(0,0,0,0.35);
+}
+#dk-diag-page .dk-step:hover .dk-step-title,
+#dk-diag-page .dk-step:focus-visible .dk-step-title {
+  color: var(--red);
+}
+#dk-diag-page .dk-step.is-active .dk-step-card {
+  border-color: var(--red);
+}
+#dk-diag-page .dk-step-num {
+  font-family: var(--font-sans); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--red); margin-bottom: var(--s2);
+}
+#dk-diag-page .dk-step-title {
+  font-family: var(--font-sans); font-size: 17px; font-weight: 700;
+  color: var(--ink); line-height: 1.25; margin-bottom: 0;
+  letter-spacing: -0.01em;
+}
+#dk-diag-page .dk-step-body {
+  font-family: var(--font-serif); font-size: 15px;
+  line-height: 1.6; color: var(--ink-soft);
+  max-height: 0; overflow: hidden; margin-top: 0;
+  transition: max-height 360ms var(--ease), opacity 280ms var(--ease),
+              margin-top 240ms var(--ease);
+  opacity: 0;
+}
+#dk-diag-page .dk-step.is-active .dk-step-body {
+  max-height: 180px; opacity: 1; margin-top: var(--s3);
+}
+
+#dk-diag-page .dk-session-quote {
+  max-width: 760px;
+  margin: var(--s7) auto 0;
+  padding: var(--s5) var(--s6);
+  background: var(--white);
+  border-left: 2px solid var(--red);
+  border-radius: 3px;
+}
+
+#dk-diag-page .dk-session-quote p {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0 0 var(--s3);
+}
+
+#dk-diag-page .dk-session-quote-attr {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--khaki);
+}
+
+@media (max-width: 600px) {
+  #dk-diag-page .dk-session-quote {
+    margin-top: var(--s5);
+    padding: var(--s5);
+  }
+
+  #dk-diag-page .dk-session-quote p {
+    font-size: 16px;
+  }
+}
+/* Mobile: single column, spine on left */
+@media (max-width: 768px) {
+  #dk-diag-page .dk-session-intro { grid-template-columns: 1fr; gap: var(--s5); }
+  #dk-diag-page .dk-steps::before { left: 20px; transform: none; }
+  #dk-diag-page .dk-step { grid-template-columns: 40px 1fr; }
+  #dk-diag-page .dk-step:nth-child(odd) .dk-step-card,
+  #dk-diag-page .dk-step:nth-child(even) .dk-step-card { grid-column: 2; grid-row: 1; }
+  #dk-diag-page .dk-step:nth-child(odd) .dk-step-node,
+  #dk-diag-page .dk-step:nth-child(even) .dk-step-node { grid-column: 1; grid-row: 1; }
+  #dk-diag-page .dk-step-empty { display: none; }
+  #dk-diag-page .dk-step.is-active .dk-step-body { max-height: 220px; }
+}
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: THE PROCESS — Assess / Map / Define tabs
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-process {
+  border-top: 3px solid var(--red);
+  border-bottom: var(--rule-hair);
+}
+#dk-diag-page .dk-process-head {
+  text-align: left; max-width: 760px; margin: 0 0 var(--s7);
+}
+#dk-diag-page .dk-process-head .eyebrow,
+#dk-diag-page .dk-process-head h2,
+#dk-diag-page .dk-process-head .lede {
+  text-align: left;
+}
+#dk-diag-page .dk-process-head .eyebrow { margin-bottom: var(--s3); }
+#dk-diag-page .dk-process-head h2 { margin-bottom: var(--s4); }
+#dk-diag-page .dk-process-head .lede {
+  font-family: var(--font-serif); font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.6; color: var(--ink-soft);
+}
+#dk-diag-page .dk-framework-label {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
+  margin-bottom: var(--s4);
+}
+/* Progress bar */
+#dk-diag-page .dk-tab-progress-wrap {
+  position: relative; height: 2px;
+  background: var(--grey-soft); border-radius: 999px; overflow: hidden;
+}
+#dk-diag-page .dk-tab-progress-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: var(--red); border-radius: 999px; width: 33.33%;
+  transition: width 400ms var(--ease);
+}
+/* Tab row */
+#dk-diag-page .dk-tabs {
+  display: flex; gap: 0; border: var(--rule-hair);
+  border-top: none; border-radius: 0 0 3px 3px; overflow: hidden;
+}
+#dk-diag-page .dk-tab {
+  flex: 1; display: flex; flex-direction: column; gap: 3px;
+  padding: var(--s4); border-right: var(--rule-hair);
+  background: var(--white); transition: background 180ms var(--ease);
+  cursor: pointer; position: relative;
+}
+#dk-diag-page .dk-tab:last-child { border-right: none; }
+#dk-diag-page .dk-tab:hover { background: var(--khaki-light); }
+#dk-diag-page .dk-tab:hover .dk-tab-num { color: var(--ink); }
+#dk-diag-page .dk-tab.is-active { background: var(--ink); }
+#dk-diag-page .dk-tab-num {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--khaki); transition: color 180ms var(--ease);
+}
+#dk-diag-page .dk-tab.is-active .dk-tab-num { color: rgba(197,170,136,0.72); }
+#dk-diag-page .dk-tab-name {
+  font-family: var(--font-sans); font-weight: 700; font-size: 13px;
+  color: var(--ink); transition: color 180ms var(--ease); line-height: 1.2;
+}
+#dk-diag-page .dk-tab.is-active .dk-tab-name { color: var(--white); }
+#dk-diag-page .dk-tab.is-active::after {
+  content: ""; position: absolute; bottom: var(--s3); right: var(--s3);
+  width: 5px; height: 5px; background: var(--red); border-radius: 50%;
+}
+/* Panel content */
+#dk-diag-page .dk-tab-content {
+  border: var(--rule-hair); border-top: none;
+  border-radius: 0 0 3px 3px; overflow: hidden; background: var(--paper);
+}
+#dk-diag-page .dk-tab-panel { display: none; padding: var(--s6); }
+#dk-diag-page .dk-tab-panel.is-active {
+  display: grid; grid-template-columns: 3fr 2fr; gap: var(--s6);
+  animation: dkPanelIn 220ms var(--ease-out);
+}
+@keyframes dkPanelIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#dk-diag-page .dk-tab-desc h4 {
+  font-family: var(--font-sans); font-weight: 700; font-size: 17px;
+  color: var(--ink); margin-bottom: var(--s3); letter-spacing: -0.01em;
+}
+#dk-diag-page .dk-tab-desc p {
+  font-family: var(--font-serif); font-size: 15px;
+  line-height: 1.65; color: var(--ink-soft); margin-top: var(--s2);
+}
+#dk-diag-page .dk-tab-outcomes {
+  border-left: var(--rule-hair); padding-left: var(--s5);
+}
+#dk-diag-page .outcomes-label {
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--khaki); margin-bottom: var(--s4);
+}
+#dk-diag-page .dk-outcomes { display: flex; flex-direction: column; gap: var(--s3); }
+#dk-diag-page .dk-outcome {
+  display: flex; gap: var(--s2); align-items: flex-start;
+  padding-bottom: var(--s3); border-bottom: var(--rule-hair);
+}
+#dk-diag-page .dk-outcome:last-child { border-bottom: none; padding-bottom: 0; }
+#dk-diag-page .dk-outcome-dash {
+  font-family: var(--font-sans); font-weight: 700; color: var(--red);
+  flex-shrink: 0; line-height: 1.6; font-size: 14px;
+}
+#dk-diag-page .dk-outcome-text {
+  font-family: var(--font-serif); font-size: 14px;
+  line-height: 1.6; color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  #dk-diag-page .dk-tab-panel.is-active { grid-template-columns: 1fr; }
+  #dk-diag-page .dk-tab-outcomes {
+    border-left: none; padding-left: 0;
+    border-top: var(--rule-hair); padding-top: var(--s4);
+  }
+}
+@media (max-width: 600px) {
+  #dk-diag-page .dk-tabs { flex-direction: column; }
+  #dk-diag-page .dk-tab { border-right: none; border-bottom: var(--rule-hair); }
+  #dk-diag-page .dk-tab:last-child { border-bottom: none; }
+}
+
+/* Mobile process accordion — desktop tabs remain unchanged above 768px */
+#dk-diag-page .dk-process-mobile-accordion {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page .dk-tab-progress-wrap,
+  #dk-diag-page .dk-tabs,
+  #dk-diag-page .dk-tab-content {
+    display: none;
+  }
+
+  #dk-diag-page .dk-process-mobile-accordion {
+    display: block;
+    border: var(--rule-hair);
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  #dk-diag-page .dk-process-acc-item {
+    border-bottom: var(--rule-hair);
+    background: var(--white);
+  }
+
+  #dk-diag-page .dk-process-acc-item:last-child {
+    border-bottom: none;
+  }
+
+  #dk-diag-page .dk-process-acc-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s4);
+    padding: var(--s4);
+    background: var(--white);
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    transition: background 180ms var(--ease), color 180ms var(--ease);
+  }
+
+  #dk-diag-page .dk-process-acc-trigger:hover,
+  #dk-diag-page .dk-process-acc-trigger:focus-visible {
+    background: var(--khaki-light);
+    outline: none;
+  }
+
+  #dk-diag-page .dk-process-acc-item.is-open .dk-process-acc-trigger {
+    background: var(--ink);
+  }
+
+  #dk-diag-page .dk-process-acc-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  #dk-diag-page .dk-process-acc-item.is-open .dk-tab-num {
+    color: rgba(197,170,136,0.72);
+  }
+
+  #dk-diag-page .dk-process-acc-item.is-open .dk-tab-name {
+    color: var(--white);
+  }
+
+  #dk-diag-page .dk-process-acc-trigger::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    background: var(--red);
+    border-radius: 50%;
+    opacity: 0;
+    flex: 0 0 auto;
+    transition: opacity 180ms var(--ease);
+  }
+
+  #dk-diag-page .dk-process-acc-item.is-open .dk-process-acc-trigger::after {
+    opacity: 1;
+  }
+
+  #dk-diag-page .dk-process-acc-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    background: var(--paper);
+    transition: grid-template-rows 260ms var(--ease);
+  }
+
+  #dk-diag-page .dk-process-acc-item.is-open .dk-process-acc-panel {
+    grid-template-rows: 1fr;
+    border-top: var(--rule-hair);
+  }
+
+  #dk-diag-page .dk-process-acc-panel-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  #dk-diag-page .dk-process-acc-panel-content {
+    display: grid;
+    gap: var(--s5);
+    padding: var(--s5);
+  }
+
+  #dk-diag-page .dk-process-acc-panel-content .dk-tab-outcomes {
+    border-left: none;
+    padding-left: 0;
+    border-top: var(--rule-hair);
+    padding-top: var(--s4);
+  }
+
+  #dk-diag-page .dk-process-acc-panel-content .dk-tab-desc p,
+  #dk-diag-page .dk-process-acc-panel-content .dk-outcome-text {
+    color: var(--ink-soft);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: PROBLEMS ACCORDION
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-problems-head {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s8); align-items: start; margin-bottom: var(--s7);
+}
+#dk-diag-page .dk-accordion {
+  border-top: var(--rule-hair);
+}
+#dk-diag-page .dk-accordion-item {
+  border-bottom: var(--rule-hair);
+  transition: border-color 180ms var(--ease);
+}
+#dk-diag-page .dk-accordion-item.is-open {
+  background: transparent;
+}
+#dk-diag-page .dk-accordion-trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s4); padding: var(--s5) 0; cursor: pointer;
+  text-align: left; background: none; border: none;
+  transition: color 180ms var(--ease);
+}
+#dk-diag-page .dk-accordion-trigger:hover .dk-accordion-q,
+#dk-diag-page .dk-accordion-item.is-open .dk-accordion-q {
+  color: var(--red);
+}
+#dk-diag-page .dk-accordion-q {
+  font-family: var(--font-sans); font-weight: 700; font-size: 15px;
+  color: var(--ink-soft); line-height: 1.3; letter-spacing: -0.005em;
+  transition: color 180ms var(--ease);
+  padding-right: var(--s4);
+}
+#dk-diag-page .dk-accordion-icon {
+  flex-shrink: 0; width: 20px; height: 20px; position: relative;
+  border: 1px solid rgba(0,0,0,0.15); border-radius: 50%;
+  transition: background 180ms var(--ease), border-color 180ms var(--ease);
+}
+#dk-diag-page .dk-accordion-icon::before,
+#dk-diag-page .dk-accordion-icon::after {
+  content: ""; position: absolute;
+  background: var(--ink-soft); border-radius: 1px;
+  transition: background 180ms var(--ease), transform 240ms var(--ease), opacity 180ms var(--ease);
+}
+#dk-diag-page .dk-accordion-icon::before {
+  width: 8px; height: 1.5px;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+#dk-diag-page .dk-accordion-icon::after {
+  width: 1.5px; height: 8px;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+#dk-diag-page .dk-accordion-trigger:hover .dk-accordion-icon,
+#dk-diag-page .dk-accordion-item.is-open .dk-accordion-icon {
+  background: transparent;
+  border-color: var(--red);
+}
+#dk-diag-page .dk-accordion-trigger:hover .dk-accordion-icon::before,
+#dk-diag-page .dk-accordion-trigger:hover .dk-accordion-icon::after,
+#dk-diag-page .dk-accordion-item.is-open .dk-accordion-icon::before,
+#dk-diag-page .dk-accordion-item.is-open .dk-accordion-icon::after {
+  background: var(--red);
+}
+#dk-diag-page .dk-accordion-item.is-open .dk-accordion-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+#dk-diag-page .dk-accordion-body {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms var(--ease);
+}
+#dk-diag-page .dk-accordion-item.is-open .dk-accordion-body {
+  grid-template-rows: 1fr;
+}
+#dk-diag-page .dk-accordion-content {
+  overflow: hidden;
+}
+#dk-diag-page .dk-accordion-content p {
+  font-family: var(--font-serif); font-size: 15px;
+  line-height: 1.7; color: var(--ink-soft);
+  padding-bottom: var(--s5); padding-right: var(--s6);
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page .dk-problems-head { grid-template-columns: 1fr; gap: var(--s5); margin-bottom: var(--s5); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: CLARITY OUTCOMES — hover/tap flip cards
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-clarity-head {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s8); align-items: start; margin-bottom: var(--s7);
+}
+#dk-diag-page .dk-clarity-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--s5);
+  align-items: start;
+  perspective: 1200px;
+}
+#dk-diag-page .dk-clarity-card {
+  position: relative;
+  align-self: start;
+  width: 100%;
+  min-height: 280px;
+  cursor: pointer;
+  outline: none;
+  perspective: 1200px;
+}
+#dk-diag-page .dk-clarity-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 520ms var(--ease-out);
+}
+#dk-diag-page .dk-clarity-card-face {
+  position: absolute;
+  inset: 0;
+  min-height: 280px;
+  padding: clamp(24px, 2.4vw, 32px);
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 4px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+#dk-diag-page .dk-clarity-card-front {
+  background: var(--paper);
+  color: var(--ink);
+  justify-content: flex-start;
+  transition: background 220ms var(--ease), border-color 220ms var(--ease), box-shadow 220ms var(--ease);
+}
+#dk-diag-page .dk-clarity-card-back {
+  background: var(--ink);
+  color: var(--white);
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  border-color: var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  #dk-diag-page .dk-clarity-card:hover .dk-clarity-card-inner {
+    transform: rotateY(180deg);
+  }
+  #dk-diag-page .dk-clarity-card:hover .dk-clarity-card-front {
+    background: var(--white);
+    border-color: rgba(0,0,0,0.18);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.055);
+  }
+}
+#dk-diag-page .dk-clarity-card:focus-visible .dk-clarity-card-front {
+  background: var(--white);
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(204,0,0,0.12);
+}
+#dk-diag-page .dk-clarity-card.is-flipped .dk-clarity-card-inner {
+  transform: rotateY(180deg);
+}
+#dk-diag-page .dk-clarity-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--red);
+  letter-spacing: 0.12em;
+}
+#dk-diag-page .dk-clarity-card-back .dk-clarity-num {
+  color: rgba(197,170,136,0.86);
+}
+#dk-diag-page .dk-clarity-hook {
+  font-family: var(--font-serif);
+  font-size: clamp(15.5px, 1.15vw, 17px);
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+#dk-diag-page .dk-clarity-detail {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.62;
+  color: rgba(255,255,255,0.82);
+}
+#dk-diag-page .dk-clarity-card-accent {
+  position: absolute;
+  top: var(--s4);
+  right: var(--s4);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  #dk-diag-page .dk-clarity-card:hover .dk-clarity-card-accent {
+    opacity: 1;
+  }
+}
+#dk-diag-page .dk-clarity-card.is-flipped .dk-clarity-card-accent {
+  opacity: 1;
+}
+
+@media (max-width: 1100px) {
+  #dk-diag-page .dk-clarity-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  #dk-diag-page .dk-clarity-head { grid-template-columns: 1fr; gap: var(--s5); margin-bottom: var(--s5); }
+  #dk-diag-page .dk-clarity-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 260px;
+  }
+}
+@media (max-width: 560px) {
+  #dk-diag-page .dk-clarity-grid { grid-template-columns: 1fr; }
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 240px;
+  }
+}
+
+
+@media (max-width: 560px) {
+  #dk-diag-page .dk-clarity-hook {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: auto;
+  }
+  #dk-diag-page .dk-clarity-card-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+  #dk-diag-page .dk-clarity-card-face {
+    position: relative;
+    inset: auto;
+    transform: none !important;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+  #dk-diag-page .dk-clarity-card-back {
+    display: none;
+    margin-top: var(--s2);
+  }
+  #dk-diag-page .dk-clarity-card.is-flipped .dk-clarity-card-front {
+    display: none;
+  }
+  #dk-diag-page .dk-clarity-card.is-flipped .dk-clarity-card-back {
+    display: flex;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    #dk-diag-page .dk-clarity-card:hover .dk-clarity-card-front {
+      display: none;
+    }
+    #dk-diag-page .dk-clarity-card:hover .dk-clarity-card-back {
+      display: flex;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: PROOF — testimonials
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-proof-head {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s8); align-items: start; margin-bottom: var(--s7);
+}
+#dk-diag-page .dk-proof-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5);
+}
+#dk-diag-page .dk-proof-card {
+  background: var(--paper); border: var(--rule-hair);
+  border-radius: 4px; padding: var(--s5);
+  display: flex; flex-direction: column; gap: var(--s4);
+  transition: border-color 220ms var(--ease);
+}
+#dk-diag-page .dk-proof-card:hover {
+  border-color: rgba(0,0,0,0.35);
+}
+#dk-diag-page .dk-proof-quote {
+  font-family: var(--font-serif); font-size: 15px; font-style: italic;
+  line-height: 1.65; color: var(--ink); flex: 1; quotes: none;
+}
+#dk-diag-page .dk-proof-cite { margin-top: auto; padding-top: var(--s3); border-top: var(--rule-hair); }
+#dk-diag-page .dk-proof-role {
+  font-family: var(--font-sans); font-weight: 700; font-size: 12px;
+  letter-spacing: 0.04em; color: var(--ink); margin-bottom: 2px;
+}
+#dk-diag-page .dk-proof-detail {
+  font-family: var(--font-sans); font-size: 11px;
+  color: var(--ink-soft); letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page .dk-proof-head { grid-template-columns: 1fr; gap: var(--s4); margin-bottom: var(--s5); }
+  #dk-diag-page .dk-proof-cards { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: PRICING
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-pricing-grid {
+  display: grid; grid-template-columns: 1fr 400px;
+  gap: var(--s8); align-items: start;
+}
+#dk-diag-page .dk-pricing-copy { display: flex; flex-direction: column; gap: var(--s4); }
+#dk-diag-page .dk-pricing-copy .display-l { line-height: 1.0; }
+#dk-diag-page .dk-pricing-copy .display-l em {
+  font-style: normal; color: var(--red);
+}
+#dk-diag-page .dk-pricing-card {
+  background: var(--ink); border-radius: 4px; padding: var(--s6);
+  display: flex; flex-direction: column; gap: var(--s4);
+  border-top: 3px solid var(--red);
+  transition: border-top-color 220ms var(--ease);
+}
+#dk-diag-page .dk-pricing-card:hover {
+  border-top-color: #A30000;
+}
+#dk-diag-page .dk-pricing-card-label {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(197,170,136,0.72);
+}
+#dk-diag-page .dk-pricing-card-title {
+  font-family: var(--font-sans); font-weight: 700; font-size: 18px;
+  letter-spacing: -0.01em; color: var(--white); line-height: 1.2;
+}
+#dk-diag-page .dk-pricing-card-desc {
+  font-family: var(--font-serif); font-size: 15px;
+  line-height: 1.6; color: rgba(255,255,255,0.72);
+}
+#dk-diag-page .dk-pricing-card-specs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3);
+  padding: var(--s4); background: rgba(255,255,255,0.06); border-radius: 3px;
+}
+#dk-diag-page .dk-pricing-card-spec-label {
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--khaki); margin-bottom: 3px;
+}
+#dk-diag-page .dk-pricing-card-spec-value {
+  font-family: var(--font-sans); font-weight: 700; font-size: 14px; color: var(--white);
+}
+#dk-diag-page .dk-pricing-card-price {
+  display: flex; align-items: baseline; gap: var(--s3);
+  padding-top: var(--s4); border-top: var(--rule-hair-white);
+}
+#dk-diag-page .dk-pricing-card-price-num {
+  font-family: var(--font-mono); font-size: 40px; font-weight: 500;
+  color: var(--white); letter-spacing: -0.02em;
+}
+#dk-diag-page .dk-pricing-card-price-note {
+  font-family: var(--font-sans); font-size: 12px;
+  color: rgba(255,255,255,0.55); line-height: 1.4;
+}
+#dk-diag-page .dk-pricing-card .btn { width: 100%; margin-bottom: var(--s3); }
+#dk-diag-page .dk-pricing-card-fineprint {
+  font-family: var(--font-sans); font-size: 11px;
+  color: rgba(255,255,255,0.4); line-height: 1.5; text-align: center;
+}
+
+@media (max-width: 900px) {
+  #dk-diag-page .dk-pricing-grid { grid-template-columns: 1fr; gap: var(--s5); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: +AI COMMUNITY
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-community-grid {
+  display: grid; grid-template-columns: 1fr 400px;
+  gap: var(--s8); align-items: start;
+}
+#dk-diag-page .dk-community-card {
+  background: var(--khaki-light); border: var(--rule-hair);
+  border-radius: 4px; padding: var(--s6);
+  display: flex; flex-direction: column; gap: var(--s5);
+  transition: border-color 220ms var(--ease);
+}
+#dk-diag-page .dk-community-card:hover {
+  border-color: rgba(0,0,0,0.35);
+}
+#dk-diag-page .dk-community-card-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+#dk-diag-page .dk-community-price {
+  display: flex; align-items: baseline; gap: var(--s2);
+}
+#dk-diag-page .dk-community-price-num {
+  font-family: var(--font-mono); font-size: 36px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.02em;
+}
+#dk-diag-page .dk-community-price-unit {
+  font-family: var(--font-sans); font-size: 13px; color: var(--ink-soft);
+}
+#dk-diag-page .dk-community-features {
+  display: flex; flex-direction: column; gap: var(--s2);
+  padding: var(--s4) 0; border-top: var(--rule-hair); border-bottom: var(--rule-hair);
+}
+#dk-diag-page .dk-community-feat {
+  font-family: var(--font-serif); font-size: 14px;
+  line-height: 1.5; color: var(--ink-soft);
+  padding-left: var(--s4); position: relative;
+}
+#dk-diag-page .dk-community-feat::before {
+  content: "—"; position: absolute; left: 0;
+  color: var(--red); font-family: var(--font-sans); font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  #dk-diag-page .dk-community-grid { grid-template-columns: 1fr; gap: var(--s5); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   STICKY BOOKING BAR — appears after hero scrolls out
+   ═══════════════════════════════════════════════════════════════════════ */
+/* Sticky bar removed */
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION: CLOSING CTA
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-close {
+  background: var(--black); color: var(--white);
+  padding: clamp(56px, 7vw, 88px) 0;
+}
+#dk-diag-page .dk-close .eyebrow { color: var(--khaki); }
+#dk-diag-page .dk-close-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s8); align-items: center;
+}
+#dk-diag-page .dk-close .display-l { color: var(--white); }
+#dk-diag-page .dk-close .body-l { color: rgba(255,255,255,0.72); }
+#dk-diag-page .dk-close-actions {
+  width: 100%;
+  max-width: 430px;
+  justify-self: end;
+  display: flex; flex-direction: column; align-items: stretch; gap: var(--s4);
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid rgba(255,255,255,0.92);
+  background: var(--white);
+}
+#dk-diag-page .dk-close-actions .btn-text { color: var(--ink); }
+#dk-diag-page .dk-close-actions .btn-text::after { background: var(--ink); }
+#dk-diag-page .dk-close-actions .mono { color: var(--ink-soft); }
+#dk-diag-page .dk-close-actions .body-l { color: var(--ink-soft); }
+
+@media (max-width: 768px) {
+  #dk-diag-page .dk-close-grid { grid-template-columns: 1fr; gap: var(--s5); }
+  /* FIX (mobile only): the single-column grid track was being forced wider than
+     its container by long content, pushing the eyebrow, headline and CTA card
+     ~7px past the right shell edge (the right-shift you saw). min-width:0 lets
+     each child shrink to the column width, restoring symmetric left/right
+     spacing. justify-self:stretch keeps the card edge-to-edge within padding. */
+  #dk-diag-page .dk-close-grid > * { min-width: 0; }
+  #dk-diag-page .dk-close-actions { justify-self: stretch; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MOBILE TYPE SCALE — matches homepage overrides at 768px
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  #dk-diag-page .display-xl {
+    font-size: clamp(34px, 11vw, 48px);
+    line-height: 0.98;
+  }
+  #dk-diag-page .display-l {
+    font-size: clamp(30px, 9.5vw, 42px);
+    line-height: 1.02;
+  }
+  #dk-diag-page .display-m {
+    font-size: clamp(22px, 7vw, 32px);
+    line-height: 1.08;
+  }
+  #dk-diag-page .body-l {
+    font-size: 16px;
+    line-height: 1.58;
+  }
+  #dk-diag-page .body,
+  #dk-diag-page .body-sans { font-size: 15px; }
+  #dk-diag-page .btn,
+  #dk-diag-page .btn-ghost,
+  #dk-diag-page .btn-primary { line-height: 1.3; }
+  #dk-diag-page .btn-text { line-height: 1.3; }
+  #dk-diag-page .dk-close-actions { max-width: none; justify-self: stretch; }
+}
+/* ═══════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  #dk-diag-page *, #dk-diag-page *::before, #dk-diag-page *::after {
+    animation-duration: 0ms !important; animation-delay: 0ms !important;
+    transition-duration: 0ms !important; transition-delay: 0ms !important;
+  }
+  #dk-diag-page .reveal { opacity: 1; transform: none; }
+}
+
+
+
+
+
+
+
+
+#dk-diag-page .eyebrow,
+#dk-diag-page .dk-hero-eyebrow,
+#dk-diag-page .dk-framework-label,
+#dk-diag-page .outcomes-label,
+#dk-diag-page .dk-pricing-card-label,
+#dk-diag-page .dk-pricing-card-spec-label,
+#dk-diag-page .rsc-hero-breadcrumb-label,
+#dk-diag-page .rsc-card-type,
+#dk-diag-page .rsc-card-format,
+#dk-diag-page .rsc-card-expand-label,
+#dk-diag-page .rsc-grid-head-title,
+#dk-diag-page .rsc-cta-eyebrow{
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+@media (min-width: 769px) {
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 360px;
+  }
+}
+@media (max-width: 768px) {
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 320px;
+  }
+}
+@media (max-width: 560px) {
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 300px;
+  }
+}
+
+</style>
+<style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SHARED CONTAINER ALIGNMENT — 1280px DK grid
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .dk-shell,
+#dk-diag-page .dk-hero-inner,
+#dk-diag-page .dk-quote-band-inner,
+#dk-diag-page .dk-anchor-nav-inner,
+#dk-diag-page .u-container{
+  max-width: var(--max-w);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUTTON + LIGHT TEXT POLISH — scoped final overrides
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 44px;
+  padding: 15px 24px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  box-shadow: none;
+  white-space: nowrap;
+  transition: background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+}
+
+#dk-diag-page .btn-primary{
+  background: var(--red);
+  color: var(--white) !important;
+  border: 0;
+}
+
+#dk-diag-page .btn-primary:hover{
+  background: var(--red-dark);
+  color: var(--white) !important;
+}
+
+#dk-diag-page .btn-primary .arrow{
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0;
+  transform: translateX(0);
+  transition: transform 200ms var(--ease);
+}
+
+
+
+#dk-diag-page .btn-primary:hover .arrow{
+  transform: translateX(3px);
+}
+</style>
+<style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   EYEBROW WEIGHT PASS — bold labels, colors/spacing preserved
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page .eyebrow,
+#dk-diag-page .u-label,
+#dk-diag-page .u-eyebrow,
+#dk-diag-page .dk-hero-eyebrow,
+#dk-diag-page .dk-close-eyebrow,
+#dk-diag-page .dk-framework-label,
+#dk-diag-page .outcomes-label,
+#dk-diag-page .dk-diag-offer-label,
+#dk-diag-page .dk-diag-spec-label,
+#dk-diag-page .dk-pricing-card-label,
+#dk-diag-page .dk-pricing-card-spec-label,
+#dk-diag-page .dk-service-eyebrow,
+#dk-diag-page .dk-comparison-col-label,
+#dk-diag-page .dk-service-detail-trigger-label,
+#dk-diag-page .rsc-hero-breadcrumb-label,
+#dk-diag-page .rsc-card-type,
+#dk-diag-page .rsc-card-format,
+#dk-diag-page .rsc-card-expand-label,
+#dk-diag-page .rsc-grid-head-title,
+#dk-diag-page .rsc-cta-eyebrow{
+  font-size: 11px;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   AI STRATEGIC DIAGNOSTIC — Clarity card height fit
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 560px) {
+  #dk-diag-page .dk-clarity-card,
+  #dk-diag-page .dk-clarity-card-inner,
+  #dk-diag-page .dk-clarity-card-face {
+    min-height: 300px;
+  }
+}
+</style>
+
+<style>
+/* BODY-ONLY HERO TOP SPACE OVERRIDE — AI Strategic Diagnostic */
+#dk-diag-page .dk-hero-copy {
+  padding-top: clamp(136px, 12vw, 192px);
+}
+
+@media (max-width: 960px) {
+  #dk-diag-page .dk-hero-copy {
+    padding-top: clamp(104px, 18vw, 128px);
+  }
+}
+
+@media (max-width: 600px) {
+  #dk-diag-page .dk-hero-copy {
+    padding-top: clamp(104px, 18vw, 128px);
+  }
+}
+
+/* After the Session cards — desktop hover + mobile tap flip with dynamic height */
+
+/* Desktop/tablet: preserve normal hover flip */
+@media (min-width: 561px) {
+  #dk-diag-page .dk-clarity-card {
+    min-height: 360px;
+    perspective: 1200px;
+  }
+
+  #dk-diag-page .dk-clarity-card-inner {
+    position: relative;
+    width: 100%;
+    min-height: 360px;
+    transform-style: preserve-3d;
+    transition: transform 520ms var(--ease-out);
+  }
+
+  #dk-diag-page .dk-clarity-card-face {
+    position: absolute;
+    inset: 0;
+    min-height: 360px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  #dk-diag-page .dk-clarity-card-front {
+    transform: rotateY(0deg);
+  }
+
+  #dk-diag-page .dk-clarity-card-back {
+    transform: rotateY(180deg);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    #dk-diag-page .dk-clarity-card:hover .dk-clarity-card-inner {
+      transform: rotateY(180deg);
+    }
+  }
+
+  #dk-diag-page .dk-clarity-card.is-flipped .dk-clarity-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Mobile: keep the flip animation, but calculate each card height */
+@media (max-width: 560px) {
+  #dk-diag-page .dk-clarity-card {
+    min-height: var(--clarity-card-mobile-height, auto) !important;
+    height: var(--clarity-card-mobile-height, auto) !important;
+    perspective: 1200px !important;
+  }
+
+  #dk-diag-page .dk-clarity-card-inner {
+    position: relative !important;
+    width: 100% !important;
+    min-height: var(--clarity-card-mobile-height, auto) !important;
+    height: var(--clarity-card-mobile-height, auto) !important;
+    transform-style: preserve-3d !important;
+    transition: transform 420ms var(--ease-out) !important;
+  }
+
+  #dk-diag-page .dk-clarity-card-face {
+    position: absolute !important;
+    inset: 0 !important;
+    min-height: var(--clarity-card-mobile-height, auto) !important;
+    height: var(--clarity-card-mobile-height, auto) !important;
+    padding: var(--s5) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+  }
+
+  #dk-diag-page .dk-clarity-card-front {
+    transform: rotateY(0deg) !important;
+  }
+
+  #dk-diag-page .dk-clarity-card-back {
+    transform: rotateY(180deg) !important;
+  }
+
+  #dk-diag-page .dk-clarity-card.is-flipped .dk-clarity-card-inner {
+    transform: rotateY(180deg) !important;
+  }
+
+  #dk-diag-page .dk-clarity-hook,
+  #dk-diag-page .dk-clarity-detail {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+</style>
+</head>
+<body>
+<div id="dk-diag-page">
+
+<main id="top">
+<!-- ════════════════════════════════════════════════════════════
+         HERO — editorial image, copy left, image right
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="AI Strategic Diagnostic — Hero" class="dk-hero" id="dkHeroSection">
+<div class="dk-hero-inner">
+<!-- LEFT: main copy -->
+<div class="dk-hero-copy">
+<div class="dk-hero-eyebrow reveal is-in">AI Strategic Diagnostic</div>
+<h1 class="dk-hero-h1 reveal is-in" data-delay="1">Turn AI noise into clear decisions</h1>
+<p class="dk-hero-lede reveal is-in" data-delay="2">You've tried the tools. You've tested the prompts. Monday morning, the way you actually work hasn't changed.</p>
+<p class="dk-hero-lede reveal is-in" data-delay="2">The gap isn't effort. <em>It's orientation.</em></p>
+<p class="dk-hero-lede reveal is-in" data-delay="3">Bring one real decision that's been stuck. We work through it together. You leave with clarity you can act on.</p>
+<div class="dk-hero-actions reveal is-in" data-delay="4">
+<a class="btn btn-primary" href="https://buy.stripe.com/28E5kE7yK5Vefyi50n8AE0N">
+              Book the AI Strategic Diagnostic
+              <span class="arrow">→</span>
+</a>
+<a class="btn-text" href="#process">
+              See how the session works
+              <span class="arrow">→</span>
+</a>
+</div>
+<div class="dk-hero-meta reveal is-in" data-delay="4">
+<div class="dk-hero-meta-item">
+<span class="dk-hero-meta-num">90 MIN</span>
+<span class="dk-hero-meta-lbl">Working Session</span>
+</div>
+<div class="dk-hero-meta-sep"></div>
+<div class="dk-hero-meta-item">
+<span class="dk-hero-meta-num">ONE DECISION</span>
+<span class="dk-hero-meta-lbl">Real, Not Hypothetical</span>
+</div>
+<div class="dk-hero-meta-sep"></div>
+<div class="dk-hero-meta-item">
+<span class="dk-hero-meta-num">$900</span>
+<span class="dk-hero-meta-lbl">Credits Toward Ongoing Work</span>
+</div>
+</div>
+</div>
+<!-- RIGHT: editorial image -->
+<div aria-hidden="true" class="dk-hero-image is-placeholder reveal is-in" data-delay="2"></div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         THE PROBLEM
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="The Problem" class="bg-white">
+<div class="dk-shell">
+<div class="dk-problem-grid">
+<div class="dk-problem-copy">
+<div class="eyebrow red reveal" style="margin-bottom: var(--s3);">Why the lift isn't matching</div>
+<h2 class="display-l reveal" data-delay="1" style="margin-bottom: var(--s4);">You're putting in the effort. The lift isn't matching.</h2>
+<p class="body-l reveal" data-delay="2">
+              That's not a knowledge gap. It's an orientation problem. Most leaders experimenting with AI are spending hours a week testing tools, prompts, and workflows, but the lift stays inconsistent.
+            </p>
+<p class="body-l reveal" data-delay="3" style="margin-top: var(--s4);">
+              The issue is rarely effort. The gap isn't technical. It's conceptual. Closing it doesn't require more tutorials. It requires a different mental model.
+            </p>
+<div class="dk-problem-pull reveal" data-delay="4">
+<p class="dk-problem-pull-text">"The design treats AI as a thinking partner, not a shortcut, not a replacement, not a gimmick. The goal is leverage you can actually trust."</p>
+<div class="dk-problem-pull-attr">· DK Consulting</div>
+</div>
+</div>
+<div class="dk-problem-statement reveal" data-delay="1">
+<div class="eyebrow" style="margin-bottom: var(--s3);">The real issue</div>
+<p class="dk-problem-statement-hl">You've been experimenting with AI using an <em>outdated mental model.</em></p>
+<p>There's a more grounded way to close that gap. It doesn't start with another tool, another prompt library, or another course.</p>
+<p>It starts with a situational read of where you actually are, what's actually constraining you, and what AI can genuinely do inside your specific operating context.</p>
+<p>That's what the Diagnostic is for.</p>
+<div class="dk-problem-statement-attr">DK Consulting · Strategic Translation for the AI Era</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         QUOTE BAND 1
+         ════════════════════════════════════════════════════════════ -->
+<div aria-label="Client quote" class="dk-quote-band" role="complementary">
+<div class="dk-quote-band-inner">
+<div class="dk-quote-band-rule"></div>
+<div>
+<blockquote class="dk-quote-band-text reveal">"There's no way I would have signed up to build a three-year strategic plan for that client without Claude in my toolbox. It would have taken me months — we got it done in a few weeks. I'm a toolmaker, not a tech wizard. But now I know enough about AI to be dangerous with it."</blockquote>
+<div class="dk-quote-band-attr reveal" data-delay="1">Mike Zacharias</div>
+</div>
+<div class="dk-quote-band-rule"></div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════════════════════
+         THE SESSION — interactive zigzag step/timeline
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="What the Diagnostic is" class="bg-khaki" id="dkSessionSection">
+<div class="dk-shell">
+<div class="dk-session-intro">
+<div class="dk-session-intro-head reveal">
+<div class="eyebrow ink" style="margin-bottom: var(--s4);">A paid working session</div>
+<h2 class="display-l">A 90-minute working session. Not a course. Not training.</h2>
+</div>
+<div class="dk-session-intro-body reveal" data-delay="2">
+<p class="body-l">No prep deck. No homework. No slide deck to review afterward. You bring one real decision or challenge that's been stuck, something with real stakes and real constraints.</p>
+<p class="body-l">We work through it together, using AI as a thinking partner. The goal isn't to teach you AI. It's to use AI to help you think more clearly about the specific problem in front of you.</p>
+<p class="body-l" style="font-weight: 700; color: var(--ink);">
+              This isn't training. It's enablement.
+</p>
+</div>
+</div>
+<div class="dk-steps reveal" data-delay="1">
+<div class="dk-step" data-step="1">
+<div class="dk-step-card">
+<div class="dk-step-num">Step 01</div>
+<div class="dk-step-title">Map current AI usage</div>
+<div class="dk-step-body">We take stock of where AI is already touching your work (tools, habits, workarounds), without judgment. This is the baseline. Most leaders discover the real picture is different from what they assumed.</div>
+</div>
+<div class="dk-step-node"><div class="dk-step-dot"></div></div>
+<div class="dk-step-empty"></div>
+</div>
+<div class="dk-step" data-step="2">
+<div class="dk-step-empty"></div>
+<div class="dk-step-node"><div class="dk-step-dot"></div></div>
+<div class="dk-step-card">
+<div class="dk-step-num">Step 02</div>
+<div class="dk-step-title">Clarify business priorities</div>
+<div class="dk-step-body">We identify what you're actually trying to move (the decisions, the outcomes, the constraints). Not AI priorities. Business priorities. This step reframes what AI is even for in your context.</div>
+</div>
+</div>
+<div class="dk-step" data-step="3">
+<div class="dk-step-card">
+<div class="dk-step-num">Step 03</div>
+<div class="dk-step-title">Identify decisions and constraints</div>
+<div class="dk-step-body">We surface the specific decision you brought in, and the real constraints around it. Budget, risk tolerance, team capacity, trust. The constraints are usually where the actual problem lives.</div>
+</div>
+<div class="dk-step-node"><div class="dk-step-dot"></div></div>
+<div class="dk-step-empty"></div>
+</div>
+<div class="dk-step" data-step="4">
+<div class="dk-step-empty"></div>
+<div class="dk-step-node"><div class="dk-step-dot"></div></div>
+<div class="dk-step-card">
+<div class="dk-step-num">Step 04</div>
+<div class="dk-step-title">Diagnose where AI supports judgment, and where it creates risk</div>
+<div class="dk-step-body">Not every decision benefits from AI involvement. We work through where AI genuinely sharpens your thinking and where it introduces noise, over-confidence, or risk you need to manage carefully.</div>
+</div>
+</div>
+<div class="dk-step" data-step="5">
+<div class="dk-step-card">
+<div class="dk-step-num">Step 05</div>
+<div class="dk-step-title">Define next orientation: what to change, ignore, test</div>
+<div class="dk-step-body">You leave with a clear, prioritized next move, not a list of things to try. One concrete shift that changes how you work. A reusable mental model for evaluating AI fit going forward.</div>
+</div>
+<div class="dk-step-node"><div class="dk-step-dot"></div></div>
+<div class="dk-step-empty"></div>
+</div>
+</div>
+<div class="dk-session-quote reveal" data-delay="2">
+<p>"I'm not an AI futurist. I'm an AI Strategist and Educator. I've spent over 15 years in rooms where decisions carry real consequences. I understand how AI systems actually work and how real businesses operate under pressure."</p>
+<div class="dk-session-quote-attr">· DK CONSULTING</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         THE PROCESS — Assess / Map / Define tabs
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="How the session works" class="dk-process bg-white" id="process">
+<div class="dk-shell">
+<div class="dk-process-head reveal">
+<div class="eyebrow red" style="margin-bottom: var(--s3);">How It Works</div>
+<h2 class="display-xl">The AI Strategic Diagnostic</h2>
+<p class="lede">A structured 90-minute session in three phases. Each phase builds on the last. You leave with definition, not ambiguity.</p>
+</div>
+<div class="reveal" data-delay="1">
+<div class="dk-framework-label">What happens in the session</div>
+<div class="dk-tab-progress-wrap">
+<div class="dk-tab-progress-fill" id="dkDiagTabProgress"></div>
+</div>
+<div aria-label="Diagnostic process phases" class="dk-tabs" role="tablist">
+<button aria-selected="true" class="dk-tab is-active" data-tab="assess" role="tab" type="button">
+<span class="dk-tab-num">01 / ASSESS</span>
+<span class="dk-tab-name">Situational Read</span>
+</button>
+<button aria-selected="false" class="dk-tab" data-tab="map" role="tab" type="button">
+<span class="dk-tab-num">02 / MAP</span>
+<span class="dk-tab-name">Fit &amp; Friction</span>
+</button>
+<button aria-selected="false" class="dk-tab" data-tab="define" role="tab" type="button">
+<span class="dk-tab-num">03 / DEFINE</span>
+<span class="dk-tab-name">Next Move</span>
+</button>
+</div>
+<div class="dk-tab-content" id="dkDiagTabContent">
+<div class="dk-tab-panel is-active" data-panel="assess">
+<div class="dk-tab-desc">
+<h4>A situational read, not a skills test.</h4>
+<p>We begin by assessing how you're currently using AI, what's working, what's creating friction, and what's being avoided entirely. This isn't about grading your prompt craft. It's about mapping how AI is actually showing up in your decision-making.</p>
+<p>Most leaders discover that the friction isn't where they thought it was. The assessment reframes the problem before we try to solve it.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">What you get</div>
+<div class="dk-outcomes">
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A clear picture of where AI is and isn't working in your context</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">Identification of the real constraint (usually not what you expected)</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A reframed problem statement to work from</span>
+</div>
+</div>
+</div>
+</div>
+<div class="dk-tab-panel" data-panel="map">
+<div class="dk-tab-desc">
+<h4>Map where AI fits, and where it creates friction.</h4>
+<p>With the situational read in hand, we map the specific decision or challenge you brought into the session. We identify where AI can genuinely help, where it introduces risk, and where it's simply not the right tool.</p>
+<p>This isn't a generic framework. It's a live working session applied to your actual operating context, your constraints, your team, your stakes.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">What you get</div>
+<div class="dk-outcomes">
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A fit/friction map for your specific decision</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">Clarity on which AI tools and approaches are worth your attention</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A framework for evaluating AI fit going forward</span>
+</div>
+</div>
+</div>
+</div>
+<div class="dk-tab-panel" data-panel="define">
+<div class="dk-tab-desc">
+<h4>Define the next move. Not more options. A clear path.</h4>
+<p>The session closes with definition. Not a list of things to explore. Not a reading list. A clear, prioritised next move you can act on this week.</p>
+<p>The market is flooded with tools, each promising to be the one you need. The Diagnostic gives you a framework for evaluating AI tools against your actual business context, so you can stop testing everything and start using the right things.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">What you get</div>
+<div class="dk-outcomes">
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A single, prioritised next move, not a list of options</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A mental model you can apply to future AI decisions</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">The clarity to stop second-guessing and start acting</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="Diagnostic process phases mobile accordion" class="dk-process-mobile-accordion">
+<div class="dk-process-acc-item is-open" data-process-acc="assess">
+<button aria-controls="dkProcessAccAssess" aria-expanded="true" class="dk-process-acc-trigger" type="button">
+<span class="dk-process-acc-copy">
+<span class="dk-tab-num">01 / ASSESS</span>
+<span class="dk-tab-name">Situational Read</span>
+</span>
+</button>
+<div aria-hidden="false" class="dk-process-acc-panel" id="dkProcessAccAssess">
+<div class="dk-process-acc-panel-inner">
+<div class="dk-process-acc-panel-content">
+<div class="dk-tab-desc">
+<h4>A situational read, not a skills test.</h4>
+<p>We begin by assessing how you're currently using AI, what's working, what's creating friction, and what's being avoided entirely. This isn't about grading your prompt craft. It's about mapping how AI is actually showing up in your decision-making.</p>
+<p>Most leaders discover that the friction isn't where they thought it was. The assessment reframes the problem before we try to solve it.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">What you get</div>
+<div class="dk-outcomes">
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A clear picture of where AI is and isn't working in your context</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">Identification of the real constraint (usually not what you expected)</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A reframed problem statement to work from</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="dk-process-acc-item" data-process-acc="map">
+<button aria-controls="dkProcessAccMap" aria-expanded="false" class="dk-process-acc-trigger" type="button">
+<span class="dk-process-acc-copy">
+<span class="dk-tab-num">02 / MAP</span>
+<span class="dk-tab-name">Fit &amp; Friction</span>
+</span>
+</button>
+<div aria-hidden="true" class="dk-process-acc-panel" id="dkProcessAccMap">
+<div class="dk-process-acc-panel-inner">
+<div class="dk-process-acc-panel-content">
+<div class="dk-tab-desc">
+<h4>Map where AI fits, and where it creates friction.</h4>
+<p>With the situational read in hand, we map the specific decision or challenge you brought into the session. We identify where AI can genuinely help, where it introduces risk, and where it's simply not the right tool.</p>
+<p>This isn't a generic framework. It's a live working session applied to your actual operating context, your constraints, your team, your stakes.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">What you get</div>
+<div class="dk-outcomes">
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A fit/friction map for your specific decision</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">Clarity on which AI tools and approaches are worth your attention</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A framework for evaluating AI fit going forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="dk-process-acc-item" data-process-acc="define">
+<button aria-controls="dkProcessAccDefine" aria-expanded="false" class="dk-process-acc-trigger" type="button">
+<span class="dk-process-acc-copy">
+<span class="dk-tab-num">03 / DEFINE</span>
+<span class="dk-tab-name">Next Move</span>
+</span>
+</button>
+<div aria-hidden="true" class="dk-process-acc-panel" id="dkProcessAccDefine">
+<div class="dk-process-acc-panel-inner">
+<div class="dk-process-acc-panel-content">
+<div class="dk-tab-desc">
+<h4>Define the next move. Not more options. A clear path.</h4>
+<p>The session closes with definition. Not a list of things to explore. Not a reading list. A clear, prioritised next move you can act on this week.</p>
+<p>The market is flooded with tools, each promising to be the one you need. The Diagnostic gives you a framework for evaluating AI tools against your actual business context, so you can stop testing everything and start using the right things.</p>
+</div>
+<div class="dk-tab-outcomes">
+<div class="outcomes-label">What you get</div>
+<div class="dk-outcomes">
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A single, prioritised next move, not a list of options</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">A mental model you can apply to future AI decisions</span>
+</div>
+<div class="dk-outcome">
+<span class="dk-outcome-dash">—</span>
+<span class="dk-outcome-text">The clarity to stop second-guessing and start acting</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         QUOTE BAND 2
+         ════════════════════════════════════════════════════════════ -->
+<div aria-label="Client quote" class="dk-quote-band" role="complementary">
+<div class="dk-quote-band-inner">
+<div class="dk-quote-band-rule"></div>
+<div>
+<blockquote class="dk-quote-band-text reveal">"I’m not a tech person — I started using a computer late in life — and Danoosh made it easy and simple. He really helped me go through it and understand."</blockquote>
+<div class="dk-quote-band-attr reveal" data-delay="1">Fabrizio Cercatore</div>
+</div>
+<div class="dk-quote-band-rule"></div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════════════════════
+         PROBLEMS ACCORDION
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="What people bring to the session" class="bg-grey">
+<div class="dk-shell">
+<div class="dk-problems-head">
+<div class="reveal">
+<div class="eyebrow red" style="margin-bottom: var(--s3);">What People Bring</div>
+<h2 class="display-l">The kind of problems brought into the room.</h2>
+</div>
+<div class="reveal" data-delay="1">
+<p class="body-l">These are the real decisions leaders bring. Not hypotheticals, actual operating challenges with real constraints and real stakes.</p>
+</div>
+</div>
+<div class="dk-accordion reveal" data-delay="2">
+<div class="dk-accordion-item">
+<button aria-expanded="false" class="dk-accordion-trigger">
+<span class="dk-accordion-q">Should I be using AI in my role, and if so, where do I start?</span>
+<span aria-hidden="true" class="dk-accordion-icon"></span>
+</button>
+<div class="dk-accordion-body">
+<div class="dk-accordion-content">
+<p>This is the most common starting point. The Diagnostic gives you an honest, operator-to-operator read on where AI creates genuine leverage for your specific role and context, and where it's just noise. You leave with a clear answer, not a list of things to try.</p>
+</div>
+</div>
+</div>
+<div class="dk-accordion-item">
+<button aria-expanded="false" class="dk-accordion-trigger">
+<span class="dk-accordion-q">I'm using AI but not getting consistent results. What's the real problem?</span>
+<span aria-hidden="true" class="dk-accordion-icon"></span>
+</button>
+<div class="dk-accordion-body">
+<div class="dk-accordion-content">
+<p>Inconsistent results are almost always a mental model problem, not a tool problem. The session helps you identify the specific gap, whether it's how you're framing problems, how you're evaluating outputs, or how you're integrating AI into your actual workflow.</p>
+</div>
+</div>
+</div>
+<div class="dk-accordion-item">
+<button aria-expanded="false" class="dk-accordion-trigger">
+<span class="dk-accordion-q">Deciding which AI tools are worth investing in for my team.</span>
+<span aria-hidden="true" class="dk-accordion-icon"></span>
+</button>
+<div class="dk-accordion-body">
+<div class="dk-accordion-content">
+<p>The market is flooded with tools, each promising to be the one you need. The Diagnostic gives you a framework for evaluating AI tools against your actual business context, so you can stop testing everything and start using the right things.</p>
+</div>
+</div>
+</div>
+<div class="dk-accordion-item">
+<button aria-expanded="false" class="dk-accordion-trigger">
+<span class="dk-accordion-q">How to integrate AI into my workflow without losing quality.</span>
+<span aria-hidden="true" class="dk-accordion-icon"></span>
+</button>
+<div class="dk-accordion-body">
+<div class="dk-accordion-content">
+<p>Quality concerns are legitimate, especially for leaders whose judgment and output are their primary value. The session helps you identify where AI genuinely sharpens your work and where it introduces risk you need to manage carefully.</p>
+</div>
+</div>
+</div>
+<div class="dk-accordion-item">
+<button aria-expanded="false" class="dk-accordion-trigger">
+<span class="dk-accordion-q">When it's time to figure out if AI is actually for you.</span>
+<span aria-hidden="true" class="dk-accordion-icon"></span>
+</button>
+<div class="dk-accordion-body">
+<div class="dk-accordion-content">
+<p>Not everyone needs to use AI the same way, or at all, for every task. The Diagnostic gives you an honest, operator-to-operator read on where AI creates genuine leverage for your specific role and context, and where it's just noise.</p>
+</div>
+</div>
+</div>
+<div class="dk-accordion-item">
+<button aria-expanded="false" class="dk-accordion-trigger">
+<span class="dk-accordion-q">What does AI-assisted leadership actually look like?</span>
+<span aria-hidden="true" class="dk-accordion-icon"></span>
+</button>
+<div class="dk-accordion-body">
+<div class="dk-accordion-content">
+<p>This is the deeper question underneath most Diagnostics. The session helps you build a mental model for how AI fits your role, not as a productivity tool, but as a thinking partner that helps you make better decisions under pressure.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         CLARITY OUTCOMES — expandable cards
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="What clarity looks like" class="bg-white">
+<div class="dk-shell">
+<div class="dk-clarity-head">
+<div class="reveal">
+<div class="eyebrow red" style="margin-bottom: var(--s3);">After the Session</div>
+<h2 class="display-l">What clarity looks like.</h2>
+</div>
+<div class="reveal" data-delay="1">
+<p class="body-l">Five concrete shifts that leaders report after completing the Diagnostic. Not aspirational outcomes (observed patterns from real sessions).</p>
+</div>
+</div>
+<div class="dk-clarity-grid">
+<div aria-pressed="false" class="dk-clarity-card reveal" data-delay="1" role="button" tabindex="0">
+<div class="dk-clarity-card-inner">
+<div class="dk-clarity-card-face dk-clarity-card-front">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">01</div>
+<p class="dk-clarity-hook">You’ll stop second-guessing whether you're "doing AI right" and start using it with intention.</p>
+</div>
+<div class="dk-clarity-card-face dk-clarity-card-back">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">01</div>
+<p class="dk-clarity-detail">Most leaders arrive with a vague sense that they're behind. They leave with a specific, grounded understanding of where they actually are, and a clear picture of what "doing it right" looks like for their specific context.</p>
+</div>
+</div>
+</div>
+<div aria-pressed="false" class="dk-clarity-card reveal" data-delay="2" role="button" tabindex="0">
+<div class="dk-clarity-card-inner">
+<div class="dk-clarity-card-face dk-clarity-card-front">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">02</div>
+<p class="dk-clarity-hook">Your mental model for AI will shift from "tool to try" to "thinking partner to deploy."</p>
+</div>
+<div class="dk-clarity-card-face dk-clarity-card-back">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">02</div>
+<p class="dk-clarity-detail">The shift from tool-testing to strategic deployment is the most common transformation leaders report. It changes how you evaluate new AI capabilities and how you integrate them into real decisions.</p>
+</div>
+</div>
+</div>
+<div aria-pressed="false" class="dk-clarity-card reveal" data-delay="3" role="button" tabindex="0">
+<div class="dk-clarity-card-inner">
+<div class="dk-clarity-card-face dk-clarity-card-front">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">03</div>
+<p class="dk-clarity-hook">The decision you brought in will have a clear path forward, not more options, a clear next move.</p>
+</div>
+<div class="dk-clarity-card-face dk-clarity-card-back">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">03</div>
+<p class="dk-clarity-detail">The session is structured around your specific decision. You don't leave with a framework to apply later. You leave having already applied it to the real problem you brought in.</p>
+</div>
+</div>
+</div>
+<div aria-pressed="false" class="dk-clarity-card reveal" data-delay="4" role="button" tabindex="0">
+<div class="dk-clarity-card-inner">
+<div class="dk-clarity-card-face dk-clarity-card-front">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">04</div>
+<p class="dk-clarity-hook">You’ll know which AI tools and workflows are worth your attention, and which aren't.</p>
+</div>
+<div class="dk-clarity-card-face dk-clarity-card-back">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">04</div>
+<p class="dk-clarity-detail">The market is loud. The Diagnostic gives you a filter, a way to evaluate new tools against your actual operating context rather than against marketing claims.</p>
+</div>
+</div>
+</div>
+<div aria-pressed="false" class="dk-clarity-card reveal" data-delay="5" role="button" tabindex="0">
+<div class="dk-clarity-card-inner">
+<div class="dk-clarity-card-face dk-clarity-card-front">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">05</div>
+<p class="dk-clarity-hook">You’ll have a reusable framework for evaluating AI fit going forward, not just for this decision.</p>
+</div>
+<div class="dk-clarity-card-face dk-clarity-card-back">
+<span aria-hidden="true" class="dk-clarity-card-accent"></span>
+<div class="dk-clarity-num">05</div>
+<p class="dk-clarity-detail">The mental model you build in the session doesn't expire when the session ends. Leaders consistently report using it weeks and months later to evaluate new AI capabilities as they emerge.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════
+         PRICING — $900, single session
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="Pricing and booking" class="bg-white" id="book">
+<div class="dk-shell">
+<div class="dk-pricing-grid">
+<div class="dk-pricing-copy reveal">
+<div class="eyebrow red" style="margin-bottom: var(--s4);">No Commitment</div>
+<h2 class="display-l">A single session. <br/><em>No commitment</em> beyond clarity.</h2>
+<p class="body-l" style="margin-top: var(--s5);">The AI Strategic Diagnostic is a standalone session. No retainer required. No follow-up commitment. No package to buy into.</p>
+<p class="body-l">The $900 session fee credits toward any ongoing work, so if you decide to continue, you're not paying twice.</p>
+<p class="body-l">Most leaders find that one session is enough to shift their mental model and give them a clear path forward. Some come back. Either way, you leave with something you can act on.</p>
+<p class="body-l" style="font-weight: 700; color: var(--ink); margin-top: var(--s4);">
+              This is a working session, not a sales call. <span class="red-accent">The work starts when you book.</span>
+</p>
+</div>
+<div class="dk-pricing-card reveal" data-delay="2">
+<div class="dk-pricing-card-label">Offer · DK/02 · Anchor</div>
+<h3 class="dk-pricing-card-title">The AI Strategic Diagnostic</h3>
+<p class="dk-pricing-card-desc">
+              You bring a real decision. We work through it together using AI as a thinking partner. You leave with orientation you can act on.
+            </p>
+<div class="dk-pricing-card-specs">
+<div>
+<div class="dk-pricing-card-spec-label">Duration</div>
+<div class="dk-pricing-card-spec-value">90 min</div>
+</div>
+<div>
+<div class="dk-pricing-card-spec-label">Format</div>
+<div class="dk-pricing-card-spec-value">Live, 1:1</div>
+</div>
+<div>
+<div class="dk-pricing-card-spec-label">Prep Required</div>
+<div class="dk-pricing-card-spec-value">None</div>
+</div>
+<div>
+<div class="dk-pricing-card-spec-label">Commitment</div>
+<div class="dk-pricing-card-spec-value">Single session</div>
+</div>
+</div>
+<div class="dk-pricing-card-price">
+<div class="dk-pricing-card-price-num">$900</div>
+<div class="dk-pricing-card-price-note">Credits toward ongoing work</div>
+</div>
+<a class="btn btn-primary" href="https://buy.stripe.com/28E5kE7yK5Vefyi50n8AE0N">
+              Book the Diagnostic <span class="arrow">→</span>
+</a>
+<p class="dk-pricing-card-fineprint">No prep deck. No homework. Bring one decision that's been stuck.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Ongoing Calibration section removed -->
+<!-- ════════════════════════════════════════════════════════════
+         CLOSING CTA
+         ════════════════════════════════════════════════════════════ -->
+<section aria-label="Final call to action" class="dk-close">
+<div class="dk-shell">
+<div class="dk-close-grid">
+<div class="reveal">
+<div class="eyebrow" style="margin-bottom: var(--s4);">Ready to Stop Guessing?</div>
+<h2 class="display-l">If you're already experimenting with AI and want to use it confidently inside real constraints, start here.</h2>
+</div>
+<div class="dk-close-actions reveal" data-delay="1">
+<p class="body-l">The AI Strategic Diagnostic is designed for leaders who are done experimenting and ready for clarity.</p>
+<a class="btn btn-primary" href="https://buy.stripe.com/28E5kE7yK5Vefyi50n8AE0N">
+              Book AI Strategic Diagnostic <span class="arrow">→</span>
+</a>
+<a class="btn-text" href="https://danooshkapadia.com/ways-to-work-together">
+              See how we work together <span class="arrow">→</span>
+</a>
+<div class="mono">No prep. No commitment beyond the session.</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     BEHAVIOR — vanilla JS, no dependencies
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+  var root = document.getElementById('dk-diag-page');
+  if (!root) return;
+
+  /* ─── STEP TIMELINE — click/keyboard to activate ───────────────────── */
+  var steps = root.querySelectorAll('.dk-step');
+
+  function activateStep(targetStep) {
+    steps.forEach(function(step) {
+      var active = step === targetStep;
+      step.classList.toggle('is-active', active);
+      step.setAttribute('aria-expanded', active ? 'true' : 'false');
+    });
+  }
+
+  steps.forEach(function(step) {
+    step.setAttribute('role', 'button');
+    step.setAttribute('tabindex', '0');
+    step.setAttribute('aria-expanded', step.classList.contains('is-active') ? 'true' : 'false');
+
+    step.addEventListener('click', function() {
+      activateStep(step);
+    });
+
+    step.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateStep(step);
+      }
+    });
+  });
+  /* ─── HERO REVEAL — visible immediately above the fold ──────────────── */
+  root.querySelectorAll('.dk-hero .reveal').forEach(function(el) {
+    el.classList.add('is-in');
+  });
+
+  /* ─── SCROLL REVEAL ──────────────────────────────────────────────────── */
+  var reveals = root.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && reveals.length) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+    reveals.forEach(function(el) { io.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('is-in'); });
+  }
+
+  /* ─── PROCESS TABS + PROGRESS FILL ──────────────────────────────────── */
+  var tabs     = root.querySelectorAll('.dk-tab');
+  var panels   = root.querySelectorAll('.dk-tab-panel');
+  var progFill = document.getElementById('dkDiagTabProgress');
+  var tabOrder = ['assess', 'map', 'define'];
+
+  function setTab(targetKey) {
+    tabs.forEach(function(t) {
+      var active = t.getAttribute('data-tab') === targetKey;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    panels.forEach(function(p) {
+      p.classList.toggle('is-active', p.getAttribute('data-panel') === targetKey);
+    });
+    if (progFill) {
+      var idx = tabOrder.indexOf(targetKey);
+      var pct = idx < 0 ? 33.33 : ((idx + 1) / tabOrder.length) * 100;
+      progFill.style.width = pct + '%';
+    }
+  }
+
+  if (tabs.length && panels.length) {
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        setTab(tab.getAttribute('data-tab'));
+        stopAuto();
+      });
+    });
+
+    var processSection = document.getElementById('process');
+    var autoIdx = 0;
+    var autoTimer = null;
+
+    function startAuto() {
+      if (autoTimer) return;
+      autoTimer = setInterval(function() {
+        autoIdx = (autoIdx + 1) % tabOrder.length;
+        setTab(tabOrder[autoIdx]);
+      }, 4000);
+    }
+    function stopAuto() {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+
+    if (processSection && 'IntersectionObserver' in window) {
+      var diagObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { startAuto(); } else { stopAuto(); }
+        });
+      }, { threshold: 0.3 });
+      diagObs.observe(processSection);
+    }
+  }
+
+  /* ─── PROCESS MOBILE ACCORDION ───────────────────────────────────────── */
+  var processAccItems = root.querySelectorAll('.dk-process-acc-item');
+
+  function openProcessAcc(targetItem) {
+    processAccItems.forEach(function(item) {
+      var active = item === targetItem;
+      var trigger = item.querySelector('.dk-process-acc-trigger');
+      var panel = item.querySelector('.dk-process-acc-panel');
+      item.classList.toggle('is-open', active);
+      if (trigger) trigger.setAttribute('aria-expanded', active ? 'true' : 'false');
+      if (panel) panel.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+  }
+
+  processAccItems.forEach(function(item) {
+    var trigger = item.querySelector('.dk-process-acc-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', function() {
+      openProcessAcc(item);
+    });
+  });
+
+  /* ─── ACCORDION ──────────────────────────────────────────────────────── */
+  var accordionItems = root.querySelectorAll('.dk-accordion-item');
+  accordionItems.forEach(function(item) {
+    var trigger = item.querySelector('.dk-accordion-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', function() {
+      var isOpen = item.classList.contains('is-open');
+      /* Close all */
+      accordionItems.forEach(function(i) {
+        i.classList.remove('is-open');
+        var t = i.querySelector('.dk-accordion-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+      /* Open clicked (if it was closed) */
+      if (!isOpen) {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ─── CLARITY FLIP CARDS — desktop hover, mobile tap flip with height sync ───────── */
+  var clarityCards = root.querySelectorAll('.dk-clarity-card');
+
+  function supportsDesktopHover() {
+    return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  }
+
+  function syncMobileClarityHeights() {
+    clarityCards.forEach(function(card) {
+      card.style.removeProperty('--clarity-card-mobile-height');
+
+      if (window.matchMedia('(max-width: 560px)').matches) {
+        var front = card.querySelector('.dk-clarity-card-front');
+        var back = card.querySelector('.dk-clarity-card-back');
+
+        if (!front || !back) return;
+
+        var frontHeight = front.scrollHeight;
+        var backHeight = back.scrollHeight;
+        var finalHeight = Math.max(frontHeight, backHeight);
+
+        card.style.setProperty('--clarity-card-mobile-height', finalHeight + 'px');
+      }
+    });
+  }
+
+  function setClarityCardState(targetCard, shouldFlip) {
+    clarityCards.forEach(function(card) {
+      var active = card === targetCard && shouldFlip;
+      card.classList.toggle('is-flipped', active);
+      card.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  clarityCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      if (supportsDesktopHover()) return;
+      syncMobileClarityHeights();
+      setClarityCardState(card, !card.classList.contains('is-flipped'));
+    });
+
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        syncMobileClarityHeights();
+        setClarityCardState(card, !card.classList.contains('is-flipped'));
+      }
+    });
+  });
+
+  syncMobileClarityHeights();
+  window.addEventListener('resize', syncMobileClarityHeights);
+
+  /* ─── SMOOTH ANCHOR SCROLL ───────────────────────────────────────────── */
+  root.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var href = a.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+})();
+</script>
