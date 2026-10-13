@@ -1,0 +1,754 @@
+<style>/* DK Consulting font system. Upload the attached font files and update paths if your hosted asset paths differ. */
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("assets/fonts/Helvetica.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("assets/fonts/helvetica%20Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("assets/fonts/Helvetica%20Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DK Helvetica";
+  src: url("assets/fonts/Helvetica%20Oblique.ttf") format("truetype");
+  font-weight: 400;
+  font-style: oblique;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DK Helvetica Compressed";
+  src: url("assets/fonts/helvetica%20Compressed.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DK Century";
+  src: url("assets/fonts/century_normal.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DK Century";
+  src: url("assets/fonts/century_bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}</style>
+<style>/* ═══════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — DK Consulting v7, aligned to AI Strategic Diagnostic
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page {
+  --ink:          #1A1A1A;
+  --ink-soft:     #2A2A2A;
+  --white:        #FFFFFF;
+  --paper:        #F5F3EE;
+  --khaki:        #C5AA88;
+  --khaki-light:  #ECE3D7;
+  --grey-soft:    #EAEAEA;
+  --black:        #000000;
+  --red:          #CC0000;
+  --red-dark:     #A30000;
+
+  --font-sans:  "DK Helvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "DK Century", "Century Schoolbook", Century, Georgia, "Times New Roman", serif;
+  --font-mono:  "JetBrains Mono", "Courier New", monospace;
+
+  --max-w: 1280px;
+  --edge:  clamp(20px, 5vw, 56px);
+
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+
+  --rule-hair:       1px solid rgba(0,0,0,0.10);
+  --rule-hair-white: 1px solid rgba(255,255,255,0.12);
+
+  --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color: var(--ink);
+  background: var(--white);
+  font-family: var(--font-sans);
+}
+
+#dk-diag-page *, #dk-diag-page *::before, #dk-diag-page *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#dk-diag-page a { color: inherit; text-decoration: none; }
+#dk-diag-page ul, #dk-diag-page ol { list-style: none; }
+#dk-diag-page img { display: block; max-width: 100%; }
+#dk-diag-page button { background: none; border: none; cursor: pointer; font: inherit; }
+#dk-diag-page blockquote { quotes: none; }
+#dk-diag-page blockquote::before, #dk-diag-page blockquote::after { content: none; }
+
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--white); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+#dk-diag-page .dk-shell {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+}
+
+#dk-diag-page .skip-link {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  z-index: 9999;
+  transform: translateY(-150%);
+  background: var(--white);
+  color: var(--ink);
+  border: var(--rule-hair);
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+#dk-diag-page .skip-link:focus { transform: translateY(0); }
+
+#dk-diag-page .eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--khaki);
+}
+#dk-diag-page .eyebrow.red { color: var(--red); }
+#dk-diag-page .eyebrow.ink { color: var(--ink); }
+
+#dk-diag-page .display-xl,
+#dk-diag-page .display-l,
+#dk-diag-page .display-m {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+#dk-diag-page .display-xl {
+  font-size: clamp(46px, 7vw, 92px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+#dk-diag-page .display-l {
+  font-size: 60px;
+  line-height: 0.98;
+  letter-spacing: -0.026em;
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+#dk-diag-page .display-m {
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+#dk-diag-page .body-l {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.62;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+#dk-diag-page .body {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--ink-soft);
+}
+#dk-diag-page .mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+#dk-diag-page .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 44px;
+  padding: 15px 24px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  box-shadow: none;
+  white-space: nowrap;
+  transition: background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+}
+#dk-diag-page .btn-primary { background: var(--red); color: var(--white) !important; border: 0; }
+#dk-diag-page .btn-primary:hover { background: var(--red-dark); }
+#dk-diag-page .btn-primary .arrow { transition: transform 200ms var(--ease); }
+#dk-diag-page .btn-primary:hover .arrow { transform: translateX(3px); }
+#dk-diag-page .btn-ghost-white {
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.34);
+  background: transparent;
+}
+#dk-diag-page .btn-ghost-white:hover { border-color: rgba(255,255,255,0.72); }
+#dk-diag-page .btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  width: fit-content;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+}
+#dk-diag-page .btn-text .arrow { transition: transform 200ms var(--ease); }
+#dk-diag-page .btn-text:hover .arrow { transform: translateX(4px); }
+
+#dk-diag-page .about-hero {
+  background: var(--white);
+  border-bottom: var(--rule-hair);
+  padding: clamp(76px, 10vw, 132px) 0 clamp(66px, 8vw, 104px);
+}
+#dk-diag-page .about-hero-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+#dk-diag-page .about-hero .eyebrow { margin-bottom: var(--s4); }
+#dk-diag-page .about-hero h1 { margin-bottom: var(--s5); }
+#dk-diag-page .about-hero .body-l {
+  max-width: 780px;
+  margin: 0 auto;
+  color: var(--ink);
+}
+#dk-diag-page .hero-rule {
+  width: 56px;
+  height: 2px;
+  background: var(--red);
+  margin: var(--s5) auto 0;
+}
+
+#dk-diag-page .about-foundation {
+  background: var(--white);
+  padding: clamp(78px, 11vw, 140px) 0;
+}
+#dk-diag-page .foundation-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 650px);
+  gap: clamp(44px, 8vw, 112px);
+  align-items: center;
+  justify-content: center;
+}
+#dk-diag-page .portrait-wrap {
+  position: relative;
+  border: var(--rule-hair);
+  background: var(--paper);
+  overflow: hidden;
+}
+#dk-diag-page .portrait-wrap::before {
+  content: "01";
+  position: absolute;
+  top: -48px;
+  left: -18px;
+  z-index: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(72px, 12vw, 132px);
+  line-height: 0.8;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(0,0,0,0.055);
+}
+#dk-diag-page .portrait-media {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 1 / 1;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+#dk-diag-page .portrait-media::after {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border: 1px solid rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+#dk-diag-page .image-placeholder {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+#dk-diag-page .foundation-copy .eyebrow { color: var(--red); margin-bottom: var(--s3); }
+#dk-diag-page .red-rule {
+  width: 56px;
+  height: 2px;
+  background: var(--red);
+  margin-bottom: var(--s5);
+}
+#dk-diag-page .foundation-copy h2 {
+  max-width: 680px;
+  margin-bottom: var(--s5);
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+#dk-diag-page .editorial-copy {
+  display: grid;
+  gap: var(--s4);
+  max-width: 620px;
+}
+
+#dk-diag-page .expertise-strip {
+  background: var(--khaki-light);
+  border-top: 2px solid var(--red);
+  border-bottom: var(--rule-hair);
+}
+#dk-diag-page .expertise-strip-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2.4vw, 32px);
+  text-align: center;
+}
+#dk-diag-page .expertise-strip span {
+  font-family: var(--font-sans);
+  font-size: clamp(11px, 1.1vw, 13px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+#dk-diag-page .expertise-strip .divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(0,0,0,0.22);
+  flex: 0 0 auto;
+}
+
+#dk-diag-page .about-thinking {
+  background: var(--white);
+  padding: clamp(76px, 11vw, 140px) 0;
+  border-bottom: var(--rule-hair);
+}
+#dk-diag-page .thinking-head {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+}
+#dk-diag-page .thinking-head .eyebrow { margin-bottom: var(--s3); }
+#dk-diag-page .thinking-head .red-rule { margin-left: auto; margin-right: auto; margin-bottom: var(--s5); }
+#dk-diag-page .thinking-head h2 {
+  max-width: 980px;
+  margin: 0 auto var(--s5);
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+#dk-diag-page .thinking-head .body { max-width: 850px; margin: 0 auto; }
+#dk-diag-page .quote-card {
+  max-width: 760px;
+  margin: clamp(28px, 4vw, 44px) auto 0;
+  background: var(--paper);
+  border: var(--rule-hair);
+  display: grid;
+  grid-template-columns: 2px 1fr;
+  gap: var(--s5);
+  padding: var(--s5) var(--s6);
+}
+#dk-diag-page .quote-card::before {
+  content: "";
+  display: block;
+  width: 2px;
+  min-height: 100%;
+  background: var(--red);
+}
+#dk-diag-page .quote-card blockquote {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--ink);
+}
+#dk-diag-page .thinking-body {
+  max-width: 740px;
+  margin: var(--s5) auto 0;
+  text-align: center;
+}
+#dk-diag-page .thinking-body.body {
+  font-size: 16px;
+  line-height: 1.68;
+}
+
+#dk-diag-page .about-cta {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(72px, 9vw, 116px) 0;
+}
+#dk-diag-page .about-cta .eyebrow { color: var(--khaki); margin-bottom: var(--s4); }
+#dk-diag-page .about-cta-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  gap: clamp(36px, 7vw, 92px);
+  align-items: center;
+}
+#dk-diag-page .about-cta h2 {
+  color: var(--white);
+  max-width: 820px;
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+#dk-diag-page .about-cta-panel {
+  justify-self: end;
+  width: 100%;
+  max-width: 430px;
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.04);
+  display: grid;
+  gap: var(--s4);
+}
+#dk-diag-page .about-cta .body-l { color: rgba(255,255,255,0.76); }
+#dk-diag-page .about-cta-panel .btn,
+#dk-diag-page .about-cta-panel .btn-text { width: 100%; justify-content: center; }
+#dk-diag-page .about-cta-panel .btn-text { color: var(--white); border-color: rgba(255,255,255,0.5); }
+
+#dk-diag-page .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 480ms var(--ease-out), transform 480ms var(--ease-out);
+}
+#dk-diag-page .reveal.is-in { opacity: 1; transform: translateY(0); }
+#dk-diag-page .reveal[data-delay="1"] { transition-delay: 80ms; }
+#dk-diag-page .reveal[data-delay="2"] { transition-delay: 160ms; }
+
+@media (max-width: 960px) {
+  #dk-diag-page .foundation-grid,
+  #dk-diag-page .about-cta-grid {
+    grid-template-columns: 1fr;
+  }
+  #dk-diag-page .portrait-wrap,
+  #dk-diag-page .about-cta-panel {
+    justify-self: stretch;
+    max-width: none;
+  }
+  /* FIX (mobile only): the single-column grid track was being forced wider than
+     its container by long content, pushing the eyebrow, headline and CTA panel
+     ~6px past the right edge (the right-shift you saw). min-width:0 lets each
+     child shrink to the column width, restoring symmetric left/right spacing. */
+  #dk-diag-page .about-cta-grid > * { min-width: 0; }
+  /* The CTA panel is itself a grid; its buttons could overflow its right
+     padding by ~1px for the same reason. Let panel children shrink too. */
+  #dk-diag-page .about-cta-panel > * { min-width: 0; }
+}
+@media (max-width: 768px) {
+  #dk-diag-page .display-xl { font-size: clamp(42px, 13vw, 58px); line-height: 0.96; }
+  #dk-diag-page .display-l { font-size: clamp(34px, 10vw, 46px); line-height: 1; }
+  #dk-diag-page .body-l { font-size: 17px; line-height: 1.58; }
+  #dk-diag-page .body { font-size: 15px; }
+  #dk-diag-page .about-hero-inner,
+  #dk-diag-page .thinking-head,
+  #dk-diag-page .thinking-body { text-align: left; }
+  #dk-diag-page .hero-rule,
+  #dk-diag-page .thinking-head .red-rule { margin-left: 0; margin-right: 0; }
+  #dk-diag-page .expertise-strip-inner { flex-wrap: wrap; padding-top: var(--s5); padding-bottom: var(--s5); }
+  #dk-diag-page .expertise-strip .divider { display: none; }
+  #dk-diag-page .quote-card {
+    grid-template-columns: 1fr;
+    max-width: none;
+    padding: var(--s5);
+    gap: var(--s4);
+  }
+  #dk-diag-page .quote-card::before { width: 72px; height: 2px; min-height: 0; }
+  #dk-diag-page .quote-card blockquote { font-size: 18px; line-height: 1.55; }
+}
+@media (max-width: 560px) {
+  #dk-diag-page .about-hero { padding-top: var(--s7); }
+  #dk-diag-page .btn { width: 100%; }
+  #dk-diag-page .about-cta-panel { padding: var(--s5); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #dk-diag-page *, #dk-diag-page *::before, #dk-diag-page *::after {
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  #dk-diag-page .reveal { opacity: 1; transform: none; }
+}</style>
+<style></style>
+<style>#dk-diag-page .about-hero {
+  padding: clamp(36px, 5vw, 56px) 0 clamp(28px, 4vw, 44px) !important;
+}
+
+#dk-diag-page .about-foundation {
+  padding: clamp(36px, 5vw, 60px) 0 !important;
+}
+
+#dk-diag-page .foundation-grid {
+  gap: clamp(32px, 6vw, 80px) !important;
+  align-items: center !important;
+}
+
+#dk-diag-page .portrait-wrap {
+  width: 100%;
+  max-width: 420px;
+  justify-self: center;
+  border: var(--rule-hair);
+  background: var(--paper);
+}
+
+#dk-diag-page .portrait-media {
+  aspect-ratio: 1 / 1;
+  min-height: 0 !important;
+  width: 100%;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+#dk-diag-page .portrait-media::after,
+#dk-diag-page .image-placeholder {
+  display: none !important;
+}
+
+#dk-diag-page .portrait-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+#dk-diag-page .expertise-strip-inner {
+  min-height: 64px !important;
+}
+
+#dk-diag-page .about-thinking {
+  padding: clamp(36px, 5vw, 64px) 0 clamp(36px, 5vw, 60px) !important;
+}
+
+#dk-diag-page .quote-card {
+  margin-top: clamp(24px, 3vw, 36px) !important;
+}
+
+#dk-diag-page .thinking-body {
+  margin-top: var(--s4) !important;
+}
+
+#dk-diag-page .about-cta {
+  padding: clamp(36px, 5vw, 60px) 0 !important;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 960px) {
+  #dk-diag-page .portrait-wrap {
+    max-width: 440px;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page .about-hero {
+    padding: 28px 0 32px !important;
+  }
+
+  #dk-diag-page .about-foundation {
+    padding: 36px 0 !important;
+  }
+
+  #dk-diag-page .foundation-grid {
+    gap: 28px !important;
+  }
+
+  #dk-diag-page .about-thinking {
+    padding: 36px 0 40px !important;
+  }
+
+  #dk-diag-page .about-cta {
+    padding: 40px 0 !important;
+  }
+
+  
+}</style>
+<style>/* ═══════════════════════════════════════════════════════════════════════
+   ABOUT FINAL OVERRIDE — bold eyebrows + sentence-case CTA headline
+   Placed at the end of the CSS to override earlier display/eyebrow styles.
+   ═══════════════════════════════════════════════════════════════════════ */
+#dk-diag-page.about-page .eyebrow,
+#dk-diag-page.about-page .section-eyebrow,
+#dk-diag-page.about-page .cta-eyebrow,
+#dk-diag-page.about-page .footer-eyebrow,
+#dk-diag-page.about-page .about-hero .eyebrow,
+#dk-diag-page.about-page .foundation-copy .eyebrow,
+#dk-diag-page.about-page .thinking-head .eyebrow,
+#dk-diag-page.about-page .about-cta .eyebrow{
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+#dk-diag-page.about-page .footer-cta-headline,
+#dk-diag-page.about-page .about-cta .display-l,
+#dk-diag-page.about-page .about-cta h2 {
+  text-transform: none !important;
+}</style><style>/* Body-only hero top spacing — matched to Resources page */
+#dk-diag-page.about-page .about-hero,
+#dk-diag-page .about-hero {
+  padding-top: clamp(136px, 12vw, 192px) !important;
+}
+
+@media (max-width: 768px) {
+  #dk-diag-page.about-page .about-hero,
+  #dk-diag-page .about-hero {
+    padding-top: clamp(104px, 18vw, 128px) !important;
+  }
+}</style>
+
+<div class="about-page" id="dk-diag-page">
+<a class="skip-link" href="#top">Skip to content</a>
+
+<main id="top">
+<section aria-labelledby="about-hero-title" class="about-hero">
+<div class="dk-shell">
+<div class="about-hero-inner">
+<div class="eyebrow reveal">About</div>
+<h1 class="display-xl reveal" data-delay="1" id="about-hero-title">Danoosh Kapadia</h1>
+<p class="body-l reveal" data-delay="2">Danoosh Kapadia is an AI Strategist and Educator. He helps founders, owner-operators, and senior executives stop experimenting and start leading their companies into the AI era with clarity and confidence.</p>
+<div aria-hidden="true" class="hero-rule reveal" data-delay="2"></div>
+</div>
+</div>
+</section>
+<section aria-labelledby="foundation-title" class="about-foundation">
+<div class="dk-shell foundation-grid">
+<figure class="portrait-wrap reveal">
+<div class="portrait-media">
+<img alt="Danoosh Kapadia" class="portrait-img" decoding="async" loading="lazy" src="https://assets.cdn.filesafe.space/kxDer9IVVD1dNmfX54TI/media/699c8b4e373080006d7c5343.svg"/>
+</div>
+</figure>
+<div class="foundation-copy reveal" data-delay="1">
+<div class="eyebrow red">The Foundation</div>
+<div aria-hidden="true" class="red-rule"></div>
+<h2 class="display-l" id="foundation-title">15 Years in Rooms Where Decisions Have Real Consequences</h2>
+<div class="editorial-copy">
+<p class="body">Danoosh has spent over 15 years in rooms where big decisions carry real consequences. He scaled General Assembly during its rise as a global ed-tech leader on its path to a $413M exit. He advised C-suite leaders driving transformation at XPLANE. He taught innovation and human-centered design at IDEO U to Fortune 500 teams navigating change.</p>
+<p class="body">He has trained over 2,000 leaders across companies, government agencies, and top universities. He co-created two university-backed AI programs delivered through partners including UT Austin, Purdue, Temple, and 30+ executive education programs. Teams that complete his programs routinely reclaim 6-8 hours per week by redesigning how they work.</p>
+<p class="body">But the credential that matters most isn't on a resume. It's the pattern he keeps seeing: smart, capable leaders who know AI matters, who've been experimenting for months, and who still can't close the gap between tinkering and real business results.</p>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Danoosh Kapadia expertise areas" class="expertise-strip">
+<div class="expertise-strip-inner">
+<span>1:1 Executive Coaching</span>
+<i aria-hidden="true" class="divider"></i>
+<span>Team Enablement</span>
+<i aria-hidden="true" class="divider"></i>
+<span>AI Strategy</span>
+<i aria-hidden="true" class="divider"></i>
+<span>Governance</span>
+</div>
+</section>
+<section aria-labelledby="thinking-title" class="about-thinking">
+<div class="dk-shell">
+<div class="thinking-head reveal">
+<div class="eyebrow red">How I Think About This</div>
+<div aria-hidden="true" class="red-rule"></div>
+<h2 class="display-l" id="thinking-title">We're Not in the Digital Era Anymore.</h2>
+<p class="body">You can't adopt AI the way you rolled out Salesforce or SAP. This isn't about which buttons to push. AI changes how work gets done at a fundamental level. The shift isn't from "not using AI" to "using AI." It's from doing the work to redesigning the work.</p>
+</div>
+<figure class="quote-card reveal" data-delay="1">
+<blockquote>“The hard part isn't learning to use AI. You can mostly just talk to it now. The hard part is the behavior change.”</blockquote>
+</figure>
+<p class="body thinking-body reveal" data-delay="2">Letting go of habits that built your career. Watching AI do in seconds what took you years to master. Figuring out what you're worth on the other side of that. Most people navigate that alone. Danoosh helps leaders move through it with clarity, not just about what AI can do, but about what they'd attempt if they believed it could amplify what they already do well.</p>
+</div>
+</section>
+<section aria-labelledby="about-cta-title" class="about-cta">
+<div class="dk-shell about-cta-grid">
+<div class="reveal">
+<div class="eyebrow">Ready to Find Direction?</div>
+<h2 class="display-l footer-cta-headline" id="about-cta-title">If you’ve been testing AI and are ready to apply it with confidence within real-world limits this is your next step.</h2>
+</div>
+<div class="about-cta-panel reveal" data-delay="1">
+<p class="body-l">The AI Strategic Diagnostic helps leaders move beyond experimentation and into focused, practical clarity.</p>
+<a class="btn btn-primary" href="https://danooshkapadia.com/diagnostic">Book AI Strategic Diagnostic <span class="arrow">→</span></a>
+<a class="btn-text" href="https://danooshkapadia.com/ways-to-work-together">See how we work together <span class="arrow">→</span></a>
+</div>
+</div>
+</section>
+</main>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var root = document.getElementById('dk-diag-page');
+  if (!root) return;
+
+  var reveals = root.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(function(el) { el.classList.add('is-in'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+</script>
