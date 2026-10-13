@@ -1,0 +1,592 @@
+<style>@font-face { font-family:"DK Helvetica"; src:url("fonts/helvetica-regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"DK Helvetica"; src:url("fonts/helvetica-oblique.ttf") format("truetype"); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:"DK Helvetica"; src:url("fonts/helvetica-light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:"DK Helvetica"; src:url("fonts/helvetica-bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:"DK Helvetica"; src:url("fonts/helvetica-bold-oblique.ttf") format("truetype"); font-weight:700; font-style:italic; font-display:swap; }
+@font-face { font-family:"DK Helvetica Compressed"; src:url("fonts/helvetica-compressed.otf") format("opentype"); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:"DK Century"; src:url("fonts/century-regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"DK Century"; src:url("fonts/century-bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+
+#dk-blog-page {
+  --ink:          #1A1A1A;
+  --ink-soft:     #2A2A2A;
+  --white:        #FFFFFF;
+  --paper:        #F5F3EE;
+  --khaki:        #C5AA88;
+  --khaki-light:  #ECE3D7;
+  --grey-soft:    #EAEAEA;
+  --black:        #000000;
+  --red:          #CC0000;
+  --red-dark:     #A30000;
+
+  --font-sans:  "DK Helvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "DK Century", "Century Schoolbook", Century, Georgia, "Times New Roman", serif;
+  --font-mono:  "JetBrains Mono", "Courier New", monospace;
+
+  --max-w: 1280px;
+  --edge:  clamp(20px, 5vw, 56px);
+
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+
+  --rule-hair:       1px solid rgba(0,0,0,0.10);
+  --rule-hair-white: 1px solid rgba(255,255,255,0.12);
+
+  --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color: var(--ink);
+  background: var(--white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#dk-blog-page *,
+#dk-blog-page *::before,
+#dk-blog-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
+#dk-blog-page a { text-decoration: none; color: inherit; }
+#dk-blog-page ul,
+#dk-blog-page ol { list-style: none; }
+#dk-blog-page img { display: block; max-width: 100%; }
+#dk-blog-page button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
+
+
+#dk-blog-page .dk-shell { max-width: var(--max-w); margin: 0 auto; padding-left: var(--edge); padding-right: var(--edge); }
+#dk-blog-page .display-xl { font-family: var(--font-sans); font-weight: 700; font-size: clamp(38px, 6.5vw, 88px); line-height: 0.96; letter-spacing: -0.022em; text-transform: uppercase; color: var(--ink); }
+#dk-blog-page .display-l { font-family: var(--font-sans); font-weight: 700; font-size: clamp(32px, 5vw, 60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); }
+#dk-blog-page .display-m { font-family: var(--font-sans); font-weight: 700; font-size: clamp(26px, 3.2vw, 40px); line-height: 1.08; letter-spacing: -0.015em; color: var(--ink); }
+#dk-blog-page .display-s { font-family: var(--font-sans); font-weight: 700; font-size: clamp(20px, 2.2vw, 26px); line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
+#dk-blog-page .body-l { font-family: var(--font-serif); font-size: clamp(17px, 1.25vw, 19px); font-weight: 400; line-height: 1.6; color: var(--ink-soft); }
+#dk-blog-page .body { font-family: var(--font-serif); font-size: 16px; font-weight: 400; line-height: 1.65; color: var(--ink-soft); }
+#dk-blog-page .eyebrow { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--khaki); }
+#dk-blog-page .eyebrow.red { color: var(--khaki); }
+#dk-blog-page .eyebrow.ink { color: var(--ink); }
+#dk-blog-page .mono { font-family: var(--font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.04em; color: var(--ink-soft); }
+
+#dk-blog-page section { position: relative; padding: clamp(64px, 8vw, 100px) 0; }
+#dk-blog-page section.compact { padding: clamp(40px, 5vw, 72px) 0; }
+#dk-blog-page .bg-white { background: var(--white); }
+#dk-blog-page .bg-paper { background: var(--paper); }
+#dk-blog-page .bg-black { background: var(--black); color: var(--white); }
+#dk-blog-page .bg-black .eyebrow { color: var(--khaki); }
+#dk-blog-page .bg-black .body,
+#dk-blog-page .bg-black .body-l { color: rgba(255,255,255,0.78); }
+#dk-blog-page .bg-black .display-xl,
+#dk-blog-page .bg-black .display-l,
+#dk-blog-page .bg-black .display-m,
+#dk-blog-page .bg-black .display-s { color: var(--white); }
+
+#dk-blog-page .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 44px;
+  padding: 15px 24px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  box-shadow: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+}
+#dk-blog-page .btn-primary { background: var(--red); color: var(--white) !important; border: 0; }
+#dk-blog-page .btn-primary:hover,
+#dk-blog-page .btn-primary:focus-visible { background: var(--red-dark); color: var(--white) !important; }
+#dk-blog-page .btn-primary .arrow { display: inline-block; font-size: 13px; line-height: 1; letter-spacing: 0; transform: translateX(0); transition: transform 200ms var(--ease); }
+#dk-blog-page .btn-primary:hover .arrow,
+#dk-blog-page .btn-primary:focus-visible .arrow { transform: translateX(3px); }
+#dk-blog-page .btn-text { display: inline-flex; align-items: center; gap: var(--s2); font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); padding: 4px 0; position: relative; }
+#dk-blog-page .btn-text::after { content: ""; position: absolute; left: 0; right: 20px; bottom: 0; height: 1px; background: currentColor; transform-origin: left; transition: transform 240ms var(--ease); }
+#dk-blog-page .btn-text .arrow { transition: transform 200ms var(--ease); }
+#dk-blog-page .btn-text:hover,
+#dk-blog-page .btn-text:focus-visible { color: var(--red); }
+#dk-blog-page .btn-text:hover .arrow,
+#dk-blog-page .btn-text:focus-visible .arrow { transform: translateX(4px); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#dk-blog-page .dk-hero { background: var(--white); padding: 0; border-bottom: var(--rule-hair); position: relative; overflow: hidden; }
+#dk-blog-page .dk-hero-inner { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 6fr 5fr; min-height: 560px; align-items: stretch; }
+#dk-blog-page .dk-hero-copy { padding: clamp(56px, 8vw, 104px) var(--s8) clamp(56px, 8vw, 96px) var(--edge); display: flex; flex-direction: column; justify-content: center; }
+#dk-blog-page .dk-hero-eyebrow { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--khaki); margin-bottom: var(--s3); }
+#dk-blog-page .dk-hero-h1 { font-family: var(--font-sans); font-weight: 700; font-size: clamp(42px, 6vw, 72px); line-height: 0.96; letter-spacing: -0.028em; color: var(--ink); text-transform: uppercase; margin-bottom: var(--s5); max-width: 14ch; }
+#dk-blog-page .dk-hero-lede { font-family: var(--font-serif); font-weight: 400; font-size: clamp(17px, 1.25vw, 19px); line-height: 1.6; color: var(--ink-soft); max-width: 46ch; margin-bottom: var(--s2); }
+#dk-blog-page .blog-hero-panel { position: relative; align-self: center; margin-right: var(--edge); min-height: 360px; background: var(--paper); border: var(--rule-hair); border-top: 3px solid var(--red); padding: var(--s6); display: flex; flex-direction: column; justify-content: space-between; transform: translateY(52px); }
+#dk-blog-page .blog-hero-panel-label { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--khaki); }
+#dk-blog-page .blog-hero-panel-text { font-family: var(--font-serif); font-size: clamp(20px, 2.1vw, 28px); font-style: italic; line-height: 1.42; color: var(--ink); margin: var(--s7) 0; }
+#dk-blog-page .blog-hero-panel-meta { display: flex; gap: var(--s4); padding-top: var(--s3); border-top: var(--rule-hair); }
+#dk-blog-page .blog-hero-panel-meta-item { display: flex; flex-direction: column; gap: 3px; }
+#dk-blog-page .blog-hero-panel-meta-num { font-family: var(--font-mono); font-size: 12px; color: var(--ink); letter-spacing: 0.02em; }
+#dk-blog-page .blog-hero-panel-meta-lbl { font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+
+@media (max-width: 960px) {
+  #dk-blog-page .dk-hero-inner { grid-template-columns: 1fr; min-height: auto; }
+  #dk-blog-page .dk-hero-copy { padding: var(--s7) var(--edge); border-bottom: var(--rule-hair); }
+  #dk-blog-page .blog-hero-panel { margin: var(--s6) var(--edge); min-height: 260px; transform: none; }
+  #dk-blog-page .dk-hero-h1 { max-width: 100%; }
+}
+@media (max-width: 600px) {
+  #dk-blog-page .dk-hero-copy { padding: var(--s6) var(--edge); }
+  #dk-blog-page .dk-hero-h1 { font-size: clamp(38px, 11vw, 52px); line-height: 0.96; letter-spacing: -0.022em; }
+  #dk-blog-page .blog-hero-panel { padding: var(--s5); }
+  #dk-blog-page .blog-hero-panel-meta { flex-wrap: wrap; gap: var(--s3); }
+}
+
+
+#dk-blog-page .blog-list-section { background: var(--white); border-bottom: var(--rule-hair); }
+#dk-blog-page .blog-list-head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: start; margin-bottom: var(--s6); }
+#dk-blog-page .blog-list-head .eyebrow { margin-bottom: var(--s3); }
+#dk-blog-page .blog-list-head h2 { margin-bottom: 0; }
+#dk-blog-page .blog-list-head-side { align-self: start; max-width: 560px; padding-top: 28px; }
+#dk-blog-page .blog-list-head-desc { max-width: 560px; margin-bottom: var(--s5); }
+#dk-blog-page .blog-search { width: 100%; max-width: 520px; }
+#dk-blog-page .blog-search-label { display: block; margin-bottom: var(--s2); font-family: var(--font-sans); font-size: 11px; font-weight: 700; line-height: 1; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+#dk-blog-page .blog-search-input { width: 100%; min-height: 48px; padding: 14px 16px; background: var(--white); border: var(--rule-hair); border-radius: 0; color: var(--ink); font-family: var(--font-sans); font-size: 13px; font-weight: 400; line-height: 1.2; letter-spacing: 0.02em; appearance: none; -webkit-appearance: none; transition: border-color 180ms var(--ease), box-shadow 180ms var(--ease), background 180ms var(--ease); }
+#dk-blog-page .blog-search-input::placeholder { color: var(--ink-soft); opacity: 0.72; }
+#dk-blog-page .blog-search-input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 1px var(--red); background: var(--paper); }
+#dk-blog-page .blog-search-empty { padding: var(--s6) 0; border-top: var(--rule-hair); font-family: var(--font-serif); font-size: 18px; line-height: 1.6; color: var(--ink-soft); }
+#dk-blog-page .blog-search-empty[hidden] { display: none !important; }
+#dk-blog-page .blog-card[hidden] { display: none !important; }
+#dk-blog-page .blog-pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: var(--s3); padding: var(--s6) 0 0; border-top: var(--rule-hair); }
+#dk-blog-page .blog-pagination[hidden] { display: none !important; }
+#dk-blog-page .blog-pagination-button { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 7px 4px 6px; border-bottom: 1px solid transparent; font-family: var(--font-sans); font-size: 11px; font-weight: 700; line-height: 1; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); background: transparent; cursor: pointer; transition: color 180ms var(--ease), border-color 180ms var(--ease), opacity 180ms var(--ease); }
+#dk-blog-page .blog-pagination-button:hover:not(:disabled),
+#dk-blog-page .blog-pagination-button:focus-visible:not(:disabled) { color: var(--red); border-bottom-color: var(--red); outline: none; }
+#dk-blog-page .blog-pagination-button.is-active { color: var(--red); border-bottom-color: var(--red); }
+#dk-blog-page .blog-pagination-button:disabled { color: var(--ink-soft); opacity: 0.38; cursor: default; }
+#dk-blog-page .blog-pagination-pages { display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: var(--s3); }
+#dk-blog-page .blog-list { display: grid; gap: 0; border-top: var(--rule-hair); }
+#dk-blog-page .blog-card { display: grid; grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr); gap: var(--s7); align-items: center; padding: var(--s7) 0; border-bottom: var(--rule-hair); transition: border-color 220ms var(--ease), background 220ms var(--ease); }
+#dk-blog-page .blog-card:hover { background: var(--paper); }
+#dk-blog-page .blog-card-body { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: var(--s5); align-items: start; padding-left: var(--s5); }
+#dk-blog-page .blog-card-index { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--red); padding-top: 5px; }
+#dk-blog-page .blog-card-meta { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s3); margin-bottom: var(--s4); align-items: center; }
+#dk-blog-page .blog-card-tag { display: inline-flex; align-items: center; min-height: 22px; padding: 4px 8px; background: var(--khaki-light); font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+#dk-blog-page .blog-card-date,
+#dk-blog-page .blog-card-read { display: inline-flex; align-items: center; font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+#dk-blog-page .blog-card-date::before,
+#dk-blog-page .blog-card-read::before { content: "·"; color: var(--red); margin-right: var(--s2); }
+#dk-blog-page .blog-card-title { margin-bottom: var(--s3); font-family: var(--font-sans); font-weight: 700; font-size: clamp(24px, 3vw, 38px); line-height: 1.06; letter-spacing: -0.018em; color: var(--ink); }
+#dk-blog-page .blog-card-title a { transition: color 180ms var(--ease); }
+#dk-blog-page .blog-card-title a:hover,
+#dk-blog-page .blog-card-title a:focus-visible { color: var(--red); }
+#dk-blog-page .blog-card-desc { max-width: 720px; margin-bottom: var(--s5); font-family: var(--font-serif); font-size: 16px; line-height: 1.65; color: var(--ink-soft); }
+#dk-blog-page .blog-card-media { display: block; position: relative; overflow: hidden; aspect-ratio: 16 / 10; margin-right: var(--s5); background: var(--grey-soft); border: var(--rule-hair); }
+#dk-blog-page .blog-card-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.01); transition: transform 420ms var(--ease); }
+#dk-blog-page .blog-card:hover .blog-card-media img { transform: scale(1.045); }
+#dk-blog-page .blog-card-media::after { content: ""; position: absolute; inset: 0; border-top: 3px solid var(--red); opacity: 0; transition: opacity 220ms var(--ease); }
+#dk-blog-page .blog-card:hover .blog-card-media::after { opacity: 1; }
+
+@media (max-width: 900px) {
+  #dk-blog-page .blog-list-head { grid-template-columns: 1fr; gap: var(--s4); margin-bottom: var(--s5); }
+  #dk-blog-page .blog-list-head-side { max-width: none; padding-top: 0; }
+  #dk-blog-page .blog-list-head-desc { max-width: none; margin-bottom: var(--s4); }
+  #dk-blog-page .blog-search { max-width: none; }
+  #dk-blog-page .blog-search-input { width: 100%; }
+  #dk-blog-page .blog-card { grid-template-columns: 1fr; gap: var(--s5); padding: var(--s6) 0; }
+  #dk-blog-page .blog-card-media { order: -1; margin: 0; }
+  #dk-blog-page .blog-card-body { padding-left: 0; padding-right: 0; }
+}
+@media (max-width: 640px) {
+  #dk-blog-page .blog-card-body { grid-template-columns: 1fr; gap: var(--s3); }
+  #dk-blog-page .blog-card-meta { display: grid; gap: 6px; }
+  #dk-blog-page .blog-card-date::before,
+  #dk-blog-page .blog-card-read::before { content: none; }
+  #dk-blog-page .blog-card-title { font-size: clamp(24px, 7vw, 32px); }
+}
+
+
+#dk-blog-page .blog-cta-section { background: var(--black); color: var(--white); padding: clamp(56px, 7vw, 88px) 0; }
+#dk-blog-page .blog-cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); align-items: center; }
+#dk-blog-page .blog-cta-section .eyebrow { color: var(--khaki); margin-bottom: var(--s4); }
+#dk-blog-page .blog-cta-section .display-l { color: var(--white); }
+#dk-blog-page .blog-cta-section .body-l { color: rgba(255,255,255,0.72); }
+#dk-blog-page .blog-cta-actions { width: 100%; max-width: 430px; justify-self: end; display: flex; flex-direction: column; align-items: stretch; gap: var(--s4); padding: clamp(24px, 3vw, 36px); border: 1px solid rgba(255,255,255,0.92); background: var(--white); }
+#dk-blog-page .blog-cta-actions .body-l { color: var(--ink-soft); }
+@media (max-width: 768px) {
+  #dk-blog-page .blog-cta-grid { grid-template-columns: 1fr; gap: var(--s5); }
+  #dk-blog-page .blog-cta-actions { max-width: none; justify-self: stretch; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#dk-blog-page .reveal { opacity: 0; transform: translateY(18px); transition: opacity 360ms var(--ease-out), transform 360ms var(--ease-out); }
+#dk-blog-page .reveal.is-in { opacity: 1; transform: translateY(0); }
+#dk-blog-page .reveal[data-delay="1"] { transition-delay: 80ms; }
+#dk-blog-page .reveal[data-delay="2"] { transition-delay: 160ms; }
+#dk-blog-page .reveal[data-delay="3"] { transition-delay: 240ms; }
+
+@media (max-width: 768px) {
+  #dk-blog-page .display-xl { font-size: clamp(34px, 11vw, 48px); line-height: 0.98; }
+  #dk-blog-page .display-l { font-size: clamp(30px, 9.5vw, 42px); line-height: 1.02; }
+  #dk-blog-page .display-m { font-size: clamp(22px, 7vw, 32px); line-height: 1.08; }
+  #dk-blog-page .body-l { font-size: 16px; line-height: 1.58; }
+  #dk-blog-page .body { font-size: 15px; }
+  #dk-blog-page .btn,
+  #dk-blog-page .btn-primary { line-height: 1.3; }
+  #dk-blog-page .btn-text { line-height: 1.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dk-blog-page *,
+  #dk-blog-page *::before,
+  #dk-blog-page *::after { animation-duration: 0ms !important; animation-delay: 0ms !important; transition-duration: 0ms !important; transition-delay: 0ms !important; }
+  #dk-blog-page .reveal { opacity: 1; transform: none; }
+}</style>
+<!-- Replace dk-blog-page with dk-home, dk-diag-page, dk-ways, dk-resources, or dk-blog-page. -->
+<style id="dk-blog-body-only-resources-top-space">#dk-blog-page .dk-hero-copy {
+  padding-top: clamp(136px, 12vw, 192px) !important;
+}
+@media (max-width: 600px) {
+  #dk-blog-page .dk-hero-copy {
+    padding-top: clamp(104px, 18vw, 128px) !important;
+  }
+}</style><noscript id="dk-blog-reveal-fallback"><style>#dk-blog-page .reveal{opacity:1!important;transform:none!important;}</style></noscript></head>
+<body>
+<div id="dk-blog-page">
+<main id="top">
+<section aria-labelledby="blog-hero-title" class="dk-hero blog-hero">
+<div class="dk-hero-inner">
+<div class="dk-hero-copy">
+<div class="dk-hero-eyebrow reveal">Strategic Translation for the AI Era</div>
+<h1 class="dk-hero-h1 reveal" data-delay="1" id="blog-hero-title">Articles for leaders navigating AI</h1>
+<p class="dk-hero-lede reveal" data-delay="2">Most leaders experimenting with AI spend hours testing tools and prompts, but the lift stays inconsistent. The issue is rarely effort. It’s orientation.</p>
+</div>
+<aside aria-label="Blog positioning" class="blog-hero-panel reveal" data-delay="2">
+<p class="blog-hero-panel-label">DK Blog</p>
+<p class="blog-hero-panel-text">Practical perspective on AI strategy, adoption, leadership, and better decisions.</p>
+<div aria-label="Blog count" class="blog-hero-panel-meta">
+<div class="blog-hero-panel-meta-item">
+<span class="blog-hero-panel-meta-num">04</span>
+<span class="blog-hero-panel-meta-lbl">Current Posts</span>
+</div>
+</div>
+</aside>
+</div>
+</section>
+<section aria-labelledby="blog-list-title" class="blog-list-section bg-white">
+<div class="dk-shell">
+<div class="blog-list-head reveal">
+<div>
+<div class="eyebrow red">Latest thinking</div>
+<h2 class="display-l" id="blog-list-title">Articles for leaders<br/>navigating AI</h2>
+</div>
+<div class="blog-list-head-side">
+<p class="body-l blog-list-head-desc" id="blogSearchIntro">A cleaner editorial archive for practical strategy, workplace fluency, implementation, and communication with AI.</p>
+<form aria-labelledby="blogSearchLabel" class="blog-search" onsubmit="return false;" role="search">
+<label class="blog-search-label" for="blogSearchInput" id="blogSearchLabel">Search blog posts</label>
+<input aria-describedby="blogSearchIntro" autocomplete="off" class="blog-search-input" id="blogSearchInput" placeholder="Search blog posts" type="search"/>
+</form>
+</div>
+</div>
+<div class="blog-list" id="blogList">
+<article class="blog-card reveal">
+<div class="blog-card-body">
+<p class="blog-card-index">01</p>
+<div class="blog-card-content">
+<div class="blog-card-meta">
+<span class="blog-card-tag">AI Leadership</span>
+<span class="blog-card-date">March 9, 2026</span>
+<span class="blog-card-read">2 min read</span>
+</div>
+<h3 class="blog-card-title"><a href="https://dkcblog.jfwllc.dev/post/shopifys-ceo-just-made-ai-fluency-mandatory-is-your-team-ready">Shopify’s CEO Just Made AI Fluency Mandatory. Is Your Team Ready?</a></h3>
+<p class="blog-card-desc">Shopify’s CEO declares AI proficiency the new baseline at work. Explore what this AI-first shift means for leadership, hiring, performance reviews, and the future of teams.</p>
+<a class="btn-text blog-card-link" href="https://dkcblog.jfwllc.dev/post/shopifys-ceo-just-made-ai-fluency-mandatory-is-your-team-ready">Read article <span aria-hidden="true" class="arrow">→</span></a>
+</div>
+</div>
+<a aria-label="Read: Shopify’s CEO Just Made AI Fluency Mandatory" class="blog-card-media" href="https://dkcblog.jfwllc.dev/post/shopifys-ceo-just-made-ai-fluency-mandatory-is-your-team-ready">
+<img alt="Man driving a car while a humanoid robot passenger reads a map, symbolising human-AI collaboration." loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https%3A//assets.cdn.filesafe.space/kxDer9IVVD1dNmfX54TI/media/69b18a30584eaab24839fc6f.png"/>
+</a>
+</article>
+<article class="blog-card reveal">
+<div class="blog-card-body">
+<p class="blog-card-index">02</p>
+<div class="blog-card-content">
+<div class="blog-card-meta">
+<span class="blog-card-tag">AI Strategy</span>
+<span class="blog-card-date">March 9, 2026</span>
+<span class="blog-card-read">6 min read</span>
+</div>
+<h3 class="blog-card-title"><a href="https://dkcblog.jfwllc.dev/post/How-to-Build-A-Generative-AI-Strategy">How to Build a Generative AI Strategy</a></h3>
+<p class="blog-card-desc">Discover how generative AI is transforming business strategy. Learn practical steps to align AI with your goals, unlock innovation, and create lasting competitive advantage.</p>
+<a class="btn-text blog-card-link" href="https://dkcblog.jfwllc.dev/post/How-to-Build-A-Generative-AI-Strategy">Read article <span aria-hidden="true" class="arrow">→</span></a>
+</div>
+</div>
+<a aria-label="Read: How to Build a Generative AI Strategy" class="blog-card-media" href="https://dkcblog.jfwllc.dev/post/How-to-Build-A-Generative-AI-Strategy">
+<img alt="Illustration of a person pushing against a large wave made of digital chat bubbles, symbolising the rapid rise of generative AI." loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https%3A//assets.cdn.filesafe.space/kxDer9IVVD1dNmfX54TI/media/69b18de08cb25946243aeee7.png"/>
+</a>
+</article>
+<article class="blog-card reveal">
+<div class="blog-card-body">
+<p class="blog-card-index">03</p>
+<div class="blog-card-content">
+<div class="blog-card-meta">
+<span class="blog-card-tag">Implementation</span>
+<span class="blog-card-date">March 9, 2026</span>
+<span class="blog-card-read">2 min read</span>
+</div>
+<h3 class="blog-card-title"><a href="https://dkcblog.jfwllc.dev/post/How-to-Bring-Your-Generative-AI-Strategy-to-Life">How to Bring Your Generative AI Strategy to Life</a></h3>
+<p class="blog-card-desc">Learn how to execute a Generative AI strategy that boosts revenue, reduces costs, and improves customer satisfaction through high-impact AI initiatives and iterative implementation.</p>
+<a class="btn-text blog-card-link" href="https://dkcblog.jfwllc.dev/post/How-to-Bring-Your-Generative-AI-Strategy-to-Life">Read article <span aria-hidden="true" class="arrow">→</span></a>
+</div>
+</div>
+<a aria-label="Read: How to Bring Your Generative AI Strategy to Life" class="blog-card-media" href="https://dkcblog.jfwllc.dev/post/How-to-Bring-Your-Generative-AI-Strategy-to-Life">
+<img alt="Business leaders walking toward a glowing lightbulb symbolising innovation and AI strategy." loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https%3A//assets.cdn.filesafe.space/kxDer9IVVD1dNmfX54TI/media/69b18d187fc07cb298947c16.png"/>
+</a>
+</article>
+<article class="blog-card reveal">
+<div class="blog-card-body">
+<p class="blog-card-index">04</p>
+<div class="blog-card-content">
+<div class="blog-card-meta">
+<span class="blog-card-tag">Prompting</span>
+<span class="blog-card-date">March 6, 2026</span>
+<span class="blog-card-read">6 min read</span>
+</div>
+<h3 class="blog-card-title"><a href="https://dkcblog.jfwllc.dev/post/How-to-Talk-To-AI">How to Talk to AI</a></h3>
+<p class="blog-card-desc">Learn how to communicate effectively with AI using clear prompts and context. Discover the differences between human communication and AI interaction, understand AI limitations, and improve your prompts.</p>
+<a class="btn-text blog-card-link" href="https://dkcblog.jfwllc.dev/post/How-to-Talk-To-AI">Read article <span aria-hidden="true" class="arrow">→</span></a>
+</div>
+</div>
+<a aria-label="Read: How to Talk to AI" class="blog-card-media" href="https://dkcblog.jfwllc.dev/post/How-to-Talk-To-AI">
+<img alt="AI and human communicate through a glowing brain interface." loading="lazy" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https%3A//assets.cdn.filesafe.space/kxDer9IVVD1dNmfX54TI/media/69b18c1178565a57073d427d.png"/>
+</a>
+</article>
+</div>
+<p class="blog-search-empty" hidden="" id="blogSearchEmpty">No posts found.</p>
+<nav aria-label="Blog pagination" class="blog-pagination" hidden="" id="blogPagination">
+<button class="blog-pagination-button" data-pagination-action="prev" type="button">Previous</button>
+<div aria-label="Blog pages" class="blog-pagination-pages" id="blogPaginationPages"></div>
+<button class="blog-pagination-button" data-pagination-action="next" type="button">Next</button>
+</nav>
+</div>
+</section>
+<section aria-labelledby="blog-cta-heading" class="blog-cta-section">
+<div class="dk-shell">
+<div class="blog-cta-grid">
+<div class="reveal">
+<div class="eyebrow">Work with me</div>
+<h2 class="display-l" id="blog-cta-heading">Not sure where<br/>to start?</h2>
+</div>
+<div class="blog-cta-actions reveal" data-delay="1">
+<p class="body-l">I help teams turn complexity into clear, confident action. If reading these articles has raised questions, the Diagnostic is the right next step.</p>
+<a class="btn btn-primary" href="https://danooshkapadia.com/diagnostic">Book the Diagnostic <span aria-hidden="true" class="arrow">→</span></a>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<script id="dk-blog-reveal-js">
+(function() {
+  'use strict';
+  var root = document.getElementById('dk-blog-page');
+  if (!root || root.dataset.dkRevealInit === 'true') return;
+  root.dataset.dkRevealInit = 'true';
+
+  var reveals = Array.prototype.slice.call(root.querySelectorAll('.reveal'));
+  var heroReveals = root.querySelectorAll('.dk-hero .reveal');
+
+  heroReveals.forEach(function(el) {
+    el.classList.add('is-in');
+  });
+
+  var lowerReveals = reveals.filter(function(el) {
+    return !el.closest('.dk-hero');
+  });
+
+  if ('IntersectionObserver' in window && lowerReveals.length) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+    lowerReveals.forEach(function(el) { io.observe(el); });
+  } else {
+    lowerReveals.forEach(function(el) { el.classList.add('is-in'); });
+  }
+})();
+</script><script id="dk-blog-search-js">
+(function() {
+  'use strict';
+
+  var root = document.getElementById('dk-blog-page');
+  if (!root || root.dataset.dkBlogSearchInit === 'true') return;
+  root.dataset.dkBlogSearchInit = 'true';
+
+  var postsPerPage = 4;
+  var currentPage = 1;
+  var input = root.querySelector('#blogSearchInput');
+  var cards = Array.prototype.slice.call(root.querySelectorAll('.blog-card'));
+  var empty = root.querySelector('#blogSearchEmpty');
+  var pagination = root.querySelector('#blogPagination');
+  var paginationPages = root.querySelector('#blogPaginationPages');
+  var prevButton = pagination ? pagination.querySelector('[data-pagination-action="prev"]') : null;
+  var nextButton = pagination ? pagination.querySelector('[data-pagination-action="next"]') : null;
+
+  if (!input || !cards.length) return;
+
+  var searchableCards = cards.map(function(card) {
+    var title = card.querySelector('.blog-card-title');
+    var desc = card.querySelector('.blog-card-desc');
+    var tag = card.querySelector('.blog-card-tag');
+    var date = card.querySelector('.blog-card-date');
+    var read = card.querySelector('.blog-card-read');
+
+    var searchText = [
+      title ? title.textContent : '',
+      desc ? desc.textContent : '',
+      tag ? tag.textContent : '',
+      date ? date.textContent : '',
+      read ? read.textContent : ''
+    ].join(' ').toLowerCase().replace(/\s+/g, ' ').trim();
+
+    return { card: card, searchText: searchText };
+  });
+
+  function getFilteredCards() {
+    var query = input.value.toLowerCase().replace(/\s+/g, ' ').trim();
+
+    return searchableCards.filter(function(item) {
+      return !query || item.searchText.indexOf(query) !== -1;
+    });
+  }
+
+  function renderPagination(totalPages) {
+    if (!pagination || !paginationPages || !prevButton || !nextButton) return;
+
+    pagination.hidden = totalPages < 1;
+    if (totalPages < 1) {
+      paginationPages.innerHTML = '';
+      return;
+    }
+
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
+    paginationPages.innerHTML = '';
+
+    for (var page = 1; page <= totalPages; page += 1) {
+      var pageButton = document.createElement('button');
+      pageButton.type = 'button';
+      pageButton.className = 'blog-pagination-button' + (page === currentPage ? ' is-active' : '');
+      pageButton.textContent = String(page);
+      pageButton.setAttribute('aria-label', 'Go to blog page ' + page);
+      if (page === currentPage) {
+        pageButton.setAttribute('aria-current', 'page');
+      }
+      pageButton.dataset.page = String(page);
+      paginationPages.appendChild(pageButton);
+    }
+  }
+
+  function renderPosts() {
+    var filtered = getFilteredCards();
+    var totalPages = Math.max(1, Math.ceil(filtered.length / postsPerPage));
+
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    var start = (currentPage - 1) * postsPerPage;
+    var end = start + postsPerPage;
+    var visibleCards = filtered.slice(start, end).map(function(item) { return item.card; });
+
+    cards.forEach(function(card) {
+      card.hidden = visibleCards.indexOf(card) === -1;
+    });
+
+    if (empty) {
+      empty.hidden = filtered.length !== 0;
+    }
+
+    renderPagination(filtered.length ? totalPages : 0);
+  }
+
+  input.addEventListener('input', function() {
+    currentPage = 1;
+    renderPosts();
+  });
+
+  input.addEventListener('search', function() {
+    currentPage = 1;
+    renderPosts();
+  });
+
+  if (pagination) {
+    pagination.addEventListener('click', function(event) {
+      var target = event.target.closest('button');
+      if (!target || target.disabled) return;
+
+      var filtered = getFilteredCards();
+      var totalPages = Math.max(1, Math.ceil(filtered.length / postsPerPage));
+
+      if (target.dataset.paginationAction === 'prev') {
+        currentPage = Math.max(1, currentPage - 1);
+      } else if (target.dataset.paginationAction === 'next') {
+        currentPage = Math.min(totalPages, currentPage + 1);
+      } else if (target.dataset.page) {
+        currentPage = parseInt(target.dataset.page, 10) || 1;
+      }
+
+      renderPosts();
+    });
+  }
+
+  renderPosts();
+})();
+</script>
